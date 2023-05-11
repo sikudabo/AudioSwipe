@@ -61,12 +61,12 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
 
   const theme: ThemeOptions = createTheme({
     palette: {
-      mode: isDarkMode ? 'dark' : 'dark',
+      mode: isDarkMode ? 'dark' : 'light',
       error: {
         main: colors.error,
       },
       info: {
-        main: colors.info,
+        main: colors.hotPink,
       },
       primary: {
         main: colors.primary,

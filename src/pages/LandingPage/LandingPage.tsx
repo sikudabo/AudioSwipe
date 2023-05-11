@@ -1,12 +1,10 @@
 import React from 'react';
-import CheckmarkIcon from '@mui/icons-material/Check';
 import styled from '@emotion/styled';
 import {
+    Button,
     createTheme,
-    Fab,
     ImageList,
     ImageListItem,
-    Paper,
     ThemeProvider,
     Typography,
     Unstable_Grid2 as Grid
@@ -18,6 +16,7 @@ import HappyFan from '../../audio-media/happy-fan.jpeg';
 import MusicCelebration from '../../audio-media/music-celebration.jpeg';
 import OrangeDrummer from '../../audio-media/orange-drummer.jpeg';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
+import { ButtonComponentProps } from '../../components/types';
 
 const LandingPageContainer = styled(Grid)`
     background-color: ${colors.hotPink};
@@ -120,13 +119,21 @@ const LandingPageContainer = styled(Grid)`
     }
 `;
 
-const StyledFabButton = styled(Fab)`
+const StyledButton = styled(Button)`
     background-color: ${colors.secondary};
+
+    :hover {
+        background-color: ${colors.secondary};
+    }
 `;
 
-const SecondStyledFabButton = styled(Fab)`
+const SecondStyledButton = styled(Button)`
     background-color: ${colors.primary};
     margin-left: 10px;
+
+    :hover {
+        background-color: ${colors.primary};
+    }
 `
 
 export default function LandingPage() {
@@ -218,12 +225,12 @@ export default function LandingPage() {
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
                             <div className="prompt-button-container">
-                                <StyledFabButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="extended" disableRipple>
-                                    <CheckmarkIcon /> Artist Sign Up
-                                </StyledFabButton>
-                                <SecondStyledFabButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="extended" disableRipple>
-                                    <CheckmarkIcon /> Fan Sign Up
-                                </SecondStyledFabButton>
+                                <StyledButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="contained" disableRipple>
+                                  Artist Sign Up
+                                </StyledButton>
+                                <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="contained" disableRipple>
+                                    Fan Sign Up
+                                </SecondStyledButton>
                          </div>
                         </Grid>
                         <Grid className="bottom-img-container" md={6} sm={12}>

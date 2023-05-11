@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import {
     createTheme,
     ImageList,
@@ -140,6 +141,8 @@ export default function LandingPage() {
         },
     });
 
+    const navigate = useNavigate();
+
     return (
         <ThemeProvider theme={theme}>
             <LandingPageContainer container>
@@ -222,7 +225,7 @@ export default function LandingPage() {
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
                             <div className="prompt-button-container">
-                                <StyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Artist Sign Up" variant="contained" disableRipple />
+                                <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate('signup/artist')} size="small" text="Artist Sign Up" variant="contained" disableRipple />
                                 <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>
                         </Grid>

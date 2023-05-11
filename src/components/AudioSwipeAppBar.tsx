@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HeadsetIcon from '@mui/icons-material/Headset';
@@ -6,7 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { 
     AppBar, 
@@ -38,6 +38,10 @@ const StyledAudioSwitchAppBar = styled(AppBar)`
     background-color: ${colors.secondary};
     margin-bottom: 20px;
     width: 100vw;
+
+    .link {
+        color: transparent;
+    }
 
     .boldened-link-text {
         color: ${colors.white};
@@ -85,6 +89,13 @@ export default function AudioSwipeAppBar() {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [artistListItemIsOpen, setArtistListItemIsOpen] = useState(false);
     const [listenersListItemIsOpen, setListenersListItemIsOpen] = useState(false);
+    const location = useLocation();
+    const { pathname } = location;
+    const navigate = useNavigate();
+
+    useMemo(() => {
+        setDrawerIsOpen(false);
+    }, [location.pathname]);
 
     const theme = createTheme({
         palette: {
@@ -170,7 +181,7 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Login</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <Link to="artist/signup">
+                                                <Link className="link" to="signup/artist">
                                                     <ListItem>
                                                         <ListItemButton>
                                                             <ListItemIcon>
@@ -236,7 +247,7 @@ export default function AudioSwipeAppBar() {
                         </Drawer>
                     </Hidden>
                 </ThemeProvider>
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => navigate('/')}>
                     <AudioSwipeAppLogo height={40} width={40} />
                     <CoolAudioSwipeCursive>
                         AudioSwipe
@@ -283,9 +294,11 @@ export default function AudioSwipeAppBar() {
                             <MenuItem>
                             <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
-                            <MenuItem>
-                                <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
-                            </MenuItem>
+                            <Link to="signup/artist">
+                                <MenuItem>
+                                    <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
+                                </MenuItem>
+                            </Link>
                         </Menu>
                         <IconButton
                             aria-label="Audio Swipe Listeners Dropdown Button"

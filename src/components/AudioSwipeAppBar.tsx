@@ -6,11 +6,11 @@ import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { 
     AppBar, 
     Box, 
-    Button, 
     Collapse,
     Drawer, 
     Hidden,
@@ -22,7 +22,6 @@ import {
     ListItemText, 
     Menu, 
     MenuItem,
-    SvgIcon,
     Toolbar, 
     Typography, 
 } from '@mui/material';
@@ -171,14 +170,16 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Login</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <ListItem>
-                                                    <ListItemButton>
-                                                        <ListItemIcon>
-                                                            <HeadsetIcon />
-                                                        </ListItemIcon>
-                                                        <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Sign Up</p>
-                                                    </ListItemButton>
-                                                </ListItem>
+                                                <Link to="artist/signup">
+                                                    <ListItem>
+                                                        <ListItemButton>
+                                                            <ListItemIcon>
+                                                                <HeadsetIcon />
+                                                            </ListItemIcon>
+                                                            <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Sign Up</p>
+                                                        </ListItemButton>
+                                                    </ListItem>
+                                                </Link>
                                             </List>
                                     </Collapse>
                                     <ListItem>

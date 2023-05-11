@@ -7,6 +7,7 @@ var artistSchema = new mongoose.Schema({
     city: { required: true, type: String },
     createdOn: { default: Date.now, required: true, type: Date },
     email: { required: true, type: String },
+    gender: { required: true, type: String },
     firstName: { require: true, type: String },
     genres: { required: true, type: [String] },
     lastName: { required: true, type: String },

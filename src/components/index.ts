@@ -1,4 +1,5 @@
 import AudioSwipeAppBar from './AudioSwipeAppBar';
+import AudioSwipeButton from './AudioSwipeButton';
 import BoxExample from './BoxExample';
 import FormSelect from './FormSelect';
 import GridExample from './GridExample';
@@ -17,6 +18,7 @@ import { colors } from './colors';
 
 export {
     AudioSwipeAppBar,
+    AudioSwipeButton,
     BoxExample,
     ButtonGroup,
     colors,

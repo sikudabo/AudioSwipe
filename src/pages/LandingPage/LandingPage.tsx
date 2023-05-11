@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import {
-    Button,
     createTheme,
     ImageList,
     ImageListItem,
@@ -10,7 +9,7 @@ import {
     Unstable_Grid2 as Grid
 } from '@mui/material';
 import { imageListLandingItems } from './imageListLandingItems';
-import { colors } from '../../components';
+import { AudioSwipeButton, colors } from '../../components';
 import { deviceBreakPointsMaxWidth } from '../../utils/helpers';
 import HappyFan from '../../audio-media/happy-fan.jpeg';
 import MusicCelebration from '../../audio-media/music-celebration.jpeg';
@@ -117,7 +116,7 @@ const LandingPageContainer = styled(Grid)`
     }
 `;
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(AudioSwipeButton)`
     background-color: ${colors.secondary};
 
     :hover {
@@ -125,7 +124,7 @@ const StyledButton = styled(Button)`
     }
 `;
 
-const SecondStyledButton = styled(Button)`
+const SecondStyledButton = styled(AudioSwipeButton)`
     background-color: ${colors.primary};
     margin-left: 10px;
 
@@ -223,12 +222,8 @@ export default function LandingPage() {
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
                             <div className="prompt-button-container">
-                                <StyledButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="contained" disableRipple>
-                                  Artist Sign Up
-                                </StyledButton>
-                                <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" variant="contained" disableRipple>
-                                    Fan Sign Up
-                                </SecondStyledButton>
+                                <StyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Artist Sign Up" variant="contained" disableRipple />
+                                <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>
                         </Grid>
                         <Grid className="bottom-img-container" md={6} sm={12}>

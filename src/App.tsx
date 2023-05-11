@@ -25,7 +25,7 @@ import {
 import { Button } from '@mui/material';
 import Container from '@mui/material/Container';
 import './BodyStyles.css';
-import { LandingPage } from './pages';
+import { LandingPage, SignupArtistPage } from './pages';
 const CatchWreckMp3 = require('./audio-media/catch-wreck.mp3');
 
 const CustomStyledContainer = styled.div`
@@ -139,7 +139,7 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
           <AudioSwipeAppBar />
           <Routes>
             <Route element={<LandingPage />} path="/" />
-            <Route element={<MusicPlayer />} path="music" />
+            <Route element={<SignupArtistPage />} path="signup/artist" />
           </Routes>
         </Router>
       </CustomStyledContainer >

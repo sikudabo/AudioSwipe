@@ -11,12 +11,10 @@ import {
 } from '@mui/material';
 import { imageListLandingItems } from './imageListLandingItems';
 import { colors } from '../../components';
-import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth } from '../../utils/helpers';
+import { deviceBreakPointsMaxWidth } from '../../utils/helpers';
 import HappyFan from '../../audio-media/happy-fan.jpeg';
 import MusicCelebration from '../../audio-media/music-celebration.jpeg';
 import OrangeDrummer from '../../audio-media/orange-drummer.jpeg';
-import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
-import { ButtonComponentProps } from '../../components/types';
 
 const LandingPageContainer = styled(Grid)`
     background-color: ${colors.hotPink};

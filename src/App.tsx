@@ -3,6 +3,12 @@ import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import TinderCard from 'react-tinder-card';
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  UNSAFE_DataRouterStateContext
+} from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useIsDarkMode } from './hooks';
 import {
@@ -10,6 +16,7 @@ import {
   BoxExample,
   GridExample,
   ImageListExample,
+  MusicPlayer,
   SelectComponent,
   SliderComponent,
   StackExample,
@@ -128,8 +135,13 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
     <ThemeProvider theme={theme}>
       <CustomStyledContainer>
         <CssBaseline />
-        <AudioSwipeAppBar />
-        <LandingPage />
+        <Router>
+          <AudioSwipeAppBar />
+          <Routes>
+            <Route element={<LandingPage />} path="/" />
+            <Route element={<MusicPlayer />} path="music" />
+          </Routes>
+        </Router>
       </CustomStyledContainer >
     </ThemeProvider>
   );

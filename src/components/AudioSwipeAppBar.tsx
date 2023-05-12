@@ -34,13 +34,23 @@ const CoolAudioSwipeCursive = styled(Typography)`
     margin-left: 10px;
 `;
 
+const StyledLink = styled(Link)`
+    color: ${colors.white};
+    text-decoration: none;
+`;
+
 const StyledAudioSwitchAppBar = styled(AppBar)`
     background-color: ${colors.secondary};
     margin-bottom: 20px;
     width: 100vw;
 
+    a {
+        color: ${colors.white};
+        text-decoration: none;
+    }
+
     .link {
-        color: transparent;
+        text-decoration: none;
     }
 
     .boldened-link-text {
@@ -83,9 +93,9 @@ const StyledAudioSwitchAppBar = styled(AppBar)`
 export default function AudioSwipeAppBar() {
 
     const [menuAnchorEl, setMenuAnchorEl] = useState<null | HTMLElement>(null);
-    const isMenuAnchorElOpen: boolean = Boolean(menuAnchorEl);
+    let isMenuAnchorElOpen: boolean = Boolean(menuAnchorEl);
     const [listenersMenuAnchorEl, setListenersMenuAnchorEl] = useState<null | HTMLElement>(null);
-    const islistenersMenuAnchorElOpen: boolean = Boolean(listenersMenuAnchorEl);
+    let islistenersMenuAnchorElOpen: boolean = Boolean(listenersMenuAnchorEl);
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [artistListItemIsOpen, setArtistListItemIsOpen] = useState(false);
     const [listenersListItemIsOpen, setListenersListItemIsOpen] = useState(false);
@@ -95,7 +105,10 @@ export default function AudioSwipeAppBar() {
 
     useMemo(() => {
         setDrawerIsOpen(false);
-    }, [location.pathname]);
+        setMenuAnchorEl(null);
+        setListenersMenuAnchorEl(null);
+
+    }, [pathname]);
 
     const theme = createTheme({
         palette: {
@@ -181,16 +194,14 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Login</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <Link className="link" to="signup/artist">
-                                                    <ListItem>
-                                                        <ListItemButton>
-                                                            <ListItemIcon>
-                                                                <HeadsetIcon />
-                                                            </ListItemIcon>
-                                                            <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Sign Up</p>
-                                                        </ListItemButton>
-                                                    </ListItem>
-                                                </Link>
+                                                   <ListItem onClick={() => navigate('signup/artist')}>
+                                                    <ListItemButton>
+                                                        <ListItemIcon>
+                                                            <HeadsetIcon />
+                                                        </ListItemIcon>
+                                                        <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Sign Up</p>
+                                                    </ListItemButton>
+                                                </ListItem>
                                             </List>
                                     </Collapse>
                                     <ListItem>
@@ -289,16 +300,14 @@ export default function AudioSwipeAppBar() {
                             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         >
                             <MenuItem>
-                              <SearchIcon sx={{ mr: 2 }} />  <Typography className="boldened-text">Get Discovered</Typography>
+                              <SearchIcon sx={{ mr: 2 }} />  <p>Get Discovered</p>
                             </MenuItem>
                             <MenuItem>
                             <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
-                            <Link to="signup/artist">
-                                <MenuItem>
-                                    <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem onClick={() => navigate('signup/artist')}>
+                                <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
+                            </MenuItem>
                         </Menu>
                         <IconButton
                             aria-label="Audio Swipe Listeners Dropdown Button"
@@ -334,12 +343,12 @@ export default function AudioSwipeAppBar() {
                             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         >
                             <MenuItem>
-                              <SearchIcon sx={{ mr: 2 }} />  <Typography className="boldened-text">Discover New Music</Typography>
+                              <SearchIcon sx={{ mr: 2 }} />  <p>Discover New Music</p>
                             </MenuItem>
                             <MenuItem>
-                            <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
+                                <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate('signup/artist')}>
                                 <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
                             </MenuItem>
                         </Menu>

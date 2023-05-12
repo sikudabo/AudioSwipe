@@ -10,5 +10,5 @@ export const colors = {
     secondary: '#00778B',
     success: '#1b5e20',
     warning: '#ff9800',
-    white: '#fffffff',
+    white: '#ffffff',
 };

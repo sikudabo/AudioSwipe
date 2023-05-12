@@ -109,110 +109,114 @@ export default function SignupArtistPage() {
                 </Stepper>
             </div>
             <Paper className="form-paper-wrapper" elevation={5}>
-                <Grid className="first-name-grid" xs={12}>
-                    <TextField
-                        aria-label="First Name"
-                        color="secondary"
-                        helperText="Required"
-                        label="First Name"
-                        name="firstName"
-                        placeholder="First Name"
-                        variant="outlined"
-                        fullWidth
-                        required
-                    />
-                </Grid>
-                <Grid className="last-name-grid" xs={12}>
-                    <TextField
-                        aria-label="Last Name"
-                        color="secondary"
-                        helperText="Required"
-                        label="Last Name"
-                        name="lastName"
-                        placeholder="Last Name"
-                        variant="outlined"
-                        fullWidth
-                        required
-                    />
-                </Grid>
-                <Grid className="stage-name-grid" xs={12}>
-                    <TextField
-                        aria-label="Stage Name"
-                        color="secondary"
-                        helperText="Required"
-                        label="Stage Name"
-                        name="stageName"
-                        placeholder="Stage Name"
-                        variant="outlined"
-                        fullWidth
-                        required
-                    />
-                </Grid>
-                <Grid className="username-grid" xs={12}>
-                    <TextField
-                        aria-label="Username"
-                        color="secondary"
-                        helperText="Required"
-                        label="username"
-                        name="username"
-                        placeholder="Username"
-                        variant="outlined"
-                        fullWidth
-                        required
-                    />
-                </Grid>
-                <Grid className="password-grid" xs={12}>
-                    <TextField
-                        aria-label="Password"
-                        color="secondary"
-                        helperText="Must be at least 6 characters long"
-                        inputProps={{ minLength: 6 }}
-                        label="password"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                        variant="outlined"
-                        fullWidth
-                        required
-                    />
-                </Grid>
-                <Grid className="bio-grid" xs={12}>
-                    <TextField
-                        aria-label="Bio"
-                        color="secondary"
-                        helperText="Optional"
-                        inputProps={{ maxLength: 250 }}
-                        label="Bio"
-                        maxRows={4}
-                        minRows={4}
-                        name="bio"
-                        placeholder="Bio"
-                        variant="outlined"
-                        fullWidth
-                        multiline
-                    />
-                </Grid>
-                <Grid className="birthday-grid" xs={12}>
-                    <DatePicker 
-                        label="Birthday"
-                        slotProps={{
-                            textField: {
-                                color: 'secondary',
-                                fullWidth: true,
-                                helperText: 'Required',
-                                required: true,
-                            },
-                        }}
-                        disableOpenPicker 
-                    />
-                </Grid>
-                <Grid className="avatar-grid" xs={12}>
-                    <IconButton color="secondary" aria-label="upload picture" component="label">
-                        <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden />
-                        <PhotoCameraIcon />
-                    </IconButton>
-                    Avatar
-                </Grid>
+                {currentStep === 0 && (
+                    <div>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="First Name"
+                                color="secondary"
+                                helperText="Required"
+                                label="First Name"
+                                name="firstName"
+                                placeholder="First Name"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="last-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Last Name"
+                                color="secondary"
+                                helperText="Required"
+                                label="Last Name"
+                                name="lastName"
+                                placeholder="Last Name"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="stage-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Stage Name"
+                                color="secondary"
+                                helperText="Required"
+                                label="Stage Name"
+                                name="stageName"
+                                placeholder="Stage Name"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="username-grid" xs={12}>
+                            <TextField
+                                aria-label="Username"
+                                color="secondary"
+                                helperText="Required"
+                                label="username"
+                                name="username"
+                                placeholder="Username"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="password-grid" xs={12}>
+                            <TextField
+                                aria-label="Password"
+                                color="secondary"
+                                helperText="Must be at least 6 characters long"
+                                inputProps={{ minLength: 6 }}
+                                label="password"
+                                name="password"
+                                placeholder="Password"
+                                type="password"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="bio-grid" xs={12}>
+                            <TextField
+                                aria-label="Bio"
+                                color="secondary"
+                                helperText="Optional"
+                                inputProps={{ maxLength: 250 }}
+                                label="Bio"
+                                maxRows={4}
+                                minRows={4}
+                                name="bio"
+                                placeholder="Bio"
+                                variant="outlined"
+                                fullWidth
+                                multiline
+                            />
+                        </Grid>
+                        <Grid className="birthday-grid" xs={12}>
+                            <DatePicker 
+                                label="Birthday"
+                                slotProps={{
+                                    textField: {
+                                        color: 'secondary',
+                                        fullWidth: true,
+                                        helperText: 'Required',
+                                        required: true,
+                                    },
+                                }}
+                                disableOpenPicker 
+                            />
+                        </Grid>
+                        <Grid className="avatar-grid" xs={12}>
+                            <IconButton color="secondary" aria-label="upload picture" component="label">
+                                <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden />
+                                <PhotoCameraIcon />
+                            </IconButton>
+                            Avatar
+                        </Grid>
+                    </div>
+                )}
                 <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
                     {currentStep === steps.length ? (

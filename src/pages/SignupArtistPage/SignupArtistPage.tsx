@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import CameraIcon from '@mui/icons-material/PhotoCamera';
 import CheckIcon from '@mui/icons-material/CheckCircleOutlineRounded'
 import PhoneInput from 'react-phone-input-material-ui';
@@ -23,6 +23,7 @@ import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
 
 export default function SignupArtistPage() {
+    const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
     const steps = [
@@ -32,6 +33,16 @@ export default function SignupArtistPage() {
         "Genres",
         "Social Links",
     ];
+
+    useEffect(() => {
+        if (typeof headerTextRef !== 'undefined' && typeof headerTextRef.current !== 'undefined') {
+            // window.scrollTo(0, (headerTextRef as any).current.offsetTop);
+            window.scrollTo({
+                behavior: 'smooth',
+                top: (headerTextRef as any).current.offsetTop,
+            });
+        }
+    }, [currentStep]);
 
     useMemo(() => {
         setCompletedSteps(completedSteps);
@@ -71,11 +82,29 @@ export default function SignupArtistPage() {
                     Sign Up
                 </p>
             </div>
+            <div ref={headerTextRef} />
             <Grid className="form-header-text-container" xs={12}>
                 <p className="form-header-text">
                     {steps[currentStep] || 'Submit'}
                 </p>
             </Grid>
+            <div className="stepper-container">
+                    <Stepper activeStep={currentStep} color="secondary">
+                        {steps.map((step, index) => {
+                            const stepProps: { completed?: boolean } = {};
+
+                            if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
+                                stepProps.completed = true;
+                            } 
+
+                            return (
+                                <Step key={index} {...stepProps}>
+                                    <StepLabel>{step}</StepLabel>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
+                </div>
             <Paper className="form-paper-wrapper" elevation={5}>
                 <Grid className="first-name-grid" xs={12}>
                     <TextField
@@ -160,23 +189,6 @@ export default function SignupArtistPage() {
                         multiline
                     />
                 </Grid>
-                <div className="stepper-container">
-                    <Stepper activeStep={currentStep} color="secondary">
-                        {steps.map((step, index) => {
-                            const stepProps: { completed?: boolean } = {};
-
-                            if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
-                                stepProps.completed = true;
-                            } 
-
-                            return (
-                                <Step key={index} {...stepProps}>
-                                    <StepLabel>{step}</StepLabel>
-                                </Step>
-                            );
-                        })}
-                    </Stepper>
-                </div>
                 <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
                     {currentStep === steps.length ? (

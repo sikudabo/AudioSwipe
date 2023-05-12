@@ -38,7 +38,7 @@ export const SignupArtistContainer = styled(Grid)`
     }
    }
 
-   @media ${deviceBreakPointsMaxWidth.mobileL} {
+   @media ${deviceBreakPointsMaxWidth.tablet} {
     .form-header-text-container {
         margin-bottom: 40px;
     }
@@ -53,13 +53,13 @@ export const SignupArtistContainer = styled(Grid)`
         width: 100vw;
     }
 
-    @media ${deviceBreakPointsMaxWidth.mobileL} {
+    @media ${deviceBreakPointsMaxWidth.tablet} {
         .stepper-container {
            display: none;
         }
     }
 
-    /* @media ${deviceBreakPointsMaxWidth.mobileL} {
+    /* @media ${deviceBreakPointsMaxWidth.tablet} {
         .back-next-button-row {
             display: none;
         }
@@ -100,36 +100,97 @@ export const SignupArtistContainer = styled(Grid)`
         width: 50vw;
     }
 
-    @media ${deviceBreakPointsMaxWidth.mobileL} {
+    @media ${deviceBreakPointsMaxWidth.tablet} {
         .personal-text-inputs {
             width: 100vw;
         }
     }
 
     .form-paper-wrapper {
-        height: 100vh;
         margin: 0 auto;
         padding-top: 40px;
     }
 
     .first-name-grid {
         margin: 0 auto;
+        padding-bottom: 20px;
         width: 50vw;
     }
 
-    @media ${deviceBreakPointsMaxWidth.mobileL} {
+    @media ${deviceBreakPointsMaxWidth.tablet} {
         .first-name-grid {
+            padding-left: 5px;
+            padding-right: 5px;
             width: 100vw;
         }
     }
 
     .last-name-grid {
         margin: 0 auto;
+        padding-bottom: 20px;
         width: 50vw;
     }
 
-    @media ${deviceBreakPointsMaxWidth.mobileL} {
+    @media ${deviceBreakPointsMaxWidth.tablet} {
         .last-name-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
+    .stage-name-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .stage-name-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
+    .username-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .username-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
+    .password-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .password-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
+    .bio-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .bio-grid {
+            padding-left: 5px;
+            padding-right: 5px;
             width: 100vw;
         }
     }

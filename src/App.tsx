@@ -17,6 +17,7 @@ import {
   GridExample,
   ImageListExample,
   MusicPlayer,
+  ScrollToTop,
   SelectComponent,
   SliderComponent,
   StackExample,
@@ -136,6 +137,7 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
       <CustomStyledContainer>
         <CssBaseline />
         <Router>
+          <ScrollToTop />
           <AudioSwipeAppBar />
           <Routes>
             <Route element={<LandingPage />} path="/" />

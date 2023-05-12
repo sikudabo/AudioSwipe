@@ -76,23 +76,6 @@ export default function SignupArtistPage() {
                     {steps[currentStep] || 'Submit'}
                 </p>
             </Grid>
-            <div className="stepper-container">
-                <Stepper activeStep={currentStep} color="secondary">
-                    {steps.map((step, index) => {
-                        const stepProps: { completed?: boolean } = {};
-
-                        if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
-                            stepProps.completed = true;
-                        } 
-
-                        return (
-                            <Step key={index} {...stepProps}>
-                                <StepLabel>{step}</StepLabel>
-                            </Step>
-                        );
-                    })}
-                </Stepper>
-            </div>
             <Paper className="form-paper-wrapper" elevation={5}>
                 <Grid className="first-name-grid" xs={12}>
                     <TextField
@@ -120,6 +103,80 @@ export default function SignupArtistPage() {
                         required
                     />
                 </Grid>
+                <Grid className="stage-name-grid" xs={12}>
+                    <TextField
+                        aria-label="Stage Name"
+                        color="secondary"
+                        helperText="Required"
+                        label="Stage Name"
+                        name="stageName"
+                        placeholder="Stage Name"
+                        variant="outlined"
+                        fullWidth
+                        required
+                    />
+                </Grid>
+                <Grid className="username-grid" xs={12}>
+                    <TextField
+                        aria-label="Username"
+                        color="secondary"
+                        helperText="Required"
+                        label="username"
+                        name="username"
+                        placeholder="Username"
+                        variant="outlined"
+                        fullWidth
+                        required
+                    />
+                </Grid>
+                <Grid className="password-grid" xs={12}>
+                    <TextField
+                        aria-label="Password"
+                        color="secondary"
+                        helperText="Must be at least 6 characters long"
+                        inputProps={{ minLength: 6 }}
+                        label="password"
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        variant="outlined"
+                        fullWidth
+                        required
+                    />
+                </Grid>
+                <Grid className="bio-grid" xs={12}>
+                    <TextField
+                        aria-label="Bio"
+                        color="secondary"
+                        helperText="Optional"
+                        inputProps={{ maxLength: 250 }}
+                        label="Bio"
+                        maxRows={4}
+                        minRows={4}
+                        name="bio"
+                        placeholder="Bio"
+                        variant="outlined"
+                        fullWidth
+                        multiline
+                    />
+                </Grid>
+                <div className="stepper-container">
+                    <Stepper activeStep={currentStep} color="secondary">
+                        {steps.map((step, index) => {
+                            const stepProps: { completed?: boolean } = {};
+
+                            if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
+                                stepProps.completed = true;
+                            } 
+
+                            return (
+                                <Step key={index} {...stepProps}>
+                                    <StepLabel>{step}</StepLabel>
+                                </Step>
+                            );
+                        })}
+                    </Stepper>
+                </div>
                 <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
                     {currentStep === steps.length ? (

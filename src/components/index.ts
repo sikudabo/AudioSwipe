@@ -10,6 +10,7 @@ import ImageListExample from './ImageListExample';
 import MusicPlayer from './MusicPlayer';
 import MyCheckbox from './Checkbox';
 import RadioButtonsGroup from './RadioButtonsGroup';
+import ScrollToTop from './ScrollToTop';
 import SelectComponent from './SelectComponent';
 import StarRating from './StartRating';
 import SliderComponent from './SliderComponent'
@@ -30,6 +31,7 @@ export {
     TextInput,
     FormSelect,
     RadioButtonsGroup,
+    ScrollToTop,
     SelectComponent,
     SliderComponent,
     StackExample,

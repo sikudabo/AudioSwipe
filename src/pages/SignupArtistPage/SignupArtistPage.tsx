@@ -49,8 +49,9 @@ export default function SignupArtistPage() {
     }
 
     const handleBackStep = () => {
-        if (currentStep < 0) {
-            handleReset();
+        if (currentStep === 0) {
+            setCurrentStep(0);
+            return;
         }
 
         setCurrentStep((previousStep: number) => previousStep - 1);
@@ -75,32 +76,58 @@ export default function SignupArtistPage() {
                     {steps[currentStep] || 'Submit'}
                 </p>
             </Grid>
-                <div className="stepper-container">
-                    <Stepper activeStep={currentStep} color="secondary">
-                        {steps.map((step, index) => {
-                            const stepProps: { completed?: boolean } = {};
+            <div className="stepper-container">
+                <Stepper activeStep={currentStep} color="secondary">
+                    {steps.map((step, index) => {
+                        const stepProps: { completed?: boolean } = {};
 
-                            if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
-                                stepProps.completed = true;
-                            } 
+                        if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
+                            stepProps.completed = true;
+                        } 
 
-                            return (
-                                <Step key={index} {...stepProps}>
-                                    <StepLabel>{step}</StepLabel>
-                                </Step>
-                            );
-                        })}
-                    </Stepper>
-                </div>
-            <div className="back-next-button-row">
-                <Hidden smDown>
+                        return (
+                            <Step key={index} {...stepProps}>
+                                <StepLabel>{step}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+            </div>
+            <Paper className="form-paper-wrapper" elevation={5}>
+                <Grid className="first-name-grid" xs={12}>
+                    <TextField
+                        aria-label="First Name"
+                        color="secondary"
+                        helperText="Required"
+                        label="First Name"
+                        name="firstName"
+                        placeholder="First Name"
+                        variant="outlined"
+                        fullWidth
+                        required
+                    />
+                </Grid>
+                <Grid className="last-name-grid" xs={12}>
+                    <TextField
+                        aria-label="Last Name"
+                        color="secondary"
+                        helperText="Required"
+                        label="Last Name"
+                        name="lastName"
+                        placeholder="Last Name"
+                        variant="outlined"
+                        fullWidth
+                        required
+                    />
+                </Grid>
+                <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
                     {currentStep === steps.length ? (
                         <AudioSwipeButton color="secondary" onClick={handleNextStep} text="submit" />
                     ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text="next" />
                     }
-                </Hidden>
-            </div>
+                </div>
+            </Paper>
         </SignupArtistContainer>
     );
 }

@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
 import { colors } from '../../../components';
-import { deviceBreakPointsMaxWidth } from '../../../utils/breakpoints';
+import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth } from '../../../utils/breakpoints';
 import RecordsImage from '../../../audio-media/records.jpeg';
 
 export const SignupArtistContainer = styled(Grid)`
@@ -34,12 +34,20 @@ export const SignupArtistContainer = styled(Grid)`
     .form-header-text {
         font-size: 42px;
         font-weight: 700;
+        height: 50px;
     }
    }
+
+   @media ${deviceBreakPointsMaxWidth.mobileL} {
+    .form-header-text-container {
+        margin-bottom: 40px;
+    }
+}
 
     .stepper-container {
         justify-content: center;
         display: flex;
+        margin-bottom: 50px;
         padding-left: 20px;
         padding-top: 10px;
         width: 100vw;
@@ -51,11 +59,11 @@ export const SignupArtistContainer = styled(Grid)`
         }
     }
 
-    @media ${deviceBreakPointsMaxWidth.mobileL} {
+    /* @media ${deviceBreakPointsMaxWidth.mobileL} {
         .back-next-button-row {
             display: none;
         }
-    }
+    } */
 
     .css-1f75pcl-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
         color: ${colors.secondary};
@@ -77,4 +85,53 @@ export const SignupArtistContainer = styled(Grid)`
         padding-top: 20px;
         width: 100vw;
     }
+
+    .form-container {
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-bottom: 30px;
+        width: 100vw;
+    }
+  
+
+    .personal-text-inputs {
+        padding-top: 40px;
+        margin: 0 auto;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.mobileL} {
+        .personal-text-inputs {
+            width: 100vw;
+        }
+    }
+
+    .form-paper-wrapper {
+        height: 100vh;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    .first-name-grid {
+        margin: 0 auto;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.mobileL} {
+        .first-name-grid {
+            width: 100vw;
+        }
+    }
+
+    .last-name-grid {
+        margin: 0 auto;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.mobileL} {
+        .last-name-grid {
+            width: 100vw;
+        }
+    }
+    
 `;

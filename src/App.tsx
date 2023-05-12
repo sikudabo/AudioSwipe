@@ -2,12 +2,13 @@
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import TinderCard from 'react-tinder-card';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  UNSAFE_DataRouterStateContext
+  Route
 } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useIsDarkMode } from './hooks';
@@ -133,19 +134,21 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CustomStyledContainer>
-        <CssBaseline />
-        <Router>
-          <ScrollToTop />
-          <AudioSwipeAppBar />
-          <Routes>
-            <Route element={<LandingPage />} path="/" />
-            <Route element={<SignupArtistPage />} path="signup/artist" />
-          </Routes>
-        </Router>
-      </CustomStyledContainer >
-    </ThemeProvider>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <ThemeProvider theme={theme}>
+        <CustomStyledContainer>
+          <CssBaseline />
+          <Router>
+            <ScrollToTop />
+            <AudioSwipeAppBar />
+            <Routes>
+              <Route element={<LandingPage />} path="/" />
+              <Route element={<SignupArtistPage />} path="signup/artist" />
+            </Routes>
+          </Router>
+        </CustomStyledContainer >
+      </ThemeProvider>
+    </LocalizationProvider>
   );
 }
 

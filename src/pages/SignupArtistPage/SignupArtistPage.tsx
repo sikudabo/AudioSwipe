@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import CameraIcon from '@mui/icons-material/PhotoCamera';
 import CheckIcon from '@mui/icons-material/CheckCircleOutlineRounded'
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
 import styled from '@emotion/styled';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Navigate } from 'react-router-dom';
 import {
     Card,
@@ -17,7 +19,8 @@ import {
     StepLabel,
     TextField,
     Typography,
-    Unstable_Grid2 as Grid
+    Unstable_Grid2 as Grid,
+    IconButton
 } from '@mui/material';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
@@ -89,22 +92,22 @@ export default function SignupArtistPage() {
                 </p>
             </Grid>
             <div className="stepper-container">
-                    <Stepper activeStep={currentStep} color="secondary">
-                        {steps.map((step, index) => {
-                            const stepProps: { completed?: boolean } = {};
+                <Stepper activeStep={currentStep} color="secondary">
+                    {steps.map((step, index) => {
+                        const stepProps: { completed?: boolean } = {};
 
-                            if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
-                                stepProps.completed = true;
-                            } 
+                        if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
+                            stepProps.completed = true;
+                        } 
 
-                            return (
-                                <Step key={index} {...stepProps}>
-                                    <StepLabel>{step}</StepLabel>
-                                </Step>
-                            );
-                        })}
-                    </Stepper>
-                </div>
+                        return (
+                            <Step key={index} {...stepProps}>
+                                <StepLabel>{step}</StepLabel>
+                            </Step>
+                        );
+                    })}
+                </Stepper>
+            </div>
             <Paper className="form-paper-wrapper" elevation={5}>
                 <Grid className="first-name-grid" xs={12}>
                     <TextField
@@ -188,6 +191,27 @@ export default function SignupArtistPage() {
                         fullWidth
                         multiline
                     />
+                </Grid>
+                <Grid className="birthday-grid" xs={12}>
+                    <DatePicker 
+                        label="Birthday"
+                        slotProps={{
+                            textField: {
+                                color: 'secondary',
+                                fullWidth: true,
+                                helperText: 'Required',
+                                required: true,
+                            },
+                        }}
+                        disableOpenPicker 
+                    />
+                </Grid>
+                <Grid className="avatar-grid" xs={12}>
+                    <IconButton color="secondary" aria-label="upload picture" component="label">
+                        <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden />
+                        <PhotoCameraIcon />
+                    </IconButton>
+                    Avatar
                 </Grid>
                 <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />

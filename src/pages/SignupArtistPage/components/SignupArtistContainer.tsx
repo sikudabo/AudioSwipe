@@ -195,4 +195,31 @@ export const SignupArtistContainer = styled(Grid)`
         }
     }
     
+    .birthday-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .birthday-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
+    .avatar-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .avatar-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
 `;

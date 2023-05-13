@@ -22,6 +22,7 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req: Reques
         genres,
         spotifyLink,
         youtubeLink,
+        userType,
         soundcloudLink,
     } = req.body;
 
@@ -53,6 +54,7 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req: Reques
             fans: [],
             upvotes: [],
             downvotes: [],
+            userType,
         }
 
         await ArtistModel.insertOne(newArtist);

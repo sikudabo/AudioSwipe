@@ -42,13 +42,13 @@ var startDb = require('../db/db');
 var uploads = require('../db/uploads');
 var ArtistModel = require('../db/models').ArtistModel;
 router.route('/api/saveArtist').put(uploads.single('avatar'), function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, firstName, lastName, stageName, username, password, bio, birthDate, email, phone, city, state, genres, spotifyLink, youtubeLink, soundcloudLink, isUsernameTaken, newArtist, user, e_1;
+    var _a, firstName, lastName, stageName, username, password, bio, birthDate, email, phone, city, state, genres, spotifyLink, youtubeLink, userType, soundcloudLink, isUsernameTaken, newArtist, user, e_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0: return [4 /*yield*/, startDb()];
             case 1:
                 _b.sent();
-                _a = req.body, firstName = _a.firstName, lastName = _a.lastName, stageName = _a.stageName, username = _a.username, password = _a.password, bio = _a.bio, birthDate = _a.birthDate, email = _a.email, phone = _a.phone, city = _a.city, state = _a.state, genres = _a.genres, spotifyLink = _a.spotifyLink, youtubeLink = _a.youtubeLink, soundcloudLink = _a.soundcloudLink;
+                _a = req.body, firstName = _a.firstName, lastName = _a.lastName, stageName = _a.stageName, username = _a.username, password = _a.password, bio = _a.bio, birthDate = _a.birthDate, email = _a.email, phone = _a.phone, city = _a.city, state = _a.state, genres = _a.genres, spotifyLink = _a.spotifyLink, youtubeLink = _a.youtubeLink, userType = _a.userType, soundcloudLink = _a.soundcloudLink;
                 return [4 /*yield*/, ArtistModel.findOne({ username: username })];
             case 2:
                 isUsernameTaken = _b.sent();
@@ -79,6 +79,7 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), function (req, res
                     fans: [],
                     upvotes: [],
                     downvotes: [],
+                    userType: userType,
                 };
                 return [4 /*yield*/, ArtistModel.insertOne(newArtist)];
             case 4:

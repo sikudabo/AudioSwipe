@@ -14,7 +14,7 @@ const artistSchema = new mongoose.Schema({
             swipeDate: Date,
         },
     ],
-    downVoteCount: Number,
+    downVoteCount: { default: 0, type: Number },
     email: { required: true, type: String },
     fans: [
         {
@@ -31,6 +31,7 @@ const artistSchema = new mongoose.Schema({
     soundcloudLink: String,
     spotifyLink: String,
     state: { required: true, type: String },
+    userType: { default: 'artist', required: true, type: String },
     youtubeLink: String,
     upVotes: [
         {
@@ -38,7 +39,7 @@ const artistSchema = new mongoose.Schema({
             swipeDate: Date,
         },
     ],
-    upVoteCount: Number,
+    upVoteCount: { default: 0, type: Number },
 }, {
     collection: 'artists',
 });

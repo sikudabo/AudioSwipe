@@ -5,6 +5,7 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
 import styled from '@emotion/styled';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { Navigate } from 'react-router-dom';
 import {
     Card,
@@ -12,6 +13,9 @@ import {
     FormControl,
     FormControlLabel,
     Hidden,
+    InputLabel,
+    MenuItem,
+    OutlinedInput,
     Paper,
     Select,
     Step,
@@ -20,15 +24,26 @@ import {
     TextField,
     Typography,
     Unstable_Grid2 as Grid,
-    IconButton
+    IconButton,
+    FormHelperText,
+    Box,
+    Chip,
+    ListItemText
 } from '@mui/material';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
-import { colors, AudioSwipeButton } from '../../components';
+import { colors, AudioSwipeButton, SelectComponent } from '../../components';
+import { genres, states } from '../../utils/constants';
+
+function CustomPhoneInput(props: any) {
+    return <TextField {...props} color="secondary" />;
+}
 
 export default function SignupArtistPage() {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const steps = [
         "Peronsal Information",
         "Contact Information",
@@ -36,6 +51,10 @@ export default function SignupArtistPage() {
         "Genres",
         "Social Links",
     ];
+
+    function handlePhoneNumberChange(value: string) {
+        setPhoneNumber(value);
+    }
 
     useEffect(() => {
         if (typeof headerTextRef !== 'undefined' && typeof headerTextRef.current !== 'undefined') {
@@ -76,6 +95,11 @@ export default function SignupArtistPage() {
     const handleReset = () => {
         setCompletedSteps([]);
         setCurrentStep(0);
+    }
+
+    function handleGenreSelectionChange(e: {target: { value: any }}) {
+        const { value: values } = e.target;
+        setSelectedGenres(values);
     }
 
     return (
@@ -194,20 +218,38 @@ export default function SignupArtistPage() {
                                 multiline
                             />
                         </Grid>
-                        <Grid className="birthday-grid" xs={12}>
-                            <DatePicker 
-                                label="Birthday"
-                                slotProps={{
-                                    textField: {
-                                        color: 'secondary',
-                                        fullWidth: true,
-                                        helperText: 'Required',
-                                        required: true,
-                                    },
-                                }}
-                                disableOpenPicker 
-                            />
-                        </Grid>
+                        <Hidden mdDown>
+                            <Grid className="birthday-grid" xs={12}>
+                                <DatePicker 
+                                    label="Birthday"
+                                    slotProps={{
+                                        textField: {
+                                            color: 'secondary',
+                                            fullWidth: true,
+                                            helperText: 'Required',
+                                            required: true,
+                                        },
+                                    }}
+                                    disableOpenPicker 
+                                />
+                            </Grid>
+                        </Hidden>
+                        <Hidden lgUp>
+                            <Grid className="birthday-grid" xs={12}>
+                                <MobileDatePicker 
+                                    label="Birthday"
+                                    slotProps={{
+                                        textField: {
+                                            color: 'secondary',
+                                            fullWidth: true,
+                                            helperText: 'Required',
+                                            required: true,
+                                        },
+                                    }}
+                                    disableOpenPicker 
+                                />
+                            </Grid>
+                        </Hidden>
                         <Grid className="avatar-grid" xs={12}>
                             <IconButton color="secondary" aria-label="upload picture" component="label">
                                 <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden />
@@ -216,6 +258,156 @@ export default function SignupArtistPage() {
                             Avatar
                         </Grid>
                     </div>
+                )}
+                {currentStep === 1 && (
+                    <>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Artist Email"
+                                color="secondary"
+                                helperText="Required"
+                                label="Email"
+                                name="email"
+                                placeholder="Email"
+                                type="email"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="first-name-grid" xs={12}>
+                            <PhoneInput
+                                aria-label="Artist Phone number"
+                                component={CustomPhoneInput}
+                                inputProps={{
+                                    name: "Phone number",
+                                    label: "Phone number (Required)",
+                                    require: true,
+                                }}
+                                onChange={handlePhoneNumberChange}
+                                value={phoneNumber}
+                            />
+                        </Grid>
+                    </>
+                )}
+                {currentStep === 2 && (
+                    <>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Artist City"
+                                color="secondary"
+                                helperText="Required"
+                                label="City"
+                                name="city"
+                                placeholder="city"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="first-name-grid" xs={12}>
+                            <Select
+                                color="secondary"
+                                defaultValue={states[1]}  
+                                name="state"  
+                                fullWidth        
+                            >
+                                {states.map((state, index) => (
+                                    <MenuItem key={index} value={state}>
+                                        {state}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            <FormHelperText>
+                                State {`(Required)`}
+                            </FormHelperText>
+                        </Grid>
+                    </>
+                )}
+                {currentStep === 3 && (
+                    <>
+                        <Grid className="genre-options-grid" xs={12}>
+                        <FormControl sx={{ width: '100%' }}>
+                            <InputLabel 
+                                color="secondary"
+                                id="select-label"
+                            >
+                            </InputLabel>
+                            <Select 
+                                aria-label="Artist Genres"
+                                color="secondary"
+                                id="artist-genres"
+                                input={<OutlinedInput />}
+                                onChange={handleGenreSelectionChange}
+                                renderValue={(selected) => (
+                                    <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
+                                        {selected.map((value: string, index: number) => (
+                                            <Chip color="secondary" key={index} label={value} variant="outlined" />
+                                        ))}
+                                    </Box>
+                                )}
+                                placeholder="Genre"
+                                value={selectedGenres}
+                                fullWidth
+                                multiple
+                                required
+                            >
+                                {genres.map((genre, index) => (
+                                    <MenuItem 
+                                        key={index}
+                                        value={genre}
+                                    >
+                                        <Checkbox checked={selectedGenres.indexOf(genre) > -1} color="secondary" />
+                                        <ListItemText primary={genre} />
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                            </FormControl>
+                        </Grid>
+                    </>
+                )}
+                {currentStep === 4 && (
+                    <>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Artist Spotify Link"
+                                color="secondary"
+                                helperText="Spotify URL (Optional)"
+                                label="Spotify URL"
+                                name="spotifyLink"
+                                placeholder="Spotify URL"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Artist YouTube Link"
+                                color="secondary"
+                                helperText="YouTube URL (Optional)"
+                                label="YouTube URL"
+                                name="youtubeLink"
+                                placeholder="YouTube URL"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="first-name-grid" xs={12}>
+                            <TextField
+                                aria-label="Artist SoundCloud Link"
+                                color="secondary"
+                                helperText="SoundCloud URL (Optional)"
+                                label="SoundCloud URL"
+                                name="soundcloudLink"
+                                placeholder="SoundCloud URL"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                    </>
                 )}
                 <div className="back-next-button-row">
                     <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />

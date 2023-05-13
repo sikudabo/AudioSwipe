@@ -44,7 +44,7 @@ export default function SelectComponent() {
                 renderValue={(selected) => (
                     <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
                         {selected.map((value, index) => (
-                            <Chip color="secondary" key={index} label={value} onDelete={() => handleRemoveCandidate(value)} variant="outlined" />
+                            <Chip color="secondary" key={index} label={value} variant="outlined" />
                         ))}
                     </Box>
                 )}

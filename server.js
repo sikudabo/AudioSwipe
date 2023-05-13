@@ -5,63 +5,23 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const errorHandler = require('errorhandler');
-const _ = require('underscore');
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
+const startDb = require('./db/db');
 const serveStatic = require('serve-static');
 const history = require('connect-history-api-fallback');
-const axios = require('axios');
 const cors = require('cors');
-const nodemailer = require('nodemailer');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
-const Contract = require('web3-eth-contract');
-const { CreateElection, Vote } = require('./routes');
+// const { CreateElection, Vote } = require('./routes');
 
-Contract.setProvider('http://127.0.0.1:8545');
-
-const votingAbi = JSON.parse(fs.readFileSync('./build/contracts/VotingExample.json'));
-
-const abi = votingAbi.abi;
-
-const contract = new Contract(abi, '0x68Ba10461f06b6Fc8c9bacbB3dAE3439C6DADF2c');
-
-
-async function addElection() {
-    const candidates = [
-        {
-            name: 'Ronny Morrell',
-            id: '1',
-            votes: 0,
-            voters: [],
-        },
-        {
-            name: 'Brad Luzater',
-            id: '2',
-            votes: 0,
-            voters: [],
-        },
-        {
-            name: 'Kyle Alumbaugh',
-            id: '3',
-            votes: 1,
-            voters: [],
-        },
-    ];
-    const result = await contract.methods.makeNewElection('1', '2', candidates).send({ from: '0x0A41C28cf5812418134EbD9b34F2F36B6E9AC6A8', gas: 6721975, gasPrice: '20000000000' }, (error, result) => {
-        if (error) {
-            return error.message;
-        }
-        return result;
-    });
-
-    console.log('The result was:', result);
-}
-
-// addElection();
+startDb();
 
 app.set('port', process.env.PORT || 2000);
-app.set('appName', 'BlockVotez');
+app.set('appName', 'AudioSwipe');
 
 app.use(cookieParser());
 app.use(logger('dev'));
@@ -83,13 +43,13 @@ app.use(history({
 }));
 
 app.get('*', (req, res) => {
-    res.status('200').send('Welcome to BlockVotez');
-    console.log('Welcome to BlockVotez!');
+    res.status('200').send('Welcome to AudioSwipe!');
+    console.log('AudioSwipe!');
 });
 
 // Routes
-app.use(CreateElection);
-app.use(Vote);
+// app.use(CreateElection);
+// app.use(Vote);
 
 // Server
 const server = http.createServer(app);

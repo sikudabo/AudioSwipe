@@ -222,4 +222,17 @@ export const SignupArtistContainer = styled(Grid)`
             width: 100vw;
         }
     }
+
+    .genre-options-grid {
+        margin: 0 auto;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .genre-options-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
 `;

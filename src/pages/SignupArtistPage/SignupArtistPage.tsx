@@ -4,16 +4,20 @@ import PhoneInput from 'react-phone-input-material-ui';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ErrorMessage } from '@hookform/error-message';
+import { ErrorMessage } from '@hookform/error-message/dist';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import {
     Checkbox,
     FormControl,
+    FormLabel,
+    FormControlLabel,
     Hidden,
     InputLabel,
     MenuItem,
     OutlinedInput,
     Paper,
+    Radio,
+    RadioGroup,
     Select,
     Step,
     Stepper,
@@ -32,16 +36,13 @@ import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
 import { genres, states } from '../../utils/constants';
 
-function CustomPhoneInput(props: any) {
-    return <TextField {...props} color="secondary" />;
-}
-
 export default function SignupArtistPage() {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [selectedGender, setSelectedGender] = useState('');
     const { formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
         defaultValues: {
             firstName: '',
@@ -59,6 +60,7 @@ export default function SignupArtistPage() {
             soundcloudLink: '',
             youtubeLink: '',
             bio: '',
+            gender: '',
         },
         mode: 'onChange',
     });
@@ -124,6 +126,19 @@ export default function SignupArtistPage() {
         console.log('The data is:', data);
     }
 
+    function handleSelectedGenderChange(e: { target: { value: string }}) {
+        const { value: gender } = e.target;
+        setSelectedGender(gender);
+    }
+
+    function DateTextField(props: any) {
+        return <TextField {...props} {...register('birthday')} />;
+    }
+
+    function CustomPhoneInput(props: any) {
+        return <TextField {...props} {...register('phoneNumber')} color="secondary" />;
+    }
+
     return (
         <SignupArtistContainer columns={12} columnSpacing={0} container>
             <div className="top-signup-header">
@@ -164,11 +179,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="First Name"
-                                    name="firstName"
                                     placeholder="First Name"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('firstName')}
                                 />
                             </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -177,11 +192,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="Last Name"
-                                    name="lastName"
                                     placeholder="Last Name"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('lastName')}
                                 />
                             </Grid>
                             <Grid className="stage-name-grid" xs={12}>
@@ -190,11 +205,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="Stage Name"
-                                    name="stageName"
                                     placeholder="Stage Name"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('artistName')}
                                 />
                             </Grid>
                             <Grid className="username-grid" xs={12}>
@@ -203,11 +218,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="username"
-                                    name="username"
                                     placeholder="Username"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('username')}
                                 />
                             </Grid>
                             <Grid className="password-grid" xs={12}>
@@ -217,12 +232,12 @@ export default function SignupArtistPage() {
                                     helperText="Must be at least 6 characters long"
                                     inputProps={{ minLength: 6 }}
                                     label="password"
-                                    name="password"
                                     placeholder="Password"
                                     type="password"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('password')}
                                 />
                             </Grid>
                             <Grid className="bio-grid" xs={12}>
@@ -234,17 +249,36 @@ export default function SignupArtistPage() {
                                     label="Bio"
                                     maxRows={4}
                                     minRows={4}
-                                    name="bio"
                                     placeholder="Bio"
                                     variant="outlined"
                                     fullWidth
                                     multiline
+                                    {...register('bio')}
                                 />
+                            </Grid>
+                            <Grid className="first-name-grid" xs={12}>
+                                <FormControl>
+                                    <FormLabel id="artist-gender-label">
+                                        Gender 
+                                    </FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        name="controlled-radio-buttons-group"
+                                        value={selectedGender}
+                                        onChange={handleSelectedGenderChange}
+                                    >
+                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                    </RadioGroup>
+                                </FormControl>
                             </Grid>
                             <Hidden mdDown>
                                 <Grid className="birthday-grid" xs={12}>
                                     <DatePicker 
                                         label="Birthday"
+                                        slots={{
+                                            textField: DateTextField,
+                                        }}
                                         slotProps={{
                                             textField: {
                                                 color: 'secondary',
@@ -253,6 +287,7 @@ export default function SignupArtistPage() {
                                                 required: true,
                                             },
                                         }}
+                                        disableFuture
                                         disableOpenPicker 
                                     />
                                 </Grid>
@@ -260,6 +295,9 @@ export default function SignupArtistPage() {
                             <Hidden lgUp>
                                     <MobileDatePicker 
                                         label="Birthday"
+                                        slots={{
+                                            textField: DateTextField,
+                                        }}
                                         slotProps={{
                                             textField: {
                                                 color: 'secondary',
@@ -288,12 +326,12 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="Email"
-                                    name="email"
                                     placeholder="Email"
                                     type="email"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('email')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -301,11 +339,9 @@ export default function SignupArtistPage() {
                                     aria-label="Artist Phone number"
                                     component={CustomPhoneInput}
                                     inputProps={{
-                                        name: "Phone number",
                                         label: "Phone number (Required)",
                                         require: true,
                                     }}
-                                    onChange={handlePhoneNumberChange}
                                     value={phoneNumber}
                                 />
                             </Grid>
@@ -319,19 +355,19 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Required"
                                     label="City"
-                                    name="city"
                                     placeholder="city"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('city')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
                                 <Select
                                     color="secondary"
-                                    defaultValue={states[1]}  
-                                    name="state"  
-                                    fullWidth        
+                                    defaultValue={states[1]}    
+                                    fullWidth 
+                                    {...register('state')}       
                                 >
                                     {states.map((state, index) => (
                                         <MenuItem key={index} value={state}>
@@ -359,7 +395,6 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     id="artist-genres"
                                     input={<OutlinedInput />}
-                                    onChange={handleGenreSelectionChange}
                                     renderValue={(selected) => (
                                         <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
                                             {selected.map((value: string, index: number) => (
@@ -372,6 +407,7 @@ export default function SignupArtistPage() {
                                     fullWidth
                                     multiple
                                     required
+                                    {...register('genres')}
                                 >
                                     {genres.map((genre, index) => (
                                         <MenuItem 
@@ -395,11 +431,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="Spotify URL (Optional)"
                                     label="Spotify URL"
-                                    name="spotifyLink"
                                     placeholder="Spotify URL"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('spotifyLink')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -408,11 +444,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="YouTube URL (Optional)"
                                     label="YouTube URL"
-                                    name="youtubeLink"
                                     placeholder="YouTube URL"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('youtubeLink')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -421,11 +457,11 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     helperText="SoundCloud URL (Optional)"
                                     label="SoundCloud URL"
-                                    name="soundcloudLink"
                                     placeholder="SoundCloud URL"
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('soundcloudLink')}
                                 />
                             </Grid>
                         </>

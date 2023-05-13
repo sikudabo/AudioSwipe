@@ -6,7 +6,6 @@
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
-    "@hookform/error-message": "^2.0.1",
     "@mdi/react": "^1.6.1",
     "@mui/icons-material": "^5.11.11",
     "@mui/joy": "^5.0.0-alpha.79",
@@ -80,8 +79,8 @@
     "zustand": "^4.3.6"
   },
   "scripts": {
-    "start": "HOST=0.0.0.0 PORT=2001 react-scripts start",
-    "build": "react-scripts build",
+    "start": "HOST=0.0.0.0 PORT=2001 react-scripts --max_old_space_size=9001 start",
+    "build": "react-scripts --max_old_space_size=9001 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

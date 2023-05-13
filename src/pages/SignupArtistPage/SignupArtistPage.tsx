@@ -263,12 +263,11 @@ export default function SignupArtistPage() {
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-controlled-radio-buttons-group"
-                                        name="controlled-radio-buttons-group"
                                         value={selectedGender}
-                                        onChange={handleSelectedGenderChange}
+                                        {...register('gender')}
                                     >
-                                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                        <FormControlLabel color="secondary" value="female" control={<Radio />} label="Female" />
+                                        <FormControlLabel color="secondary" value="male" control={<Radio />} label="Male" />
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>

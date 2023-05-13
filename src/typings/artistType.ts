@@ -10,7 +10,7 @@ export type ArtistType = {
     upVoteCount?: number;
     email: string;
     fans: [{ fanAvatar: string; fanId: string; fanName: string; }];
-    gender: string;
+    gender: any;
     genres: [string];
     username?: string;
     password: string;

@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-
-const songSchema = new mongoose.Schema({
+var mongoose = require('mongoose');
+var songSchema = new mongoose.Schema({
     email: { required: true, type: String, unique: true },
     myArray: Array,
     songName: String,
@@ -15,5 +14,4 @@ const songSchema = new mongoose.Schema({
 }, {
     collection: 'songs',
 });
-
 module.exports = songSchema;

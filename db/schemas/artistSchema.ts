@@ -8,7 +8,21 @@ const artistSchema = new mongoose.Schema({
     birthday: { required: true, type: Date },
     city: { required: true, type: String },
     createdOn: { default: Date.now, required: true, type: Date },
+    downVotes: [
+        {
+            fanId: String,
+            swipeDate: Date,
+        },
+    ],
+    downVoteCount: Number,
     email: { required: true, type: String },
+    fans: [
+        {
+            fanAvatar: String,
+            fanName: String,
+            fanId: String,
+        }
+    ],
     gender: { required: true, type: String },
     firstName: { require: true, type: String },
     genres: { required: true, type: [String] },
@@ -18,6 +32,13 @@ const artistSchema = new mongoose.Schema({
     spotifyLink: String,
     state: { required: true, type: String },
     youtubeLink: String,
+    upVotes: [
+        {
+            fanId: String,
+            swipeDate: Date,
+        },
+    ],
+    upVoteCount: Number,
 }, {
     collection: 'artists',
 });

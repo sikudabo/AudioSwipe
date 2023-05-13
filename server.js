@@ -16,7 +16,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
-// const { CreateElection, Vote } = require('./routes');
+const { SaveNewArtist } = require('./routes');
 
 startDb();
 
@@ -30,6 +30,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded(({ extended: true })));
 app.use(cors());
 app.use(sslRedirect.default());
+
+console.log('Restart');
 
 app.use(history({
     rewrites: [
@@ -48,8 +50,7 @@ app.get('*', (req, res) => {
 });
 
 // Routes
-// app.use(CreateElection);
-// app.use(Vote);
+app.use(SaveNewArtist);
 
 // Server
 const server = http.createServer(app);

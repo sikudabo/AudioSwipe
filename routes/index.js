@@ -1,7 +1,6 @@
-const CreateElection = require('./createElection');
-const Vote = require('./vote');
+const SaveNewArtist = require('./saveNewArtist');
+
 
 module.exports = {
-    CreateElection,
-    Vote,
+    SaveNewArtist,
 };

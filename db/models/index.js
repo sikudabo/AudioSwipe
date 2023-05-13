@@ -1,6 +1,4 @@
-var artistModel = require('artistModel');
-var customerModel = require('./customerModel');
+var artistModel = require('./artistModel');
 module.exports = {
     artistModel: artistModel,
-    customerModel: customerModel,
 };

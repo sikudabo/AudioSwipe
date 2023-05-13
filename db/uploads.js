@@ -1,6 +1,6 @@
 var dotenv = require('dotenv').config();
 var Grid = require('gridfs-stream');
-var GridFsStorage = require('multer-gridfs-storage');
+var GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 var mongoose = require('mongoose');
 var multer = require('multer');
 var path = require('path');

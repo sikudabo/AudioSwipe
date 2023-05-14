@@ -80,8 +80,8 @@
     "zustand": "^4.3.6"
   },
   "scripts": {
-    "start": "HOST=0.0.0.0 PORT=2001 react-scripts start",
-    "build": "react-scripts build",
+    "start": "HOST=0.0.0.0 PORT=2001 max_old_space_size=4096 react-scripts start",
+    "build": "max_old_space_size=4096 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -105,7 +105,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
-    "@types/node": "^20.1.1",
+    "@types/node": "^20.1.4",
     "typescript": "^5.0.4"
   }
 }

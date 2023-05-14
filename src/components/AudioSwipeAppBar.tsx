@@ -103,6 +103,8 @@ export default function AudioSwipeAppBar() {
     const { pathname } = location;
     const navigate = useNavigate();
 
+    console.log("Restart dev server");
+
     useMemo(() => {
         setDrawerIsOpen(false);
         setMenuAnchorEl(null);

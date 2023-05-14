@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
-import TinderCard from 'react-tinder-card';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
@@ -14,21 +13,11 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { useIsDarkMode } from './hooks';
 import {
   AudioSwipeAppBar,
-  BoxExample,
-  GridExample,
-  ImageListExample,
-  MusicPlayer,
   ScrollToTop,
-  SelectComponent,
-  SliderComponent,
-  StackExample,
   colors,
 } from './components';
-import { Button } from '@mui/material';
-import Container from '@mui/material/Container';
 import './BodyStyles.css';
 import { LandingPage, SignupArtistPage } from './pages';
-const CatchWreckMp3 = require('./audio-media/catch-wreck.mp3');
 
 const CustomStyledContainer = styled.div`
   padding: 0;
@@ -48,25 +37,6 @@ function App() {
 function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
   const audioRef = useRef<any>();
   const [isPaused, setIsPaused] = useState(false);
-
-  function onSwipe(direction: string) {
-    console.log('The direction is:', direction);
-  }
-
-  const people = [
-    {
-      name: 'Simeon',
-      age: 30,
-    },
-    {
-      name: 'Alyssa',
-      age: 30,
-    },
-    {
-      name: 'Kyle',
-      age: 40,
-    },
-  ];
 
   const theme: ThemeOptions = createTheme({
     palette: {
@@ -92,19 +62,13 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
       warning: {
         main: colors.warning,
       },
-      cream: {
-        main: colors.cream,
-      },
-      crimson: {
-        main: colors.crimson,
-      }
     },
     typography: {
       fontFamily: 'Varela Round',
     },
   });
 
-  function handleDurationChange(data: any) {
+ /*  function handleDurationChange(data: any) {
     console.log(data);
   }
 
@@ -131,7 +95,7 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
     if (audioRef.current.currentTime > 500) {
       audioRef.current.currentTime = 0;
     }
-  }
+  } */
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

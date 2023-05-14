@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ErrorMessage } from '@hookform/error-message/dist';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import {
     Checkbox,
@@ -64,6 +63,14 @@ export default function SignupArtistPage() {
         },
         mode: 'onChange',
     });
+
+    const currentGenderSelection = useWatch({
+        name: 'gener',
+    });
+
+    useMemo(() => {
+        console.log('The current gender selection is:', currentGenderSelection);
+    }, [currentGenderSelection]);
     const steps = [
         "Peronsal Information",
         "Contact Information",

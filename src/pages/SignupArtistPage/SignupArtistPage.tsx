@@ -67,13 +67,10 @@ export default function SignupArtistPage() {
         mode: 'onChange',
     });
 
-    const currentGenderSelection = useWatch({
-        name: 'gener',
-    });
 
     useMemo(() => {
-        console.log('The current gender selection is:', currentGenderSelection);
-    }, [currentGenderSelection]);
+        console.log('The current gender selection is:', selectedGender);
+    }, [selectedGender]);
     const steps = [
         "Peronsal Information",
         "Contact Information",

@@ -33,7 +33,10 @@ import {
 import { ArtistType } from '../../typings';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
-import { genres, states } from '../../utils/constants';
+import { states } from '../../utils/constants';
+import { genres } from '../../utils/constants/genres';
+
+console.log('Testing');
 
 export default function SignupArtistPage() {
     const headerTextRef = useRef(null);

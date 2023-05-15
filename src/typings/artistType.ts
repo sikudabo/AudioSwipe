@@ -4,9 +4,9 @@ export type ArtistType = {
     artistName: string;
     birthday: number;
     createdOn: number;
-    downVotes?: [{ fanId: string; swipeDate: Date }];
+    downVotes?: [{ fanId: string; swipeDate: number }];
     downVoteCount?: number;
-    upVotes?: [{ fanId: string; swipeDate: Date }];
+    upVotes?: [{ fanId: string; swipeDate: number }];
     upVoteCount?: number;
     email: string;
     fans: [{ fanAvatar: string; fanId: string; fanName: string; }];

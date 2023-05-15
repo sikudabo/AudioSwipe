@@ -31,8 +31,6 @@ app.use(bodyParser.urlencoded(({ extended: true })));
 app.use(cors());
 app.use(sslRedirect.default());
 
-console.log('Restart');
-
 app.use(history({
     rewrites: [
         {
@@ -44,13 +42,15 @@ app.use(history({
     ]
 }));
 
-app.get('*', (req, res) => {
-    res.status('200').send('Welcome to AudioSwipe!');
-    console.log('AudioSwipe!');
-});
-
 // Routes
 app.use(SaveNewArtist);
+
+app.use(serveStatic(path.join(__dirname, 'build')));
+
+// Middleware
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // Server
 const server = http.createServer(app);

@@ -1,5 +1,5 @@
 import { ArtistType } from "./artistType";
 
 export {
-    ArtistType,
+    type ArtistType,
 };

@@ -225,7 +225,7 @@ export default function LandingPage() {
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
                             <div className="prompt-button-container">
-                                <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate('signup/artist')} size="small" text="Artist Sign Up" variant="contained" disableRipple />
+                                <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate('ll" text="Artist Sign Up" variant="contained" disableRipple />
                                 <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>
                         </Grid>

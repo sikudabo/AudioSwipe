@@ -42,7 +42,7 @@ export default function SignupArtistPage() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [selectedGender, setSelectedGender] = useState('');
-    const { formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
+    const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
         defaultValues: {
             firstName: '',
             lastName: '',
@@ -65,8 +65,11 @@ export default function SignupArtistPage() {
     });
 
     const currentGenderSelection = useWatch({
-        name: 'gener',
+        control,
+        name: 'gender',
     });
+
+    console.log('Test');
 
     useMemo(() => {
         console.log('The current gender selection is:', currentGenderSelection);

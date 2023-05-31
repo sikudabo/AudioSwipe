@@ -1,5 +1,7 @@
-var mongoose = require('mongoose');
-var artistSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+
+const artistSchema = new mongoose.Schema({
     avatar: { required: true, type: String },
     artistName: { required: true, type: String },
     bio: String,
@@ -41,4 +43,5 @@ var artistSchema = new mongoose.Schema({
 }, {
     collection: 'artists',
 });
+
 module.exports = artistSchema;

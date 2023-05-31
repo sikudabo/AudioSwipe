@@ -1,31 +1,38 @@
-var dotenv = require('dotenv').config();
-var Grid = require('gridfs-stream');
-var GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
-var mongoose = require('mongoose');
-var multer = require('multer');
-var path = require('path');
-var dbUri = dotenv.parsed.DB_URI;
-var conn = mongoose.createConnection(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true });
-var gfs;
-conn.once('open', function () {
+const dotenv = require('dotenv').config();
+const Grid = require('gridfs-stream');
+const { GridFsStorage } = require('multer-gridfs-storage');
+const mongoose = require('mongoose');
+const multer = require('multer');
+const path = require('path');
+
+const dbUri = dotenv.parsed.DB_URI;
+
+var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
+
+let gfs;
+
+conn.once('open', () => {
     // Init Stream
     gfs = Grid(conn.db, mongoose.mongo);
     gfs.collection('uploads');
     return 'done';
 });
-var storage = new GridFsStorage({
+
+const storage = new GridFsStorage({
     url: dbUri,
-    file: function (req, file) {
-        return new Promise(function (resolve, reject) {
-            var filename = Date.now() + "-" + file.fieldname + path.extname(file.originalname);
-            var fileInfo = {
-                filename: filename,
-                bucketName: 'uploads'
-            };
-            resolve(fileInfo);
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+          const filename = Date.now() + "-" + file.fieldname + path.extname(file.originalname);
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
         });
     }
 });
-var uploads = multer({ storage: storage });
+
+const uploads = multer({ storage });
+
 module.exports = uploads;

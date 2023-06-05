@@ -86,11 +86,11 @@ export default function CastBallot() {
                 Vote!
             </div>
             <FormControl fullWidth>
-                <InputLabel color="crimson" id="marion-election-label">
+                <InputLabel color="secondary" id="marion-election-label">
                     Marion Mayoral Race
                 </InputLabel>
                 <Select 
-                    color="crimson"
+                    color="secondary"
                     id="election-select"
                     label="Marion Mayoral Race"
                     labelId="marion-election-label"

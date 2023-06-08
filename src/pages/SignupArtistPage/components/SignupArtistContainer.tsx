@@ -69,6 +69,10 @@ export const SignupArtistContainer = styled(Grid)`
         color: ${colors.secondary};
     }
 
+    .css-10g0ua6.Mui-active {
+        color: ${colors.secondary};
+    }
+
     .css-10g0ua6 {
         color: ${colors.secondary};
     }

@@ -73,6 +73,10 @@ export const SignupArtistContainer = styled(Grid)`
         color: ${colors.secondary};
     }
 
+    .css-1f75pcl-MuiSvgIcon-root-MuiStepIcon-root {
+        color: rgba(0, 0, 0, 0.38);
+    }
+
     .css-10g0ua6 {
         color: ${colors.secondary};
     }

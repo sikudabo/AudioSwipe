@@ -119,6 +119,7 @@ const LandingPageContainer = styled(Grid)`
 
 const StyledButton = styled(AudioSwipeButton)`
     background-color: ${colors.secondary};
+    color: ${colors.white};
 
     :hover {
         background-color: ${colors.secondary};
@@ -225,7 +226,7 @@ export default function LandingPage() {
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
                             <div className="prompt-button-container">
-                                <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate("artist/signup")} text="Artist Sign Up" />
+                                <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate("signup/artist")} text="Artist Sign Up" />
                                 <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>
                         </Grid>

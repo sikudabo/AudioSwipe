@@ -69,6 +69,10 @@ export const SignupArtistContainer = styled(Grid)`
         color: ${colors.secondary};
     }
 
+    .MuiStepIcon-root .Mui-active {
+        color: ${colors.secondary};
+    }
+
     .MuiStepLabel-iconContainer {
         color: ${colors.secondary};
     }

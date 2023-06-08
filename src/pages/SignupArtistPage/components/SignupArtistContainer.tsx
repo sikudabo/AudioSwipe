@@ -48,6 +48,10 @@ export const SignupArtistContainer = styled(Grid)`
     color: ${colors.secondary};
 }
 
+.css-12blyff.Mui-checked {
+    color: ${colors.secondary};
+}
+
     .stepper-container {
         justify-content: center;
         display: flex;

@@ -44,6 +44,10 @@ export const SignupArtistContainer = styled(Grid)`
     }
 }
 
+.css-1rrtu9p-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+    color: ${colors.secondary};
+}
+
     .stepper-container {
         justify-content: center;
         display: flex;

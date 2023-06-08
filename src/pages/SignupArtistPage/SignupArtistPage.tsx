@@ -44,7 +44,7 @@ export default function SignupArtistPage() {
     const [completedSteps, setCompletedSteps] = useState<any>([]);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
-    const [selectedGender, setSelectedGender] = useState('');
+    const [selectedGender, setSelectedGender] = useState('female');
     const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
         defaultValues: {
             firstName: '',
@@ -271,13 +271,13 @@ export default function SignupArtistPage() {
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
                                 <FormControl>
-                                    <FormLabel id="artist-gender-label">
+                                    <FormLabel color="secondary" id="artist-gender-label">
                                         Gender 
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-controlled-radio-buttons-group"
                                         value={selectedGender}
-                                        {...register('gender')}
+                                        onChange={handleSelectedGenderChange}
                                     >
                                         <FormControlLabel color="secondary" value="female" control={<Radio />} label="Female" />
                                         <FormControlLabel color="secondary" value="male" control={<Radio />} label="Male" />

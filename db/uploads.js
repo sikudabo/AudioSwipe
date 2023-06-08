@@ -1,11 +1,11 @@
-const dotenv = require('dotenv').config();
+// const dotenv = require('dotenv').config();
 const Grid = require('gridfs-stream');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
 
-const dbUri = dotenv.parsed.DB_URI;
+const dbUri = process.env.DB_URI;
 
 var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});

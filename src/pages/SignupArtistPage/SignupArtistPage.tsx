@@ -145,11 +145,11 @@ export default function SignupArtistPage() {
     }
 
     function DateTextField(props: any) {
-        return <TextField {...props} {...register('birthday')} />;
+        return <TextField {...props} />;
     }
 
     function CustomPhoneInput(props: any) {
-        return <TextField {...props} {...register('phoneNumber')} color="secondary" />;
+        return <TextField {...props} color="secondary" />;
     }
 
     return (

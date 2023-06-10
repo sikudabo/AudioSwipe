@@ -432,6 +432,7 @@ export default function SignupArtistPage() {
                                         </MenuItem>
                                     ))}
                                 </Select>
+                                <FormHelperText>Required (Up to 3)</FormHelperText>
                                 </FormControl>
                             </Grid>
                         </>

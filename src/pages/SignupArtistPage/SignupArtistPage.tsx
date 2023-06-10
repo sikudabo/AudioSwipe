@@ -139,6 +139,7 @@ export default function SignupArtistPage() {
     }
 
     function handleSave(data: ArtistType) {
+        console.log('The errors are:', errors);
         console.log('The data is:', data);
     }
 
@@ -163,6 +164,10 @@ export default function SignupArtistPage() {
     function handleArtistTypeChange(e: { target: { value: string }}) {
         const { value } = e.target;
         setArtistType(value);
+    }
+
+    function handleCreateArtist(data: any) {
+        console.log('The data is:', data);
     }
 
     return (
@@ -209,7 +214,7 @@ export default function SignupArtistPage() {
                                     variant="outlined"
                                     fullWidth
                                     required
-                                    {...register('firstName')}
+                                    {...register('firstName', { required: true })}
                                 />
                             </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -222,7 +227,10 @@ export default function SignupArtistPage() {
                                     variant="outlined"
                                     fullWidth
                                     required
-                                    {...register('lastName')}
+                                    {...register('lastName', { 
+                                    required: 'This field was required',
+                                    validate: v => v.trim() !== 'joey',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="stage-name-grid" xs={12}>
@@ -514,7 +522,7 @@ export default function SignupArtistPage() {
                     <div className="back-next-button-row">
                         <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
                         {currentStep === steps.length ? (
-                            <AudioSwipeButton color="secondary" onClick={handleNextStep} text="submit" />
+                            <AudioSwipeButton color="secondary" onClick={handleNextStep} text="submit" type="submit" />
                         ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text="next" />
                         }
                     </div>

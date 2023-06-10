@@ -153,6 +153,21 @@ export const SignupArtistContainer = styled(Grid)`
         }
     }
 
+    .artist-type-grid {
+        margin: 0 auto;
+        padding-bottom: 20px;
+        padding-top: 50px;
+        width: 50vw;
+    }
+
+    @media ${deviceBreakPointsMaxWidth.tablet} {
+        .artist-type-grid {
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 100vw;
+        }
+    }
+
     .last-name-grid {
         margin: 0 auto;
         padding-bottom: 20px;

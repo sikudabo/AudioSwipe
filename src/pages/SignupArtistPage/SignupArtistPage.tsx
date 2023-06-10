@@ -44,6 +44,7 @@ export default function SignupArtistPage() {
     const [completedSteps, setCompletedSteps] = useState<any>([]);
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [artistType, setArtistType] = useState('musician');
     const [selectedGender, setSelectedGender] = useState('female');
     const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
     const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
@@ -157,6 +158,11 @@ export default function SignupArtistPage() {
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {
         const { value } = e.target;
         setSelectedArtistState(value);
+    }
+
+    function handleArtistTypeChange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setArtistType(value);
     }
 
     return (
@@ -278,7 +284,7 @@ export default function SignupArtistPage() {
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
                                 <FormControl>
-                                    <FormLabel color="secondary"id="artist-gender-label">
+                                    <FormLabel color="secondary" id="artist-gender-label">
                                         Gender 
                                     </FormLabel>
                                     <RadioGroup
@@ -420,7 +426,7 @@ export default function SignupArtistPage() {
                                     placeholder="Genre"
                                     onChange={handleGenreSelectionChange}
                                     renderValue={(selected) => (
-                                        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
+                                        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5, marginBottom: 100 }}>
                                             {selected.map((value: string, index: number) => (
                                                 <Chip color="secondary" key={index} label={value} variant="outlined" />
                                             ))}
@@ -443,6 +449,21 @@ export default function SignupArtistPage() {
                                     ))}
                                 </Select>
                                 <FormHelperText>Required (Up to 3)</FormHelperText>
+                                </FormControl>
+                            </Grid>
+                            <Grid className="artist-type-grid" sx={{ mt: 50 }} xs={12}>
+                                <FormControl>
+                                    <FormLabel color="secondary" id="artist-type-label">
+                                        Artist Type 
+                                    </FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="demo-controlled-radio-buttons-group"
+                                        onChange={handleArtistTypeChange}
+                                        value={artistType}
+                                    >
+                                        <FormControlLabel color="secondary" value="musician" control={<Radio />} label="Musician" />
+                                        <FormControlLabel color="secondary" value="podcaster" control={<Radio />} label="Podcaster" />
+                                    </RadioGroup>
                                 </FormControl>
                             </Grid>
                         </>

@@ -45,6 +45,7 @@ export default function SignupArtistPage() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [selectedGender, setSelectedGender] = useState('female');
+    const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
     const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
         defaultValues: {
             firstName: '',
@@ -85,7 +86,8 @@ export default function SignupArtistPage() {
         "Social Links",
     ];
 
-    function handlePhoneNumberChange(value: string) {
+    function handlePhoneNumberChange(e: { target: { value: string }}) {
+        const { value } = e.target;
         setPhoneNumber(value);
     }
 
@@ -150,6 +152,11 @@ export default function SignupArtistPage() {
 
     function CustomPhoneInput(props: any) {
         return <TextField {...props} color="secondary" />;
+    }
+
+    function handleSelectedArtistStatechange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setSelectedArtistState(value);
     }
 
     return (
@@ -349,11 +356,13 @@ export default function SignupArtistPage() {
                             <Grid className="first-name-grid" xs={12}>
                                 <PhoneInput
                                     aria-label="Artist Phone number"
-                                    component={CustomPhoneInput}
+                                    component={TextField}
                                     inputProps={{
+                                        color: "secondary",
                                         label: "Phone number (Required)",
-                                        require: true,
+                                        required: true,
                                     }}
+                                    onChange={(e: string) => setPhoneNumber(e)}
                                     value={phoneNumber}
                                 />
                             </Grid>
@@ -377,9 +386,10 @@ export default function SignupArtistPage() {
                             <Grid className="first-name-grid" xs={12}>
                                 <Select
                                     color="secondary"
-                                    defaultValue={states[1]}    
-                                    fullWidth 
-                                    {...register('state')}       
+                                    defaultValue={states[0]} 
+                                    onChange={handleSelectedArtistStatechange}
+                                    value={selectedArtistState}   
+                                    fullWidth       
                                 >
                                     {states.map((state, index) => (
                                         <MenuItem key={index} value={state}>

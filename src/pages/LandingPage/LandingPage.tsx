@@ -106,6 +106,7 @@ const LandingPageContainer = styled(Grid)`
 
     .prompt-buttons-container {
         display: flex;
+        padding-bottom: 30px;
     }
 
     .bottom-img-container {
@@ -225,7 +226,7 @@ export default function LandingPage() {
                                 We offer an ad-free and smooth experience that will immdiately 
                                 show you the value in AudioSwipe during our beta launch.
                             </p>
-                            <div className="prompt-button-container">
+                            <div className="prompt-buttons-container">
                                 <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate("signup/artist")} text="Artist Sign Up" />
                                 <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>

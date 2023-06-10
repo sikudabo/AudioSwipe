@@ -271,7 +271,7 @@ export default function SignupArtistPage() {
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
                                 <FormControl>
-                                    <FormLabel color="secondary" id="artist-gender-label">
+                                    <FormLabel color="secondary"id="artist-gender-label">
                                         Gender 
                                     </FormLabel>
                                     <RadioGroup
@@ -407,6 +407,8 @@ export default function SignupArtistPage() {
                                     color="secondary"
                                     id="artist-genres"
                                     input={<OutlinedInput />}
+                                    placeholder="Genre"
+                                    onChange={handleGenreSelectionChange}
                                     renderValue={(selected) => (
                                         <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
                                             {selected.map((value: string, index: number) => (
@@ -414,15 +416,14 @@ export default function SignupArtistPage() {
                                             ))}
                                         </Box>
                                     )}
-                                    placeholder="Genre"
                                     value={selectedGenres}
                                     fullWidth
                                     multiple
                                     required
-                                    {...register('genres')}
                                 >
                                     {genres.map((genre, index) => (
                                         <MenuItem 
+                                            disabled={selectedGenres.length > 2 && !selectedGenres.includes(genre)}
                                             key={index}
                                             value={genre}
                                         >

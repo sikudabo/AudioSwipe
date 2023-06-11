@@ -35,6 +35,7 @@ import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
+import { useHandleToastMessage } from '../../utils';
 import { useShowToastMessage } from '../../hooks';
 
 export default function SignupArtistPage() {
@@ -42,12 +43,10 @@ export default function SignupArtistPage() {
 }
 
 type SignupArtistPageDisplayLayerProps = {
-    handleToastMessageChange: (isOpen: boolean) => void;
-    setIsError: (isError: boolean) => void;
-    setToastMessage: (message: string) => void;
+    handleSave: (data: ArtistType) => Promise<void>;
 }
 
-function SignupArtistPageDisplayLayer({ handleToastMessageChange, setIsError, setToastMessage }: SignupArtistPageDisplayLayerProps) {
+function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLayerProps) {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
@@ -145,18 +144,6 @@ function SignupArtistPageDisplayLayer({ handleToastMessageChange, setIsError, se
     function handleGenreSelectionChange(e: {target: { value: any }}) {
         const { value: values } = e.target;
         setSelectedGenres(values);
-    }
-
-    async function handleSave(data: ArtistType) {
-        setIsError(true);
-        setToastMessage('You forgot to add your name');
-        handleToastMessageChange(true);
-        await setTimeout(() => {
-            handleToastMessageChange(false);
-            setToastMessage('');
-        }, 5000);
-        console.log('The errors are:', errors);
-        console.log('The data is:', data);
     }
 
     function handleSelectedGenderChange(e: { target: { value: string }}) {
@@ -552,10 +539,41 @@ function SignupArtistPageDisplayLayer({ handleToastMessageChange, setIsError, se
 
 function useDataLayer() {
     const { handleToastMessageChange, setIsError, setToastMessage } = useShowToastMessage();
+    const { showToastMessage } = useHandleToastMessage();
+
+    async function handleSave(data: ArtistType) {
+        const { artistName, firstName, lastName } = data;
+        console.log('The data is:', data);
+        
+        if (!firstName.trim()) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a first name.',
+            });
+
+            return;
+        }
+
+        else if (!lastName.trim()) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a last name.',
+            });
+
+            return;
+        }
+
+        else if (!artistName.trim()) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter an artist name.',
+            });
+
+            return;
+        }
+    }
 
     return {
-        handleToastMessageChange,
-        setIsError,
-        setToastMessage,
+        handleSave,
     };
 }

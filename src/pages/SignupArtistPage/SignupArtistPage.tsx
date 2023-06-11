@@ -43,10 +43,11 @@ export default function SignupArtistPage() {
 
 type SignupArtistPageDisplayLayerProps = {
     handleToastMessageChange: (isOpen: boolean) => void;
+    setIsError: (isError: boolean) => void;
     setToastMessage: (message: string) => void;
 }
 
-function SignupArtistPageDisplayLayer({ handleToastMessageChange, setToastMessage }: SignupArtistPageDisplayLayerProps) {
+function SignupArtistPageDisplayLayer({ handleToastMessageChange, setIsError, setToastMessage }: SignupArtistPageDisplayLayerProps) {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
@@ -146,11 +147,12 @@ function SignupArtistPageDisplayLayer({ handleToastMessageChange, setToastMessag
         setSelectedGenres(values);
     }
 
-    function handleSave(data: ArtistType) {
+    async function handleSave(data: ArtistType) {
         console.log('The current step is:', currentStep);
+        setIsError(true);
         setToastMessage('You forgot to add your name');
         handleToastMessageChange(true);
-        setTimeout(() => {
+        await setTimeout(() => {
             handleToastMessageChange(false);
             setToastMessage('');
         }, 3000);
@@ -550,10 +552,11 @@ function SignupArtistPageDisplayLayer({ handleToastMessageChange, setToastMessag
 }
 
 function useDataLayer() {
-    const { handleToastMessageChange, setToastMessage } = useShowToastMessage();
+    const { handleToastMessageChange, setIsError, setToastMessage } = useShowToastMessage();
 
     return {
         handleToastMessageChange,
+        setIsError,
         setToastMessage,
     };
 }

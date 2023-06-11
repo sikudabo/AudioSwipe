@@ -6,6 +6,7 @@ import { useShowToastMessage } from '../hooks';
 type ToastMessageDisplayLayerProps = {
     duration?: number;
     handleClose: () => void;
+    isError?: boolean;
     isOpen: boolean;
     message?: string;
 };
@@ -18,12 +19,13 @@ export default function ToastMessage({ duration }: { duration: number }) {
 function ToastMessageDisplayLayer({
     duration = 5000,
     handleClose,
+    isError = false,
     isOpen,
     message = '',
 }: ToastMessageDisplayLayerProps) {
     return (
         <SnackBar autoHideDuration={duration} open={isOpen} onClose={handleClose}>
-            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            <Alert onClose={handleClose} severity={isError ? 'error' : 'success'} sx={{ width: '100%' }}>
                 {message}
             </Alert>
         </SnackBar>
@@ -31,7 +33,7 @@ function ToastMessageDisplayLayer({
 }
 
 function useDataLayer() {
-    const { handleToastMessageChange, isToastVisible, message } = useShowToastMessage();
+    const { handleToastMessageChange, isError, isToastVisible, message } = useShowToastMessage();
 
     const isOpen = useMemo(() => {
         return isToastVisible;
@@ -43,6 +45,7 @@ function useDataLayer() {
 
     return {
         handleClose,
+        isError,
         isOpen,
         message,
     };

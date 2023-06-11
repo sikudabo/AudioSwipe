@@ -24,7 +24,7 @@ function ToastMessageDisplayLayer({
     message = '',
 }: ToastMessageDisplayLayerProps) {
     return (
-        <SnackBar autoHideDuration={duration} open={isOpen} onClose={handleClose}>
+        <SnackBar anchorOrigin={{ horizontal: 'center', vertical: 'top' }} autoHideDuration={duration} open={isOpen} onClose={handleClose}>
             <Alert onClose={handleClose} severity={isError ? 'error' : 'success'} sx={{ width: '100%' }}>
                 {message}
             </Alert>

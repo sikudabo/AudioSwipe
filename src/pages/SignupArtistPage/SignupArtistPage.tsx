@@ -148,14 +148,13 @@ function SignupArtistPageDisplayLayer({ handleToastMessageChange, setIsError, se
     }
 
     async function handleSave(data: ArtistType) {
-        console.log('The current step is:', currentStep);
         setIsError(true);
         setToastMessage('You forgot to add your name');
         handleToastMessageChange(true);
         await setTimeout(() => {
             handleToastMessageChange(false);
             setToastMessage('');
-        }, 3000);
+        }, 5000);
         console.log('The errors are:', errors);
         console.log('The data is:', data);
     }

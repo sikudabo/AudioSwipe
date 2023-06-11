@@ -15,6 +15,7 @@ import {
   AudioSwipeAppBar,
   ScrollToTop,
   colors,
+  ToastMessage,
 } from './components';
 import './BodyStyles.css';
 import { LandingPage, SignupArtistPage } from './pages';
@@ -104,6 +105,7 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
           <CssBaseline />
           <Router>
             <ScrollToTop />
+            <ToastMessage duration={6000} />
             <AudioSwipeAppBar />
             <Routes>
               <Route element={<LandingPage />} path="/" />

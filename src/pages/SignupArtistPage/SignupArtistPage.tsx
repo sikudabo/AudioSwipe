@@ -35,10 +35,18 @@ import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
-
-console.log('Testing');
+import { useShowToastMessage } from '../../hooks';
 
 export default function SignupArtistPage() {
+    return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
+}
+
+type SignupArtistPageDisplayLayerProps = {
+    handleToastMessageChange: (isOpen: boolean) => void;
+    setToastMessage: (message: string) => void;
+}
+
+function SignupArtistPageDisplayLayer({ handleToastMessageChange, setToastMessage }: SignupArtistPageDisplayLayerProps) {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
@@ -139,6 +147,13 @@ export default function SignupArtistPage() {
     }
 
     function handleSave(data: ArtistType) {
+        console.log('The current step is:', currentStep);
+        setToastMessage('You forgot to add your name');
+        handleToastMessageChange(true);
+        setTimeout(() => {
+            handleToastMessageChange(false);
+            setToastMessage('');
+        }, 3000);
         console.log('The errors are:', errors);
         console.log('The data is:', data);
     }
@@ -189,7 +204,9 @@ export default function SignupArtistPage() {
                         const stepProps: { completed?: boolean } = {};
 
                         if(completedSteps.find((stepIndex: number) => step as any === stepIndex)) {
-                            stepProps.completed = true;
+                            if (currentStep !== 5) {
+                                stepProps.completed = true;
+                            }
                         } 
 
                         return (
@@ -434,7 +451,7 @@ export default function SignupArtistPage() {
                                     placeholder="Genre"
                                     onChange={handleGenreSelectionChange}
                                     renderValue={(selected) => (
-                                        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5, marginBottom: 100 }}>
+                                        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
                                             {selected.map((value: string, index: number) => (
                                                 <Chip color="secondary" key={index} label={value} variant="outlined" />
                                             ))}
@@ -521,13 +538,22 @@ export default function SignupArtistPage() {
                     )}
                     <div className="back-next-button-row">
                         <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
-                        {currentStep === steps.length ? (
+                        {currentStep === steps.length? (
                             <AudioSwipeButton color="secondary" onClick={handleNextStep} text="submit" type="submit" />
-                        ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text="next" />
+                        ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text={currentStep === 4 ? 'submit' : 'next' } type="button" />
                         }
                     </div>
                 </form>
             </Paper>
         </SignupArtistContainer>
     );
+}
+
+function useDataLayer() {
+    const { handleToastMessageChange, setToastMessage } = useShowToastMessage();
+
+    return {
+        handleToastMessageChange,
+        setToastMessage,
+    };
 }

@@ -15,6 +15,7 @@ import SelectComponent from './SelectComponent';
 import StarRating from './StartRating';
 import SliderComponent from './SliderComponent'
 import StackExample from './StackExample';
+import ToastMessage from './ToastMessage';
 import { colors } from './colors';
 
 export {
@@ -36,4 +37,5 @@ export {
     SliderComponent,
     StackExample,
     StarRating,
+    ToastMessage,
 };

@@ -41,6 +41,8 @@ import { useHandleToastMessage } from '../../utils';
 import { useShowToastMessage } from '../../hooks';
 import { checkServerIdentity } from 'tls';
 import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
+import saveNewArtist from './form/saveNewArtist';
+import axios from 'axios';
 
 export default function SignupArtistPage() {
     return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
@@ -736,7 +738,21 @@ function useDataLayer() {
         formData.append('city', city);
         formData.append('state', selectedArtistState);
         formData.append('genres', selectedGenres as any);
+        formData.append('spotifyLink', spotifyLink as any);
+        formData.append('soundcloudLink', soundcloudLink as any);
+        formData.append('youtubeLink', youtubeLink as any);
 
+        await saveNewArtist({
+            data: formData,
+        }).then(response => {
+            console.log('My response as:', response);
+        }).catch(e => {
+            console.log('There was an error:', e.message);
+            showToastMessage({
+                isError: true,
+                message: 'There was an error creating your profile. Try again!',
+            });
+        });
 
     }
 

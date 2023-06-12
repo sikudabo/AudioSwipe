@@ -29,7 +29,7 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) =
     const isUsernameTaken = await ArtistModel.findOne({ username: username})
 
     if (isUsernameTaken) {
-        res.status(401).send('Username has been taken');
+        res.status(401).json({ isSuccess: false, message: 'Username taken' });
         return;
     }
 
@@ -63,13 +63,13 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) =
         const user = await ArtistModel.findOne({ username: username });
 
         res.status(200).json({
-            success: true,
+            isSuccess: true,
             user,
         });
     
     } catch(e) {
         console.log('Error saving a new artist to the DB!!!!');
-        res.status(500).send('Error saving artist to the DB');
+        res.status(500).json({ isSuccess: false, message: 'Error saving the artist into the db on PUT request.'});
         return;
     }
 });

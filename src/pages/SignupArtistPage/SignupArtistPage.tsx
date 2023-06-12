@@ -48,12 +48,13 @@ export default function SignupArtistPage() {
 
 type SignupArtistPageDisplayLayerProps = {
     artistBirthday: any;
-    avatar: any;
+    artistType: string;
     handleSave: (data: ArtistType) => Promise<void>;
     phoneNumber: string;
     selectedArtistState: string;
     selectedGenres: string[];
     setArtistBirthday: any;
+    setArtistType: React.Dispatch<React.SetStateAction<string>>;
     setAvatar: any;
     setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
     setSelectedArtistState: React.Dispatch<React.SetStateAction<string>>;
@@ -62,12 +63,13 @@ type SignupArtistPageDisplayLayerProps = {
 
 function SignupArtistPageDisplayLayer({ 
     artistBirthday, 
-    avatar,
+    artistType,
     handleSave, 
     phoneNumber, 
     selectedArtistState,
     selectedGenres, 
     setArtistBirthday, 
+    setArtistType,
     setAvatar,
     setPhoneNumber,
     setSelectedArtistState,
@@ -76,7 +78,6 @@ function SignupArtistPageDisplayLayer({
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
-    const [artistType, setArtistType] = useState('musician');
     const [selectedGender, setSelectedGender] = useState('female');
     const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
         defaultValues: {
@@ -577,10 +578,11 @@ function useDataLayer() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [artistType, setArtistType] = useState('musician');
     const [avatar, setAvatar] = useState(null);
 
     async function handleSave(data: ArtistType) {
-        const { artistName, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
+        const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
         
         if (!firstName.trim()) {
             showToastMessage({
@@ -720,16 +722,33 @@ function useDataLayer() {
 
             return;
         }
+
+        const formData = new FormData();
+        formData.append('firstName', firstName);
+        formData.append('lastName', lastName);
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('stageName', artistName);
+        formData.append('birthDate', formatUserBirthday(artistBirthday) as any);
+        formData.append('bio', bio as string);
+        formData.append('email', email);
+        formData.append('phone', phoneNumber);
+        formData.append('city', city);
+        formData.append('state', selectedArtistState);
+        formData.append('genres', selectedGenres as any);
+
+
     }
 
     return {
         artistBirthday,
-        avatar,
+        artistType,
         handleSave,
         phoneNumber,
         selectedArtistState,
         selectedGenres,
         setArtistBirthday,
+        setArtistType,
         setAvatar,
         setPhoneNumber,
         setSelectedGenres,

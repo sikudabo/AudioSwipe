@@ -7,6 +7,7 @@ const { ArtistModel } = require('../db/models');
 router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) => {
     await startDb();
     const {
+        artistType,
         firstName,
         lastName,
         stageName,
@@ -35,6 +36,7 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) =
     try {
         const newArtist = {
             avatar: req.files.filename,
+            artistType,
             firstName,
             lastName,
             stageName,

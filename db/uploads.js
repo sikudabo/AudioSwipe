@@ -4,8 +4,11 @@ const { GridFsStorage } = require('multer-gridfs-storage');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
+const dotenv = require('dotenv').config();
 
-const dbUri = process.env.DB_URI;
+const dbUri = dotenv.parsed.DB_URI;
+
+console.log('The dbUri is:', dbUri);
 
 var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});

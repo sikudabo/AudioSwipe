@@ -10,8 +10,9 @@ export const postBinaryData = async ({ data, url }: PostBinaryDataProps) => {
         data,
         headers: {
             'Content-Type': 'multipart/form-data',
+            'Content-Encoding': 'mutipart/form-data',
         },
-        method: 'PUT',
+        method: 'POST',
         url: 'http://localhost:2000/api/saveArtist',
     }).then(response => {
         return response.data;

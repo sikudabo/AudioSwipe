@@ -34,7 +34,7 @@ import {
 import { ArtistType } from '../../typings';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
-import { checkValidAge, checkValidEmail, formatUserBirthday } from '../../utils/helpers';
+import { checkValidAge, checkValidEmail, formatUserBirthday, resizeImage } from '../../utils/helpers';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
 import { useHandleToastMessage } from '../../utils';
@@ -48,11 +48,13 @@ export default function SignupArtistPage() {
 
 type SignupArtistPageDisplayLayerProps = {
     artistBirthday: any;
+    avatar: any;
     handleSave: (data: ArtistType) => Promise<void>;
     phoneNumber: string;
     selectedArtistState: string;
     selectedGenres: string[];
     setArtistBirthday: any;
+    setAvatar: any;
     setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
     setSelectedArtistState: React.Dispatch<React.SetStateAction<string>>;
     setSelectedGenres: React.Dispatch<React.SetStateAction<string[]>>;
@@ -60,11 +62,13 @@ type SignupArtistPageDisplayLayerProps = {
 
 function SignupArtistPageDisplayLayer({ 
     artistBirthday, 
+    avatar,
     handleSave, 
     phoneNumber, 
     selectedArtistState,
     selectedGenres, 
     setArtistBirthday, 
+    setAvatar,
     setPhoneNumber,
     setSelectedArtistState,
     setSelectedGenres,
@@ -188,6 +192,12 @@ function SignupArtistPageDisplayLayer({
 
     function handleBirthDateChange(val: any) {
         setArtistBirthday(val);
+    }
+
+    async function handleAvatarChange(e: { target: { files: any }}) {
+        const file = e.target.files[0];
+        const resizedAvatar = await resizeImage(file);
+        setAvatar(resizedAvatar);
     }
 
     return (
@@ -371,7 +381,7 @@ function SignupArtistPageDisplayLayer({
                             </Hidden>
                             <Grid className="avatar-grid" xs={12}>
                                 <IconButton color="secondary" aria-label="upload picture" component="label">
-                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden />
+                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" onChange={handleAvatarChange} type="file" hidden required />
                                     <PhotoCameraIcon />
                                 </IconButton>
                                 Avatar
@@ -567,6 +577,7 @@ function useDataLayer() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+    const [avatar, setAvatar] = useState(null);
 
     async function handleSave(data: ArtistType) {
         const { artistName, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
@@ -700,15 +711,26 @@ function useDataLayer() {
 
             return;
         }
+
+        else if (!avatar) {
+            showToastMessage({
+                isError: true,
+                message: 'You must upload a profile avatar.',
+            });
+
+            return;
+        }
     }
 
     return {
         artistBirthday,
+        avatar,
         handleSave,
         phoneNumber,
         selectedArtistState,
         selectedGenres,
         setArtistBirthday,
+        setAvatar,
         setPhoneNumber,
         setSelectedGenres,
         setSelectedArtistState,

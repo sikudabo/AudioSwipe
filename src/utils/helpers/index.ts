@@ -4,6 +4,7 @@ import { checkValidEmail } from "./checkValidEmail";
 import { checkValidUrl } from './checkValidUrl';
 import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth} from "../breakpoints";
 import { formatUserBirthday } from './formatUserBirthday';
+import { resizeImage } from "./resizeImage";
 
 export { 
     checkValidAge,
@@ -13,4 +14,5 @@ export {
     deviceBreakPointsMinWidth,
     formatUserBirthday,
     postData,
+    resizeImage,
 };

@@ -47,6 +47,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.8",
+    "react-image-file-resizer": "^0.4.8",
     "react-material-ui-carousel": "^3.4.2",
     "react-phone-input-material-ui": "^2.18.1",
     "react-query": "^3.39.3",
@@ -61,6 +62,8 @@
     "sweetalert": "^2.1.2",
     "truffle": "^5.8.1",
     "underscore": "^1.13.6",
+    "url-validation": "^2.1.0",
+    "valid-url": "^1.0.9",
     "web-vitals": "^2.1.4",
     "web3": "^1.10.0",
     "web3-eth": "^1.9.0",
@@ -106,6 +109,7 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^20.1.4",
+    "@types/valid-url": "^1.0.4",
     "typescript": "^5.0.4"
   }
 }

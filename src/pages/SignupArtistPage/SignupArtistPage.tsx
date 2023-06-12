@@ -5,6 +5,7 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import dayjs from 'dayjs';
 import {
     Checkbox,
     FormControl,
@@ -33,25 +34,39 @@ import {
 import { ArtistType } from '../../typings';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { colors, AudioSwipeButton } from '../../components';
+import { checkValidAge, checkValidEmail, formatUserBirthday } from '../../utils/helpers';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
 import { useHandleToastMessage } from '../../utils';
 import { useShowToastMessage } from '../../hooks';
+import { checkServerIdentity } from 'tls';
 
 export default function SignupArtistPage() {
     return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
 }
 
 type SignupArtistPageDisplayLayerProps = {
+    artistBirthday: any;
     handleSave: (data: ArtistType) => Promise<void>;
+    phoneNumber: string;
+    selectedGenres: string[];
+    setArtistBirthday: any;
+    setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
+    setSelectedGenres: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLayerProps) {
+function SignupArtistPageDisplayLayer({ 
+    artistBirthday, 
+    handleSave, 
+    phoneNumber, 
+    selectedGenres, 
+    setArtistBirthday, 
+    setPhoneNumber,
+    setSelectedGenres,
+}: SignupArtistPageDisplayLayerProps) {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [artistType, setArtistType] = useState('musician');
     const [selectedGender, setSelectedGender] = useState('female');
     const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
@@ -82,10 +97,7 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
         name: 'gender',
     });
 
-    console.log('Test');
-
     useMemo(() => {
-        console.log('The current gender selection is:', selectedGender);
     }, [selectedGender]);
     const steps = [
         "Peronsal Information",
@@ -120,7 +132,6 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
         }
 
         setCompletedSteps((previousSteps: [any]) => [...previousSteps as any, currentStep]);
-        console.log('The current steps next are:', completedSteps);
 
         setCurrentStep((previousStep: number) => previousStep + 1);
     }
@@ -133,7 +144,6 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
 
         setCurrentStep((previousStep: number) => previousStep - 1);
         setCompletedSteps(() => completedSteps.filter((step: number) => step !== currentStep));
-        console.log('The completed steps back are:', completedSteps);
     }
 
     const handleReset = () => {
@@ -170,7 +180,12 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
     }
 
     function handleCreateArtist(data: any) {
-        console.log('The data is:', data);
+    }
+
+    function handleBirthDateChange(val: any) {
+        const { $d } = val;
+        const birthDate = new Date($d);
+        setArtistBirthday(val);
     }
 
     return (
@@ -313,9 +328,10 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
                             <Hidden mdDown>
                                 <Grid className="birthday-grid" xs={12}>
                                     <DatePicker 
+                                        defaultValue={artistBirthday}
                                         label="Birthday"
                                         slots={{
-                                            textField: DateTextField,
+                                            textField: TextField,
                                         }}
                                         slotProps={{
                                             textField: {
@@ -323,8 +339,10 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
                                                 fullWidth: true,
                                                 helperText: 'Must be at least 13 (Required)',
                                                 required: true,
+                                                onChange: handleBirthDateChange,
                                             },
                                         }}
+                                        value={artistBirthday}
                                         disableFuture
                                         disableOpenPicker 
                                     />
@@ -332,9 +350,10 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
                             </Hidden>
                             <Hidden lgUp>
                                     <MobileDatePicker 
+                                        defaultValue={artistBirthday}
                                         label="Birthday"
                                         slots={{
-                                            textField: DateTextField,
+                                            textField: TextField,
                                         }}
                                         slotProps={{
                                             textField: {
@@ -342,8 +361,10 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
                                                 fullWidth: true,
                                                 helperText: 'Must be at least 13 (Required)',
                                                 required: true,
+                                                onChange: handleBirthDateChange,
                                             },
                                         }}
+                                        value={artistBirthday}
                                         disableFuture
                                     />
                             </Hidden>
@@ -540,10 +561,13 @@ function SignupArtistPageDisplayLayer({ handleSave }: SignupArtistPageDisplayLay
 function useDataLayer() {
     const { handleToastMessageChange, setIsError, setToastMessage } = useShowToastMessage();
     const { showToastMessage } = useHandleToastMessage();
+    const [artistBirthday, setArtistBirthday] = useState(dayjs('1997-03-20'));
+    const [artistEmail, setArtistEmail] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
     async function handleSave(data: ArtistType) {
-        const { artistName, firstName, lastName } = data;
-        console.log('The data is:', data);
+        const { artistName, city, email, firstName, lastName, password, state, username } = data;
         
         if (!firstName.trim()) {
             showToastMessage({
@@ -571,9 +595,84 @@ function useDataLayer() {
 
             return;
         }
+
+        else if (!checkValidEmail(email)) {
+            console.log('The email is:', email);
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a valid email.',
+            });
+
+            return;
+        }
+
+        else if (!username) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a username.',
+            });
+
+            return;
+        }
+
+        else if(!password || password.length < 6) {
+            showToastMessage({
+                isError: true,
+                message: 'Password must be 6 characters long.',
+            });
+
+            return;
+        }
+
+        else if (!checkValidAge(formatUserBirthday(artistBirthday))) {
+            showToastMessage({
+                isError: true,
+                message: 'You must be at least 13-years old to join AudioSwipe.',
+            });
+
+            return;
+        }
+
+        else if (phoneNumber.length < 11) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a valid phone number.',
+            });
+
+            return;
+        }
+
+        else if (!city) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter your city.',
+            });
+
+            return;
+        } else if (!state) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter your state.',
+            });
+
+            return;
+        } else if (selectedGenres.length < 1 || selectedGenres.length > 3) {
+            showToastMessage({
+                isError: true,
+                message: selectedGenres.length > 3 ? 'You can only select up to 3 genres.' : 'You must select at least one genre',
+            });
+
+            return;
+        }
     }
 
     return {
+        artistBirthday,
         handleSave,
+        phoneNumber,
+        selectedGenres,
+        setArtistBirthday,
+        setPhoneNumber,
+        setSelectedGenres,
     };
 }

@@ -110,7 +110,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
           <CssBaseline />
           <Router>
             <Backdrop
-              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              sx={{ color: colors.hotPink, zIndex: (theme) => theme.zIndex.drawer + 1 }}
               open={isLoading}
               onClick={handleBackdropClose}
             >
@@ -133,6 +133,8 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
 function useDatalayer() {
   const { isDarkMode } = useIsDarkMode();
   const { isLoading, setIsLoading } = useIsFormLoading();
+
+  setIsLoading(true);
 
   function handleBackdropClose() {
     setIsLoading(false);

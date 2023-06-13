@@ -41,6 +41,7 @@ import { checkServerIdentity } from 'tls';
 import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
 import saveNewArtist from './form/saveNewArtist';
 import axios from 'axios';
+import { useIsFormLoading } from '../../utils/forms/useIsFormLoading';
 
 export default function SignupArtistPage() {
     return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
@@ -50,6 +51,7 @@ type SignupArtistPageDisplayLayerProps = {
     artistBirthday: any;
     artistType: string;
     handleSave: (data: ArtistType) => Promise<void>;
+    isLoading: boolean;
     phoneNumber: string;
     selectedArtistState: string;
     selectedGender: string;
@@ -67,6 +69,7 @@ function SignupArtistPageDisplayLayer({
     artistBirthday, 
     artistType,
     handleSave, 
+    isLoading,
     phoneNumber, 
     selectedArtistState,
     selectedGender,
@@ -184,6 +187,10 @@ function SignupArtistPageDisplayLayer({
         const file = e.target.files[0];
         const resizedAvatar = await resizeImage(file);
         setAvatar(resizedAvatar);
+    }
+
+    if (isLoading) {
+        return <div>Loading...</div>;
     }
 
     return (
@@ -558,6 +565,7 @@ function SignupArtistPageDisplayLayer({
 
 function useDataLayer() {
     const { showToastMessage } = useHandleToastMessage();
+    const { isLoading, setIsLoading } = useIsFormLoading();
     const [artistBirthday, setArtistBirthday] = useState(dayjs('2023-03-20'));
     const [selectedGender, setSelectedGender] = useState('female');
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -568,13 +576,15 @@ function useDataLayer() {
 
     async function handleSave(data: ArtistType) {
         const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
+
+        setIsLoading(true);
         
         if (!firstName.trim()) {
             showToastMessage({
                 isError: true,
                 message: 'You must enter a first name.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -583,7 +593,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter a last name.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -592,7 +602,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter an artist name.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -602,7 +612,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter a valid email.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -611,7 +621,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter a username.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -620,7 +630,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'Password must be 6 characters long.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -629,7 +639,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must be at least 13-years old to join AudioSwipe.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -638,7 +648,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter a valid phone number.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -647,28 +657,28 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must enter your city.',
             });
-
+            setIsLoading(false);
             return;
         } else if (!selectedArtistState) {
             showToastMessage({
                 isError: true,
                 message: 'You must enter your state.',
             });
-
+            setIsLoading(false);
             return;
         } else if (selectedGenres.length < 1 || selectedGenres.length > 3) {
             showToastMessage({
                 isError: true,
                 message: selectedGenres.length > 3 ? 'You can only select up to 3 genres.' : 'You must select at least one genre.',
             });
-
+            setIsLoading(false);
             return;
         } else if (spotifyLink && !checkValidUrl(spotifyLink)) {
             showToastMessage({
                 isError: true,
                 message: 'Your spotify link must be a valid url.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -677,7 +687,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'Your spotify link must be a valid url.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -686,7 +696,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'Your soundcloud link must be a valid url.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -695,7 +705,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'Your youtube link must be a valid url.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -704,7 +714,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'You must upload a profile avatar.',
             });
-
+            setIsLoading(false);
             return;
         }
 
@@ -738,7 +748,7 @@ function useDataLayer() {
                     isError: true,
                     message,
                 })
-
+                setIsLoading(false);
                 return;
             }
 
@@ -746,10 +756,11 @@ function useDataLayer() {
                 isError: false,
                 message: 'Welcome to AudioSwipe!',
             });
-
+            setIsLoading(false);
             return;
         }).catch(e => {
             console.log('There was an error:', e.message);
+            setIsLoading(false);
             showToastMessage({
                 isError: true,
                 message: 'There was an error creating your profile. Try again!',
@@ -762,6 +773,7 @@ function useDataLayer() {
         artistBirthday,
         artistType,
         handleSave,
+        isLoading,
         phoneNumber,
         selectedArtistState,
         selectedGender,

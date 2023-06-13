@@ -1,9 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
 import React, { useRef, useState } from 'react';
 import styled from '@emotion/styled';
+import Backdrop from '@mui/material/Backdrop';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
+import { useIsFormLoading } from './utils/forms';
 import {
   BrowserRouter as Router,
   Routes,
@@ -19,6 +21,7 @@ import {
 } from './components';
 import './BodyStyles.css';
 import { LandingPage, SignupArtistPage } from './pages';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const CustomStyledContainer = styled.div`
   padding: 0;
@@ -28,14 +31,16 @@ const CustomStyledContainer = styled.div`
 `;
 
 type AppDisplayLayerProps = {
+  handleBackdropClose: () => void;
   isDarkMode: boolean;
+  isLoading: boolean;
 };
 
 function App() {
   return <App_DisplayLayer {...useDatalayer()} />;
 }
 
-function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
+function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDisplayLayerProps) {
   const audioRef = useRef<any>();
   const [isPaused, setIsPaused] = useState(false);
 
@@ -104,6 +109,13 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
         <CustomStyledContainer>
           <CssBaseline />
           <Router>
+            <Backdrop
+              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={isLoading}
+              onClick={handleBackdropClose}
+            >
+              <CircularProgress color="error" />
+            </Backdrop>
             <ScrollToTop />
             <ToastMessage duration={6000} />
             <AudioSwipeAppBar />
@@ -120,8 +132,15 @@ function App_DisplayLayer({ isDarkMode }: AppDisplayLayerProps) {
 
 function useDatalayer() {
   const { isDarkMode } = useIsDarkMode();
+  const { isLoading, setIsLoading } = useIsFormLoading();
+
+  function handleBackdropClose() {
+    setIsLoading(false);
+  }
   return {
+    handleBackdropClose,
     isDarkMode,
+    isLoading,
   }
 }
 

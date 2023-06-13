@@ -12,11 +12,12 @@ export const postBinaryData = async ({ data, url }: PostBinaryDataProps) => {
             'Content-Type': 'multipart/form-data',
             'Content-Encoding': 'mutipart/form-data',
         },
-        method: 'POST',
+        method: 'PUT',
         url: 'http://localhost:2000/api/saveArtist',
     }).then(response => {
         return response.data;
     }).catch(e => {
-        console.log(e);
+        const { isSuccess, message } = e.response.data;
+        return { isSuccess, message };
     });
 }

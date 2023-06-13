@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
-import { useForm, useWatch } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import dayjs from 'dayjs';
@@ -23,7 +22,6 @@ import {
     Stepper,
     StepLabel,
     TextField,
-    Typography,
     Unstable_Grid2 as Grid,
     IconButton,
     FormHelperText,
@@ -54,9 +52,11 @@ type SignupArtistPageDisplayLayerProps = {
     handleSave: (data: ArtistType) => Promise<void>;
     phoneNumber: string;
     selectedArtistState: string;
+    selectedGender: string;
     selectedGenres: string[];
     setArtistBirthday: any;
     setArtistType: React.Dispatch<React.SetStateAction<string>>;
+    setSelectedGender: React.Dispatch<React.SetStateAction<string>>;
     setAvatar: any;
     setPhoneNumber: React.Dispatch<React.SetStateAction<string>>;
     setSelectedArtistState: React.Dispatch<React.SetStateAction<string>>;
@@ -69,19 +69,20 @@ function SignupArtistPageDisplayLayer({
     handleSave, 
     phoneNumber, 
     selectedArtistState,
+    selectedGender,
     selectedGenres, 
     setArtistBirthday, 
     setArtistType,
     setAvatar,
     setPhoneNumber,
     setSelectedArtistState,
+    setSelectedGender,
     setSelectedGenres,
 }: SignupArtistPageDisplayLayerProps) {
     const headerTextRef = useRef(null);
     const [currentStep, setCurrentStep] = useState(0);
     const [completedSteps, setCompletedSteps] = useState<any>([]);
-    const [selectedGender, setSelectedGender] = useState('female');
-    const { control, formState: { errors }, handleSubmit, register, reset, watch } = useForm<ArtistType>({
+    const { handleSubmit, register, setValue, watch } = useForm<ArtistType>({
         defaultValues: {
             firstName: '',
             lastName: '',
@@ -103,13 +104,12 @@ function SignupArtistPageDisplayLayer({
         mode: 'onChange',
     });
 
-    const currentGenderSelection = useWatch({
-        control,
-        name: 'gender',
-    });
+    const currentUsername = watch('username');
 
     useMemo(() => {
-    }, [selectedGender]);
+        setValue('username', currentUsername?.trim());
+    }, [currentUsername, setValue]);
+
     const steps = [
         "Peronsal Information",
         "Contact Information",
@@ -117,11 +117,6 @@ function SignupArtistPageDisplayLayer({
         "Genres",
         "Social Links",
     ];
-
-    function handlePhoneNumberChange(e: { target: { value: string }}) {
-        const { value } = e.target;
-        setPhoneNumber(value);
-    }
 
     useEffect(() => {
         if (typeof headerTextRef !== 'undefined' && typeof headerTextRef.current !== 'undefined') {
@@ -157,11 +152,6 @@ function SignupArtistPageDisplayLayer({
         setCompletedSteps(() => completedSteps.filter((step: number) => step !== currentStep));
     }
 
-    const handleReset = () => {
-        setCompletedSteps([]);
-        setCurrentStep(0);
-    }
-
     function handleGenreSelectionChange(e: {target: { value: any }}) {
         const { value: values } = e.target;
         setSelectedGenres(values);
@@ -176,10 +166,6 @@ function SignupArtistPageDisplayLayer({
         return <TextField {...props} />;
     }
 
-    function CustomPhoneInput(props: any) {
-        return <TextField {...props} color="secondary" />;
-    }
-
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {
         const { value } = e.target;
         setSelectedArtistState(value);
@@ -188,9 +174,6 @@ function SignupArtistPageDisplayLayer({
     function handleArtistTypeChange(e: { target: { value: string }}) {
         const { value } = e.target;
         setArtistType(value);
-    }
-
-    function handleCreateArtist(data: any) {
     }
 
     function handleBirthDateChange(val: any) {
@@ -574,9 +557,9 @@ function SignupArtistPageDisplayLayer({
 }
 
 function useDataLayer() {
-    const { handleToastMessageChange, setIsError, setToastMessage } = useShowToastMessage();
     const { showToastMessage } = useHandleToastMessage();
     const [artistBirthday, setArtistBirthday] = useState(dayjs('2023-03-20'));
+    const [selectedGender, setSelectedGender] = useState('female');
     const [phoneNumber, setPhoneNumber] = useState("");
     const [selectedArtistState, setSelectedArtistState] = useState(states[0]);
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
@@ -741,11 +724,30 @@ function useDataLayer() {
         formData.append('spotifyLink', spotifyLink as any);
         formData.append('soundcloudLink', soundcloudLink as any);
         formData.append('youtubeLink', youtubeLink as any);
+        formData.append('avatar', avatar, 'avatar.jpg');
+        formData.append('artistType', artistType);
+        formData.append('gender', selectedGender);
 
         await saveNewArtist({
             data: formData,
         }).then(response => {
-            console.log('My response as:', response);
+            const { isSuccess, message, user } = response;
+
+            if (!isSuccess) {
+                showToastMessage({
+                    isError: true,
+                    message,
+                })
+
+                return;
+            }
+
+            showToastMessage({
+                isError: false,
+                message: 'Welcome to AudioSwipe!',
+            });
+
+            return;
         }).catch(e => {
             console.log('There was an error:', e.message);
             showToastMessage({
@@ -762,11 +764,13 @@ function useDataLayer() {
         handleSave,
         phoneNumber,
         selectedArtistState,
+        selectedGender,
         selectedGenres,
         setArtistBirthday,
         setArtistType,
         setAvatar,
         setPhoneNumber,
+        setSelectedGender,
         setSelectedGenres,
         setSelectedArtistState,
     };

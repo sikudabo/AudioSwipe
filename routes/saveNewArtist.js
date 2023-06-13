@@ -12,10 +12,8 @@ const dotenv = require('dotenv').config();
 
 const dbUri = dotenv.parsed.DB_URI;
 
-var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
-
-console.log('conn is:', conn);
+var conn = mongoose.createConnection('mongodb://localhost:27017/audioswipe', {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/audioswipe', {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
 
@@ -44,11 +42,13 @@ const uploads = multer({ storage });
 
 
 
-router.route('/api/saveArtist').post(uploads.single('avatar'), async (req, res) => {
-    await startDb();
+router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) => {
+    await mongoose.connect('mongodb://localhost:27017/audioswipe');
+
     const {
         artistType,
         firstName,
+        gender,
         lastName,
         stageName,
         username,
@@ -62,47 +62,47 @@ router.route('/api/saveArtist').post(uploads.single('avatar'), async (req, res) 
         genres,
         spotifyLink,
         youtubeLink,
-        userType,
         soundcloudLink,
     } = req.body;
 
-    console.log('The file is:', req.file);
-
     try {
-        /* console.log('The ArtistModel is:', ArtistModel);
-        const isUsernameTaken = await ArtistModel.findOne({ username: username});
+        console.log('The ArtistModel is:', ArtistModel);
+        const isUsernameTaken = await ArtistModel.findOne({ username });
 
         if (isUsernameTaken) {
-            res.status(401).json({ isSuccess: false, message: 'Username taken' });
+            res.status(401).json({ isSuccess: false, message: 'Username taken. Select a new one.' });
             return;
-        } */
+        }
+        const splitGenres = genres.split(',');
         const newArtist = {
             avatar: req.file.filename,
             artistType,
+            gender,
             firstName,
             lastName,
-            stageName,
+            artistName: stageName,
             username,
             password,
             bio,
-            birthDate,
+            birthday: birthDate,
             email,
-            phone,
+            phoneNumber: phone,
             city,
             state,
-            genres,
+            genres: splitGenres,
             spotifyLink,
             youtubeLink,
             soundcloudLink,
             fans: [],
             upvotes: [],
             downvotes: [],
-            userType,
         }
 
-        await ArtistModel.insertOne(newArtist);
+        await ArtistModel.insertMany([newArtist]);
 
-        const user = await ArtistModel.findOne({ username: username });
+        const user = await ArtistModel.findOne({ username }).exec();
+
+        console.log('The user is:', user);
 
         res.status(200).json({
             isSuccess: true,
@@ -110,7 +110,6 @@ router.route('/api/saveArtist').post(uploads.single('avatar'), async (req, res) 
         });
     
     } catch(e) {
-        console.log('Error saving a new artist to the DB!!!!');
         console.log(e.message);
         res.status(500).json({ isSuccess: false, message: 'Error saving the artist into the db on PUT request.'});
         return;

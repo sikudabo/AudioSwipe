@@ -28,10 +28,12 @@ const artistSchema = new mongoose.Schema({
     firstName: { require: true, type: String },
     genres: { required: true, type: [String] },
     lastName: { required: true, type: String },
+    password: { required: true, type: String },
     phoneNumber: { required: true, type: String },
     soundcloudLink: String,
     spotifyLink: String,
     state: { required: true, type: String },
+    username: { required: true, type: String, unique: true },
     userType: { default: 'artist', required: true, type: String },
     youtubeLink: String,
     upVotes: [

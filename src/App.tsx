@@ -133,12 +133,11 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
 function useDatalayer() {
   const { isDarkMode } = useIsDarkMode();
   const { isLoading, setIsLoading } = useIsFormLoading();
-
-  setIsLoading(true);
-
+  
   function handleBackdropClose() {
-    setIsLoading(false);
+    setIsLoading(true);
   }
+  
   return {
     handleBackdropClose,
     isDarkMode,

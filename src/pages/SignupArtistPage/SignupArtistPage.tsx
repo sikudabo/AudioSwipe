@@ -31,16 +31,13 @@ import {
 } from '@mui/material';
 import { ArtistType } from '../../typings';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
-import { colors, AudioSwipeButton } from '../../components';
+import { AudioSwipeButton } from '../../components';
 import { checkValidAge, checkValidEmail, formatUserBirthday, resizeImage } from '../../utils/helpers';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
 import { useHandleToastMessage } from '../../utils';
-import { useShowToastMessage } from '../../hooks';
-import { checkServerIdentity } from 'tls';
 import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
 import saveNewArtist from './form/saveNewArtist';
-import axios from 'axios';
 import { useIsFormLoading } from '../../utils/forms/useIsFormLoading';
 
 export default function SignupArtistPage() {
@@ -607,7 +604,6 @@ function useDataLayer() {
         }
 
         else if (!checkValidEmail(email)) {
-            console.log('The email is:', email);
             showToastMessage({
                 isError: true,
                 message: 'You must enter a valid email.',
@@ -759,7 +755,6 @@ function useDataLayer() {
             setIsLoading(false);
             return;
         }).catch(e => {
-            console.log('There was an error:', e.message);
             setIsLoading(false);
             showToastMessage({
                 isError: true,

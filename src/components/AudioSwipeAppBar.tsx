@@ -302,7 +302,7 @@ export default function AudioSwipeAppBar() {
                             <MenuItem>
                               <SearchIcon sx={{ mr: 2 }} />  <p>Get Discovered</p>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate('login/artist')}>
                             <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
                             <MenuItem onClick={() => navigate('signup/artist')}>
@@ -345,7 +345,7 @@ export default function AudioSwipeAppBar() {
                             <MenuItem>
                               <SearchIcon sx={{ mr: 2 }} />  <p>Discover New Music</p>
                             </MenuItem>
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate('login/artist')}>
                                 <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
                             <MenuItem onClick={() => navigate('signup/artist')}>

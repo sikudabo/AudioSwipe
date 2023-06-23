@@ -219,12 +219,12 @@ export default function LandingPage() {
                     <Grid className="free-offer-container" columns={12} columnSpacing={0} container>
                         <Grid className="free-offer-text-container" md={6} sm={12}>
                             <p className="free-offer-headline-text">
-                                Limited Time: $0 Per month while in beta!
+                                Limited Time: $0 Per month while in alpha!
                             </p>
                             <p className="free-offer-body-text">
                                 Don't miss a chance to discover and become discovered for free. 
                                 We offer an ad-free and smooth experience that will immdiately 
-                                show you the value in AudioSwipe during our beta launch.
+                                show you the value in AudioSwipe during our alpha launch.
                             </p>
                             <div className="prompt-buttons-container">
                                 <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate("signup/artist")} text="Artist Sign Up" />

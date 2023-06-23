@@ -1,23 +1,28 @@
 import Grid from '@mui/material/Grid';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { colors } from '../../../components';
 import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth } from '../../../utils/breakpoints';
-import RecordsImage from '../../../audio-media/records.jpeg';
 
-export const SignupArtistContainer = styled(Grid)`
+const DynamicBackground = ({ bgImage }: { bgImage?: any }) => css`
+    background: url(${bgImage});
+`;
+
+export const SignupArtistContainer = styled(Grid)<{
+    bgImage?: any;
+}>`
     padding-top: 50px;
     max-width: 100vw;
 
     .top-signup-header {
         align-items: center;
-        background: url(${RecordsImage});
         background-size: cover;
         display: flex;
         justify-content: center;
         height: 400px;
         opacity: 0.8;
         width: 100vw;
-
+        ${DynamicBackground};
         .header-text {
             color: ${colors.white};
             font-size: 48px;
@@ -244,7 +249,7 @@ export const SignupArtistContainer = styled(Grid)`
         width: 50vw;
     }
 
-    @media ${deviceBreakPointsMaxWidth.tablet} {
+    @media ${deviceBreakPointsMaxWidth.mobileL} {
         .birthday-grid {
             padding-left: 5px;
             padding-right: 5px;

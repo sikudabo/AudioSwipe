@@ -39,6 +39,7 @@ import { useHandleToastMessage } from '../../utils';
 import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
 import saveNewArtist from './form/saveNewArtist';
 import { useIsFormLoading } from '../../utils/forms/useIsFormLoading';
+import RecordsImage from '../../audio-media/records.jpeg';
 
 export default function SignupArtistPage() {
     return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
@@ -191,7 +192,7 @@ function SignupArtistPageDisplayLayer({
     }
 
     return (
-        <SignupArtistContainer columns={12} columnSpacing={0} container>
+        <SignupArtistContainer bgImage={RecordsImage} columns={12} columnSpacing={0} container>
             <div className="top-signup-header">
                 <p className="header-text">
                     Sign Up
@@ -327,7 +328,7 @@ function SignupArtistPageDisplayLayer({
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Hidden mdDown>
+                            <Hidden lgDown>
                                 <Grid className="birthday-grid" xs={12}>
                                     <DatePicker 
                                         defaultValue={artistBirthday}
@@ -351,6 +352,7 @@ function SignupArtistPageDisplayLayer({
                                 </Grid>
                             </Hidden>
                             <Hidden lgUp>
+                                <Grid className="birthday-grid" xs={12}>
                                     <MobileDatePicker 
                                         defaultValue={artistBirthday}
                                         label="Birthday"
@@ -368,6 +370,7 @@ function SignupArtistPageDisplayLayer({
                                         }}
                                         value={artistBirthday}
                                     />
+                                </Grid>
                             </Hidden>
                             <Grid className="avatar-grid" xs={12}>
                                 <IconButton color="secondary" aria-label="upload picture" component="label">

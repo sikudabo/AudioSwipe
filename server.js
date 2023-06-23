@@ -60,6 +60,7 @@ server.listen(app.get('port'), () => {
 });
 
 // Catch uncaught exceptions
-process.on('uncaughtException', err => {
-    console.log(`Error: ${err.message}`);
-});
+/* process.on('uncaughtException', err => {
+    // console.log(`Error: ${err.message}`);
+    console.log(err);
+}); */

@@ -15,7 +15,6 @@ import { useHandleToastMessage } from '../../utils';
 import { AudioSwipeButton } from '../../components';
 import { useIsFormLoading } from '../../utils/forms';
 import { checkValidEmail, postData } from '../../utils/helpers';
-import { useShowToastMessage } from '../../hooks/useShowToastMessage';
 
 type ArtistLoginDisplayLayerProps = {
     handleForgot: (email: string) => void;
@@ -199,7 +198,7 @@ function useDataLayer() {
                 isError: false,
                 message,
             });
-            navigate('dashboard/artist');
+            navigate('/dashboard/artist');
         }).catch(err => {
             setIsLoading(false);
             showToastMessage({

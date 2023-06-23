@@ -8,6 +8,7 @@ type AudioSwipeButtonProps = ButtonProps & {
 
 const StyledButton = styled(Button)`
     padding: 10px;
+    font-weight: 900;
 `;
 
 export default function AudioSwipeButton(props: AudioSwipeButtonProps) {

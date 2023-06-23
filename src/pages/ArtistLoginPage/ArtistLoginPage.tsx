@@ -199,6 +199,7 @@ function useDataLayer() {
                 isError: false,
                 message,
             });
+            navigate('dashboard/artist');
         }).catch(err => {
             setIsLoading(false);
             showToastMessage({

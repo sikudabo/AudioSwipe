@@ -20,7 +20,12 @@ import {
   ToastMessage,
 } from './components';
 import './BodyStyles.css';
-import { ArtistLoginPage, LandingPage, SignupArtistPage } from './pages';
+import { 
+  ArtistDashboardPage,
+  ArtistLoginPage, 
+  LandingPage, 
+  SignupArtistPage 
+} from './pages';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const CustomStyledContainer = styled.div`
@@ -123,6 +128,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               <Route element={<LandingPage />} path="/" />
               <Route element={<SignupArtistPage />} path="signup/artist" />
               <Route element={<ArtistLoginPage />} path="login/artist" />
+              <Route element={<ArtistDashboardPage />} path="dashboard/artist" />
             </Routes>
           </Router>
         </CustomStyledContainer >

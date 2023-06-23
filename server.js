@@ -16,7 +16,11 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
-const { SaveNewArtist } = require('./routes');
+const { 
+    ForgotLogin,
+    LoginArtist, 
+    SaveNewArtist,
+} = require('./routes');
 
 startDb();
 
@@ -43,6 +47,8 @@ app.use(history({
 }));
 
 // Routes
+app.use(ForgotLogin);
+app.use(LoginArtist);
 app.use(SaveNewArtist);
 
 app.use(serveStatic(path.join(__dirname, 'build')));

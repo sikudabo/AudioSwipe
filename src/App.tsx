@@ -114,7 +114,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               open={isLoading}
               onClick={handleBackdropClose}
             >
-              <CircularProgress color="error" />
+              <CircularProgress color="secondary" />
             </Backdrop>
             <ScrollToTop />
             <ToastMessage duration={6000} />

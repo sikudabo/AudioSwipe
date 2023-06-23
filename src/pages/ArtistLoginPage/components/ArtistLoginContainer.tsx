@@ -106,4 +106,4 @@ export const ArtistLoginContainer = styled(Grid)`
             }
         }
     }
-`   
+`;

@@ -21,8 +21,10 @@ export const ArtistLoginContainer = styled(Grid)`
         width: 50vw;
 
         @media ${deviceBreakPointsMaxWidth.mobileL} {
-            height: 75vh;
-            width: 100vw;
+            height: 450px;
+            padding-left: 5px;
+            padding-right: 5px;
+            width: 95vw;
         }
 
         .form-header-text-container {
@@ -47,6 +49,8 @@ export const ArtistLoginContainer = styled(Grid)`
             .username-grid {
                 margin: 0 auto;
                 padding-bottom: 20px;
+                padding-left: 5px;
+                padding-right: 5px;
                 width: 50vw;
             }
         
@@ -57,13 +61,15 @@ export const ArtistLoginContainer = styled(Grid)`
                 .username-grid {
                     padding-left: 5px;
                     padding-right: 5px;
-                    width: 100vw;
+                    width: 95vw;
                 }
             }
 
             .password-grid {
                 margin: 0 auto;
                 padding-bottom: 20px;
+                padding-left: 5px;
+                padding-right: 5px;
                 width: 50vw;
             }
         
@@ -75,7 +81,7 @@ export const ArtistLoginContainer = styled(Grid)`
                 .password-grid {
                     padding-left: 5px;
                     padding-right: 5px;
-                    width: 100vw;
+                    width: 95vw;
                 }
             }
         }

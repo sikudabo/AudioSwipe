@@ -22,31 +22,33 @@ function ArtistLoginPage_DisplayLayer() {
                     </p>
                 </div>
                 <div className="form-content-container">
-                    <Grid className="username-grid" xs={12}>
-                        <TextField
-                            aria-label="Username"
-                            color="secondary"
-                            helperText="Required"
-                            label="Username"
-                            placeholder="Username"
-                            variant="outlined"
-                            fullWidth
-                            required
-                        />
-                    </Grid>
-                    <Grid className="password-grid" xs={12}>
-                        <TextField
-                            aria-label="Password"
-                            color="secondary"
-                            helperText="Required"
-                            label="Password"
-                            placeholder="Password"
-                            type="password"
-                            variant="outlined"
-                            fullWidth
-                            required
-                        />
-                    </Grid>
+                    <form>
+                        <Grid className="username-grid" xs={12}>
+                            <TextField
+                                aria-label="Username"
+                                color="secondary"
+                                helperText="Required"
+                                label="Username"
+                                placeholder="Username"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                        <Grid className="password-grid" xs={12}>
+                            <TextField
+                                aria-label="Password"
+                                color="secondary"
+                                helperText="Required"
+                                label="Password"
+                                placeholder="Password"
+                                type="password"
+                                variant="outlined"
+                                fullWidth
+                                required
+                            />
+                        </Grid>
+                    </form>
                 </div>
                 <div className="buttons-container">
                     <AudioSwipeButton color="error" variant="contained" text="Forgot ?" />

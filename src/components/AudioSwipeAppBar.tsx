@@ -161,7 +161,7 @@ export default function AudioSwipeAppBar() {
                         >
                             <Box 
                                 role="presentation"
-                                sx={{ backgroundColor: colors.primary }}
+                                sx={{ backgroundColor: colors.secondary, opacity: 0.5, width: '55vw' }}
                             >
                                 <List  sx={{
                                     backgroundColor: 'rgb(0, 119, 139, 0.9)',
@@ -186,7 +186,7 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Get Discovered</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <ListItem>
+                                                <ListItem onClick={() => navigate('login/artist')}>
                                                     <ListItemButton>
                                                         <ListItemIcon>
                                                             <LoginIcon />

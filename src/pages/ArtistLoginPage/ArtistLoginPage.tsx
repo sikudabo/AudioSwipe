@@ -1,4 +1,6 @@
 import React from 'react';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { ArtistLoginContainer } from './components/ArtistLoginContainer';
 import { ArtistType } from '../../typings';
@@ -12,7 +14,46 @@ export default function ArtistLoginPage() {
 
 function ArtistLoginPage_DisplayLayer() {
     return (
-        <ArtistLoginContainer columns={12} columnSpacing={0} container />
+        <ArtistLoginContainer columns={12} columnSpacing={0} container>
+            <Paper className="form-paper-wrapper" elevation={5}>
+                <div className="form-header-text-container">
+                    <p className="form-header-text">
+                        Login
+                    </p>
+                </div>
+                <div className="form-content-container">
+                    <Grid className="username-grid" xs={12}>
+                        <TextField
+                            aria-label="Username"
+                            color="secondary"
+                            helperText="Required"
+                            label="Username"
+                            placeholder="Username"
+                            variant="outlined"
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                    <Grid className="password-grid" xs={12}>
+                        <TextField
+                            aria-label="Password"
+                            color="secondary"
+                            helperText="Required"
+                            label="Password"
+                            placeholder="Password"
+                            type="password"
+                            variant="outlined"
+                            fullWidth
+                            required
+                        />
+                    </Grid>
+                </div>
+                <div className="buttons-container">
+                    <AudioSwipeButton color="error" variant="contained" text="Forgot ?" />
+                    <AudioSwipeButton className="confirm-button" color="secondary" variant="contained" text="Login" />
+                </div>
+            </Paper>
+        </ArtistLoginContainer>
     );
 }
 

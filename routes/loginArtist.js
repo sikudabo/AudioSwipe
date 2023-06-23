@@ -9,7 +9,7 @@ router.route('/api/loginArtist').post(async (req, res) => {
         const isAuthenticated = await ArtistModel.findOne({ password, username }).exec();
 
         if (isAuthenticated) {
-            res.status(200).json({ isAuthenticated: true , message: 'Successfully Logged in!', user: isAuthenticated });
+            res.status(200).json({ isAuthenticated: true , message: 'Welcome!', user: isAuthenticated });
             return;
         }
 

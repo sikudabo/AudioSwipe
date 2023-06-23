@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Backdrop from '@mui/material/Backdrop';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -9,14 +9,15 @@ import { useIsFormLoading } from './utils/forms';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
 } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
-import { useIsDarkMode } from './hooks';
+import { useIsDarkMode, useUserData } from './hooks';
 import {
   AudioSwipeAppBar,
   ScrollToTop,
   colors,
+  RouteWatch,
   ToastMessage,
 } from './components';
 import './BodyStyles.css';
@@ -27,6 +28,7 @@ import {
   SignupArtistPage 
 } from './pages';
 import CircularProgress from '@mui/material/CircularProgress';
+import { ArtistType } from './typings';
 
 const CustomStyledContainer = styled.div`
   padding: 0;
@@ -36,6 +38,7 @@ const CustomStyledContainer = styled.div`
 `;
 
 type AppDisplayLayerProps = {
+  artist?: any;
   handleBackdropClose: () => void;
   isDarkMode: boolean;
   isLoading: boolean;
@@ -121,6 +124,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
             >
               <CircularProgress color="secondary" />
             </Backdrop>
+            <RouteWatch />
             <ScrollToTop />
             <ToastMessage duration={6000} />
             <AudioSwipeAppBar />
@@ -140,12 +144,14 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
 function useDatalayer() {
   const { isDarkMode } = useIsDarkMode();
   const { isLoading, setIsLoading } = useIsFormLoading();
+  const { artist } = useUserData();
   
   function handleBackdropClose() {
     setIsLoading(true);
   }
   
   return {
+    artist,
     handleBackdropClose,
     isDarkMode,
     isLoading,

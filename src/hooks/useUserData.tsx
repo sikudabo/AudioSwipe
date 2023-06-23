@@ -2,10 +2,12 @@ import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import { ArtistType } from '../typings';
 
+type Artist = ArtistType & {
+    isLoggedIn?: boolean;
+}
+
 type UseUserStateType = {
-    artist: ArtistType & {
-        isLoggedIn?: boolean;
-    } | {};
+    artist: Artist | {};
 };
 
 type UseUserActionsType = {
@@ -14,11 +16,11 @@ type UseUserActionsType = {
 }
 
 export const useUserData = create(
-    persist<UseUserStateType | {} & UseUserActionsType>(
+    persist<UseUserStateType & UseUserActionsType>(
       (set) => ({
         artist: {},
         clearArtist: () => set(() => ({ artist: {} })),
-        setArtist: (artist: boolean) => set(() => ({ artist })),
+        setArtist: (artist: ArtistType) => set(() => ({ artist })),
       }),
       {
         name: 'artist-data-storage',

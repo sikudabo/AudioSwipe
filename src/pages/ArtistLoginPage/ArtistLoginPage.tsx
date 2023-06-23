@@ -15,6 +15,7 @@ import { useHandleToastMessage } from '../../utils';
 import { AudioSwipeButton } from '../../components';
 import { useIsFormLoading } from '../../utils/forms';
 import { checkValidEmail, postData } from '../../utils/helpers';
+import { useUserData } from '../../hooks';
 
 type ArtistLoginDisplayLayerProps = {
     handleForgot: (email: string) => void;
@@ -122,6 +123,7 @@ function ArtistLoginPage_DisplayLayer({ handleForgot, handleLogin, isForgotOpen,
 }
 
 function useDataLayer() {
+    const { setArtist } = useUserData();
     const { showToastMessage } = useHandleToastMessage();
     const { isLoading, setIsLoading } = useIsFormLoading();
     const [isForgotOpen, setIsForgotOpen] = useState(false);
@@ -184,7 +186,9 @@ function useDataLayer() {
             },
             url: 'http://localhost:2000/api/loginArtist',
         }).then((res: { data: any }) => {
-            const { isAuthenticated, message } = res.data;
+            const { isAuthenticated, message, user } = res.data;
+            let artist = user;
+            artist.isLoggedIn = true;
             if (!isAuthenticated) {
                 setIsLoading(false);
                 showToastMessage({
@@ -198,6 +202,7 @@ function useDataLayer() {
                 isError: false,
                 message,
             });
+            setArtist(artist);
             navigate('/dashboard/artist');
         }).catch(err => {
             setIsLoading(false);
@@ -205,6 +210,7 @@ function useDataLayer() {
                 isError: true,
                 message: 'Error. Please try again!',
             });
+            return;
         });
     }
     return {

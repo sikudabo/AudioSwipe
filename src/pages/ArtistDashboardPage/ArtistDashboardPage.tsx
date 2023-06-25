@@ -5,6 +5,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useUserData } from '../../hooks';
 import { ArtistType } from '../../typings';
+import { colors } from '../../components';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
 
 type ArtistDashboardPageDisplayLayerProps = {
     artist?: any;
@@ -15,12 +23,15 @@ export default function ArtistDashboardPage() {
 }
 
 function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplayLayerProps) {
+    const navigate = useNavigate();
     return (
-        <Grid style={{ paddingTop: 300, alignItems: 'center', justifyContent: 'center' }} columns={12} columnSpacing={0} container>
-            <p style={{ fontSize: 32, fontWeight: 900 }}>
-                Welcome {artist.artistName}
-            </p>
-        </Grid>
+        <ThemeProvider theme={theme}>
+            <Grid style={{ paddingTop: 300, alignItems: 'center', justifyContent: 'center' }} columns={12} columnSpacing={0} container>
+                <p onClick={() => navigate('/')} style={{ cursor: 'pointer', fontSize: 32, fontWeight: 900 }}>
+                    Welcome {artist.artistName}
+                </p>
+            </Grid>
+        </ThemeProvider>
     );
 }
 

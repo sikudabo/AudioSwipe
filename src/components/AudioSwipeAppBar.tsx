@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import HeadsetIcon from '@mui/icons-material/Headset';
@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { 
@@ -28,6 +29,12 @@ import {
 import { colors } from './colors';
 import { AudioSwipeAppLogo } from './Icons';
 
+const CustomAppBarStyles = ({ isHidden }: { isHidden: boolean }) => {
+    return css`
+        display: ${isHidden ? 'none' : 'block'};
+    `;
+}
+
 const CoolAudioSwipeCursive = styled(Typography)`
     font-size: 20px;
     font-weight: 700;
@@ -39,10 +46,13 @@ const StyledLink = styled(Link)`
     text-decoration: none;
 `;
 
-const StyledAudioSwitchAppBar = styled(AppBar)`
+const StyledAudioSwitchAppBar = styled(AppBar)<{
+    isHidden: boolean;
+}>`
     background-color: ${colors.secondary};
     margin-bottom: 20px;
     width: 100vw;
+    ${CustomAppBarStyles};
 
     a {
         color: ${colors.white};
@@ -99,6 +109,7 @@ export default function AudioSwipeAppBar() {
     const [drawerIsOpen, setDrawerIsOpen] = useState(false);
     const [artistListItemIsOpen, setArtistListItemIsOpen] = useState(false);
     const [listenersListItemIsOpen, setListenersListItemIsOpen] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
     const location = useLocation();
     const { pathname } = location;
     const navigate = useNavigate();
@@ -107,6 +118,15 @@ export default function AudioSwipeAppBar() {
         setDrawerIsOpen(false);
         setMenuAnchorEl(null);
         setListenersMenuAnchorEl(null);
+
+    }, [pathname]);
+
+    useEffect(() => {
+        if (pathname.includes('/dashboard')) {
+            setIsHidden(true);
+            return;
+        } 
+        setIsHidden(false);
 
     }, [pathname]);
 
@@ -140,7 +160,7 @@ export default function AudioSwipeAppBar() {
         }
     }
     return (
-        <StyledAudioSwitchAppBar color="secondary">
+        <StyledAudioSwitchAppBar color="secondary" isHidden={isHidden}>
             <Toolbar>
                 <ThemeProvider theme={theme}>
                     <Hidden mdUp>

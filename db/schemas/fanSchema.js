@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const fanSchema = new mongoose.Schema({
     avatar: { required: true, type: String },
     birthDay: { required: true, type: Date },
+    email: { required: true, type: String},
     firstName: { required: true, type: String },
     gender: { required: true, type: String },
     lastName: { required: true, type: String },

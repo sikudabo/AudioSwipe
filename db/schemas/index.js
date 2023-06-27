@@ -1,7 +1,9 @@
-var artistSchema = require('./artistSchema');
-var songSchema = require('./songSchema');
+const artistSchema = require('./artistSchema');
+const fanSchema = require('./fanSchema');
+const songSchema = require('./songSchema');
 
 module.exports = {
     artistSchema,
+    fanSchema,
     songSchema,
 };

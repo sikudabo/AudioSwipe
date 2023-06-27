@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
-var artistSchema = require('../schemas').artistSchema;
+const mongoose = require('mongoose');
+const { artistSchema } = require('../schemas');
 
-var ArtistModel = mongoose.model('ArtistModel', artistSchema);
+const ArtistModel = mongoose.model('ArtistModel', artistSchema);
 
 module.exports = ArtistModel;

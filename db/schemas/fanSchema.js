@@ -15,6 +15,8 @@ const fanSchema = new mongoose.Schema({
         artistId: String,
         subscribedOn: Date,
     }),
+}, {
+    collection: 'fans',
 });
 
 module.exports = fanSchema;

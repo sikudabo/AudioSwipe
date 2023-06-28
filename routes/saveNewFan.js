@@ -48,27 +48,27 @@ router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
         if (isEmailTaken) {
             res.status(200).json({ message: 'That email is taken. Select another', success: false });
             return;
-
-            const newFan = {
-                avatar: req.file.filename,
-                birthday,
-                email,
-                firstName,
-                gender,
-                lastName,
-                likedSongs: [],
-                password,
-                phoneNumber,
-                subscribedArtists: [],
-            };
-
-            await FanModel.insertMany([newFan]);
-
-            const user = await FanModel.findOne({ email }).exec();
-
-            res.status(200).json({ success: true, user });
-            return;
         }
+
+        const newFan = {
+            avatar: req.file.filename,
+            birthday,
+            email,
+            firstName,
+            gender,
+            lastName,
+            likedSongs: [],
+            password,
+            phoneNumber,
+            subscribedArtists: [],
+        };
+
+        await FanModel.insertMany([newFan]);
+
+        const user = await FanModel.findOne({ email }).exec();
+
+        res.status(200).json({ success: true, user });
+        return;
 
 
     } catch(e) {

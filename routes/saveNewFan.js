@@ -41,6 +41,7 @@ const uploads = multer({ storage });
 
 router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
     const { birthday, firstName, lastName, email, password, gender, phoneNumber } = req.body;
+    console.log('The body is:', req.body);
 
     try {
         const isEmailTaken = await FanModel.findOne({ email });
@@ -50,9 +51,11 @@ router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
             return;
         }
 
+        console.log('The birthday is:', birthday);
+
         const newFan = {
             avatar: req.file.filename,
-            birthday,
+            birthday: new Date(birthday),
             email,
             firstName,
             gender,
@@ -74,7 +77,7 @@ router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
     } catch(e) {
         console.log(e.message);
         console.log('error saving a new fan in the PUT request');
-        res.status(500).json({ isSuccess: false, message: 'There was an error saving your profile. Please try again!' });
+        res.status(500).json({ success: false, message: 'There was an error saving your profile. Please try again!' });
         return;
     }
 });

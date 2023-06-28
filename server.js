@@ -19,6 +19,7 @@ const sslRedirect = require('heroku-ssl-redirect');
 const { 
     ForgotLogin,
     LoginArtist, 
+    LoginFan,
     SaveNewArtist,
     SaveNewFan,
 } = require('./routes');
@@ -50,6 +51,7 @@ app.use(history({
 // Routes
 app.use(ForgotLogin);
 app.use(LoginArtist);
+app.use(LoginFan);
 app.use(SaveNewArtist);
 app.use(SaveNewFan);
 

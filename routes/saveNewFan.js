@@ -51,8 +51,6 @@ router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
             return;
         }
 
-        console.log('The birthday is:', birthday);
-
         const newFan = {
             avatar: req.file.filename,
             birthday: new Date(birthday),

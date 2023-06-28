@@ -9,12 +9,14 @@ router.route('/api/loginFan').post(async (req, res) => {
     try {
         const isValid = await FanModel.findOne({ email, password }).exec();
 
+        console.log(isValid);
+
         if (!isValid) {
             res.status(200).json({ message: 'Invalid username or password.', success: false});
             return;
         }
 
-        res.status(200).json({ message: 'Welcome!', success: true, user: isValid });
+        res.status(200).json({ message: 'Welcome back!', success: true, user: isValid });
     } catch(e) {
         console.log('There was an error attempting to log a fan in.');
         console.log(e.message);

@@ -20,6 +20,7 @@ const {
     ForgotLogin,
     LoginArtist, 
     SaveNewArtist,
+    SaveNewFan,
 } = require('./routes');
 
 startDb();
@@ -50,6 +51,7 @@ app.use(history({
 app.use(ForgotLogin);
 app.use(LoginArtist);
 app.use(SaveNewArtist);
+app.use(SaveNewFan);
 
 app.use(serveStatic(path.join(__dirname, 'build')));
 

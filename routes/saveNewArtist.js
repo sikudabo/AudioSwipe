@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const startDb = require('../db/db');
 const { ArtistModel } = require('../db/models');
-// const dotenv = require('dotenv').config();
 const Grid = require('gridfs-stream');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const mongoose = require('mongoose');

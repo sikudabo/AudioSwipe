@@ -12,6 +12,7 @@ const fanSchema = new mongoose.Schema({
         likedOn: Date,
     }),
     password: { required: true, type: String },
+    phoneNumber: { required: true, type: String },
     subscribedArtists: mongoose.Schema({
         artistId: String,
         subscribedOn: Date,

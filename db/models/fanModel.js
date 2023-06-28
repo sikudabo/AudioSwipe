@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { fanSchema } = require('../schema');
+const { fanSchema } = require('../schemas');
 
 const FanModel = mongoose.model('FanModel', fanSchema);
 

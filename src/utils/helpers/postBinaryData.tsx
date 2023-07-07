@@ -13,7 +13,7 @@ export const postBinaryData = async ({ data, url }: PostBinaryDataProps) => {
             'Content-Encoding': 'mutipart/form-data',
         },
         method: 'PUT',
-        url: 'http://localhost:2000/api/saveArtist',
+        url: `${process.env.REACT_APP_BASE_URI}${url}`,
     }).then(response => {
         return response.data;
     }).catch(e => {

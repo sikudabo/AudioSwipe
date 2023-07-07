@@ -67,7 +67,7 @@ export default function CastBallot() {
 
         const response = await postData({
             data: createElectionData,
-            url: 'http://127.0.0.1:2000/api/createElection',
+            url: `${process.env.REACT_APP_BASE_URI}api/createElection`,
             contentType: 'application/json',
         }).then(res => {
             setIsSending(false);

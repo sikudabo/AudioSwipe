@@ -145,7 +145,7 @@ function useDataLayer() {
             data: {
                 email: email.trim(),
             },
-            url: 'http://localhost:2000/api/forgotLogin',
+            url: `${process.env.REACT_APP_BASE_URI}api/forgotLogin`,
         }).then((res: { data: any }) => {
             const { isSuccess, message } = res.data;
 
@@ -184,7 +184,7 @@ function useDataLayer() {
                 password,
                 username,
             },
-            url: 'http://localhost:2000/api/loginArtist',
+            url: `${process.env.REACT_APP_BASE_URI}api/loginArtist`,
         }).then((res: { data: any }) => {
             const { isAuthenticated, message, user } = res.data;
             let artist = user;

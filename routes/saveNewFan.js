@@ -11,8 +11,8 @@ const dotenv = require('dotenv').config();
 
 const dbUri = dotenv.parsed.DB_URI;
 
-var conn = mongoose.createConnection('mongodb://localhost:27017/audioswipe', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect('mongodb://localhost:27017/audioswipe', {useNewUrlParser: true, useUnifiedTopology: true});
+var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
 

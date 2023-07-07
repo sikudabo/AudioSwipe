@@ -6,7 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const dotenv = require('dotenv').config();
 
-const dbUri = dotenv.parsed.DB_URI;
+const dbUri = process.env.DB_URI;
 
 console.log('The dbUri is:', dbUri);
 

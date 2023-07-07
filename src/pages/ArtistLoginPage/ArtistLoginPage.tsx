@@ -188,7 +188,9 @@ function useDataLayer() {
         }).then((res: { data: any }) => {
             const { isAuthenticated, message, user } = res.data;
             let artist = user;
-            artist.isLoggedIn = true;
+            if (isAuthenticated) {
+                artist.isLoggedIn = true;
+            }
             if (!isAuthenticated) {
                 setIsLoading(false);
                 showToastMessage({

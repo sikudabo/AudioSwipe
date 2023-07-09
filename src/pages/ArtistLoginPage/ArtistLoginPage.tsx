@@ -205,7 +205,7 @@ function useDataLayer() {
                 message,
             });
             setArtist(artist);
-            navigate('/artist/dashboard');
+            navigate('/artist/dashboard/main');
         }).catch(err => {
             setIsLoading(false);
             showToastMessage({

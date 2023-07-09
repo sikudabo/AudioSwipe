@@ -14,6 +14,7 @@ import {
 import CssBaseline from '@mui/material/CssBaseline';
 import { useIsDarkMode, useUserData } from './hooks';
 import {
+  ArtistDashboardLayout,
   AudioSwipeAppBar,
   ScrollToTop,
   colors,
@@ -130,12 +131,13 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
             <ScrollToTop />
             <ToastMessage duration={6000} />
             <AudioSwipeAppBar />
-            <NavSection data={navConfig} />
             <Routes>
               <Route element={<LandingPage />} path="/" />
               <Route element={<SignupArtistPage />} path="signup/artist" />
               <Route element={<ArtistLoginPage />} path="login/artist" />
-              <Route element={<ArtistDashboardPage />} path="artist/dashboard" />
+              <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
+                <Route element={<ArtistDashboardPage />} path="main" />
+              </Route>
             </Routes>
           </Router>
         </CustomStyledContainer >

@@ -7,7 +7,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 const navConfig = [
   {
     title: 'dashboard',
-    path: '/artist/dashboard',
+    path: '/artist/dashboard/main',
     icon: <GridViewOutlinedIcon />,
   },
   {

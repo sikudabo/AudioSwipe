@@ -1,3 +1,4 @@
+import ArtistDashboardLayout from './artistDashboard/ArtistDashboardLayout';
 import AudioSwipeAppBar from './AudioSwipeAppBar';
 import AudioSwipeButton from './AudioSwipeButton';
 import BoxExample from './BoxExample';
@@ -20,6 +21,7 @@ import ToastMessage from './ToastMessage';
 import { colors } from './colors';
 
 export {
+    ArtistDashboardLayout,
     AudioSwipeAppBar,
     AudioSwipeButton,
     BoxExample,

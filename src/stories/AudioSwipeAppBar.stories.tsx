@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import NavSection from "../components/DashboardNavSection";
+import NavSection from "../components/TestDashboardNavSection";
 import { NavSectionProps } from '../components/DashboardNavSection';
 import navConfig from "../components/configs/dashboardNavConfig";
 

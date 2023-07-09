@@ -7,6 +7,7 @@ export const colors = {
     info: '#03a9f4',
     lightGrey: '#A5ACAF',
     primary: '#0080C6',
+    salmonPink: '#FF91A4',
     secondary: '#00778B',
     success: '#1b5e20',
     warning: '#ff9800',

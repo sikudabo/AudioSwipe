@@ -7,6 +7,8 @@ import { useUserData } from '../../hooks';
 import { ArtistType } from '../../typings';
 import { colors } from '../../components';
 import { createTheme, ThemeProvider } from '@mui/material';
+import NavSection from '../../components/DashboardNavSection';
+import navConfig from '../../components/configs/dashboardNavConfig';
 
 const theme = createTheme({
     palette: {
@@ -30,6 +32,7 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                 <p onClick={() => navigate('/')} style={{ cursor: 'pointer', fontSize: 32, fontWeight: 900 }}>
                     Welcome {artist.artistName}
                 </p>
+                <NavSection data={navConfig} />
             </Grid>
         </ThemeProvider>
     );

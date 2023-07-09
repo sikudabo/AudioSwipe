@@ -1,9 +1,18 @@
-import PropTypes from 'prop-types';
+import { ReactElement } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { Box, List, ListItemText } from '@mui/material';
+import { Button, Box, List, ListItemText } from '@mui/material';
 import { StyledNavItem, StyledNavItemIcon } from './navStyles';
 
-export default function NavSection({ data = [], ...other }: any) {
+export type NavSectionProps = {
+  data: {
+    icon: ReactElement;
+    path: string;
+    title: string;
+  }[];
+  other?: any;
+};
+
+export default function NavSection({ data = [], ...other }: NavSectionProps) {
   return (
     <Box {...other}>
       <List disablePadding sx={{ p: 1 }}>
@@ -20,7 +29,6 @@ function NavItem({ item }: any) {
 
   return (
     <StyledNavItem
-      component={RouterLink}
       to={path}
       sx={{
         '&.active': {

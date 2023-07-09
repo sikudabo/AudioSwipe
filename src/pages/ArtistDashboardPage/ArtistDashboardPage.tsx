@@ -28,7 +28,7 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
-            <Grid style={{ paddingTop: 300, alignItems: 'center', justifyContent: 'center' }} columns={12} columnSpacing={0} container>
+            <Grid style={{ backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }} columns={12} columnSpacing={0} container>
                 <p onClick={() => navigate('/')} style={{ cursor: 'pointer', fontSize: 32, fontWeight: 900 }}>
                     Welcome {artist.artistName}
                 </p>

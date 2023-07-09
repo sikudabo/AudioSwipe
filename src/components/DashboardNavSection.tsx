@@ -1,5 +1,5 @@
-import { ReactElement } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { ReactElement, useEffect, useState } from 'react';
+import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 import { Button, Box, List, ListItemText } from '@mui/material';
 import { StyledNavItem, StyledNavItemIcon } from './navStyles';
 
@@ -13,14 +13,31 @@ export type NavSectionProps = {
 };
 
 export default function NavSection({ data = [], ...other }: NavSectionProps) {
+  const location = useLocation();
+  const { pathname } = location;
+  const [isHidden, setIsHidden] = useState(true);
+
+  useEffect(() => {
+    if (pathname.includes('artist/dashboard') || pathname === 'artist/dashboard') {
+      setIsHidden(false);
+      return;
+    }
+
+    setIsHidden(true);
+
+  }, [pathname]);
   return (
-    <Box {...other}>
-      <List disablePadding sx={{ p: 1 }}>
-        {data.map((item: any) => (
-          <NavItem key={item.title} item={item} />
-        ))}
-      </List>
-    </Box>
+    <div>
+      {!isHidden ? (
+        <Box {...other}>
+        <List disablePadding sx={{ p: 1 }}>
+          {data.map((item: any) => (
+            <NavItem key={item.title} item={item} />
+          ))}
+        </List>
+      </Box>
+      ): <></>}
+    </div>
   );
 }
 

@@ -122,7 +122,7 @@ export default function AudioSwipeAppBar() {
     }, [pathname]);
 
     useEffect(() => {
-        if (pathname.includes('/dashboard')) {
+        if (pathname.includes('artist/dashboard')) {
             setIsHidden(true);
             return;
         } 

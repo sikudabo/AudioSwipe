@@ -10,7 +10,7 @@ export default function RouteWatch() {
 
     useEffect(() => {
         console.log('The path name is:', pathname);
-        if (!isLoggedIn && pathname === '/dashboard/artist') {
+        if (!isLoggedIn && pathname === '/artist/dashboard') {
             navigate('/');
         }
     }, [pathname]);

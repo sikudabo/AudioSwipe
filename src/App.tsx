@@ -135,7 +135,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               <Route element={<LandingPage />} path="/" />
               <Route element={<SignupArtistPage />} path="signup/artist" />
               <Route element={<ArtistLoginPage />} path="login/artist" />
-              <Route element={<ArtistDashboardPage />} path="dashboard/artist" />
+              <Route element={<ArtistDashboardPage />} path="artist/dashboard" />
             </Routes>
           </Router>
         </CustomStyledContainer >

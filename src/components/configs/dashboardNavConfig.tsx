@@ -12,22 +12,22 @@ const navConfig = [
   },
   {
     title: 'upload',
-    path: '/artist/upload',
+    path: '/artist/dashboard/upload',
     icon: <CloudUploadOutlinedIcon />,
   },
   {
     title: 'songs',
-    path: '/artist/songs',
+    path: '/artist/dashboard/songs',
     icon: <LibraryMusicOutlinedIcon />
   },
   {
     title: 'settings',
-    path: '/artist/settings',
+    path: '/artist/dashboard/settings',
     icon: <SettingsOutlinedIcon />,
   },
   {
     title: 'logout',
-    path: '/artist/logout',
+    path: '/artist/dashboard/logout',
     icon: <ExitToAppOutlinedIcon />,
   },
 ];

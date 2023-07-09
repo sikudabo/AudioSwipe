@@ -29,6 +29,8 @@ import {
 } from './pages';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ArtistType } from './typings';
+import navConfig from './components/configs/dashboardNavConfig';
+import NavSection from './components/DashboardNavSection';
 
 const CustomStyledContainer = styled.div`
   padding: 0;
@@ -128,6 +130,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
             <ScrollToTop />
             <ToastMessage duration={6000} />
             <AudioSwipeAppBar />
+            <NavSection data={navConfig} />
             <Routes>
               <Route element={<LandingPage />} path="/" />
               <Route element={<SignupArtistPage />} path="signup/artist" />

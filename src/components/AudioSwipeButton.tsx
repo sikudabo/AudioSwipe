@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, ButtonProps } from '@mui/material';
 
-type AudioSwipeButtonProps = ButtonProps & {
+export type AudioSwipeButtonProps = ButtonProps & {
     text: string;
 }
 

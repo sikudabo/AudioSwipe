@@ -1,10 +1,20 @@
-import { colors, AudioSwipeButton } from "../components";
+import { Meta, StoryFn } from '@storybook/react';
+import { AudioSwipeButton } from "../components";
+import { AudioSwipeButtonProps } from "../components/AudioSwipeButton";
 
-const audioSwipeButtonObj = {
+const meta: Meta<typeof AudioSwipeButton> = {
     component: AudioSwipeButton,
     title: 'AudioSwipeButton',
 };
 
-export default audioSwipeButtonObj;
+export default meta;
 
-export const TestButton = () => <AudioSwipeButton color="primary" onClick={() => console.log('Pressed')} text="Press me" variant="contained" />;
+const Template: StoryFn<typeof AudioSwipeButton> = (args: AudioSwipeButtonProps) => <AudioSwipeButton {...args} />;
+
+export const TestButton = Template.bind({});
+
+TestButton.args = {
+    color: "success",
+    text: "This these are dynmaic args",
+    variant: "contained",
+};

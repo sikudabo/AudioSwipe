@@ -1,16 +1,18 @@
 import React from 'react';
 
 type AudioSwipeAppLogoProps = {
+    color?: string;
     height?: number,
     width?: number,
 };
 
 export default function AudioSwipeAppLogo({
+    color = "#ffffff",
     height = 18,
     width = 18,
 }: AudioSwipeAppLogoProps) {
     return (
-        <svg fill="#ffffff" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 211.683 211.684">
+        <svg fill={color} version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 211.683 211.684">
             <g>
                 <path d="M169.083,109.229c10.242-6.887,17.281-20.451,17.281-32.666c0-17.259-13.993-31.24-31.231-31.24
                     c-17.244,0-31.225,13.981-31.225,31.24c0,12.215,7.039,25.779,17.274,32.666c-24.454,6.211-42.59,27.419-42.59,43.178

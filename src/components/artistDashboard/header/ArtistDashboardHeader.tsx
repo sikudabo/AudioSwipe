@@ -8,6 +8,7 @@ import { bgBlur } from '../styles/cssStyles';
 import Iconify from '../components/Iconify';
 //
 import Searchbar from '../components/Searchbar';
+import { AudioSwipeAppLogo } from '../../Icons';
 import AccountPopover from '../components/AccountPopover';
 import LanguagePopover from '../components/LanguagePopover';
 import { colors } from '../../colors';
@@ -52,7 +53,11 @@ export default function ArtistDashboardHeader({ onOpenNav }: any) {
           <Iconify icon="eva:menu-2-fill" />
         </IconButton>
 
-        <Searchbar />
+        <AudioSwipeAppLogo 
+            color={colors.secondary}
+            height={50}
+            width={50}
+        />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack

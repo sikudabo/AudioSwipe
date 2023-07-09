@@ -12,13 +12,15 @@ import NavSection from '../../DashboardNavSection';
 //
 import navConfig from '../../configs/dashboardNavConfig';
 
+const CeCePhoto = require('../../../album-cover-media/cece.jpeg');
+
 // ----------------------------------------------------------------------
 
 const account = {
-    displayName: 'Jaydon Frankie',
+    displayName: "CeCe Winans",
     email: 'demo@minimals.cc',
     photoURL: '/assets/images/avatars/avatar_default.jpg',
-    role: "leader",
+    role: "CeCe",
 };
 
 
@@ -30,6 +32,7 @@ const StyledAccount = styled('div')(({ theme }) => ({
   padding: theme.spacing(2, 2.5),
   borderRadius: Number(theme.shape.borderRadius) * 1.5,
   backgroundColor: alpha(theme.palette.grey[500], 0.12),
+  fontWeight: 900,
 }));
 
 // ----------------------------------------------------------------------
@@ -64,14 +67,14 @@ export default function Nav({ openNav, onCloseNav }: { openNav: any; onCloseNav:
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={CeCePhoto} alt="photoURL" />
 
             <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+              <Typography variant="subtitle2" sx={{ color: 'text.primary', fontWeight: 900, }}>
                 {account.displayName}
               </Typography>
 
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 900 }}>
                 {account.role}
               </Typography>
             </Box>
@@ -85,25 +88,6 @@ export default function Nav({ openNav, onCloseNav }: { openNav: any; onCloseNav:
 
       <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
         <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
-          <Box
-            component="img"
-            src="/assets/illustrations/illustration_avatar.png"
-            sx={{ width: 100, position: 'absolute', top: -50 }}
-          />
-
-          <Box sx={{ textAlign: 'center' }}>
-            <Typography gutterBottom variant="h6">
-              Get more?
-            </Typography>
-
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              From only $69
-            </Typography>
-          </Box>
-
-          <Button href="https://material-ui.com/store/items/minimal-dashboard/" target="_blank" variant="contained">
-            Upgrade to Pro
-          </Button>
         </Stack>
       </Box>
     </Scrollbar>

@@ -3,12 +3,6 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import { Box, List, ListItemText } from '@mui/material';
 import { StyledNavItem, StyledNavItemIcon } from './navStyles';
 
-// ----------------------------------------------------------------------
-
-NavSection.propTypes = {
-  data: PropTypes.array,
-};
-
 export default function NavSection({ data = [], ...other }: any) {
   return (
     <Box {...other}>
@@ -20,12 +14,6 @@ export default function NavSection({ data = [], ...other }: any) {
     </Box>
   );
 }
-
-// ----------------------------------------------------------------------
-
-NavItem.propTypes = {
-  item: PropTypes.object,
-};
 
 function NavItem({ item }: any) {
   const { title, path, icon, info } = item;

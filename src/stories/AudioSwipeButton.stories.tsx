@@ -1,6 +1,19 @@
+import { ReactNode } from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import { AudioSwipeButton } from "../components";
+import { AudioSwipeButton, MusicPlayer } from "../components";
 import { AudioSwipeButtonProps } from "../components/AudioSwipeButton";
+
+type MetaContainerProps = {
+    numberOfChildren: number;
+};
+
+const metaContainer: Meta<MetaContainerProps> = {
+    argTypes: {
+        numberOfChildren: { defaultValue: 3, type: "number" },
+    },
+    component: RenderDivs,
+    title: "MultiplePlayers",
+};
 
 const meta: Meta<typeof AudioSwipeButton> = {
     argTypes: {
@@ -10,32 +23,24 @@ const meta: Meta<typeof AudioSwipeButton> = {
     title: 'AudioSwipeButton',
 };
 
-export default meta;
+export default metaContainer;
 
-const Template: StoryFn<typeof AudioSwipeButton> = (args: AudioSwipeButtonProps) => <AudioSwipeButton {...args} />;
+function RenderDivs({ numberOfChildren }: MetaContainerProps) {
+    return (
+        <div>
+            {[...Array(numberOfChildren).keys()].map((n: number) => (
+                <MusicPlayer />
+            ))}
+        </div>
+    );
+}
 
-export const  ContainedButton = Template.bind({});
-export const OutlinedButton = Template.bind({});
-export const TextButton = Template.bind({});
+const Template: StoryFn<typeof RenderDivs> = ({ numberOfChildren }: MetaContainerProps) => {
+    return <RenderDivs numberOfChildren={numberOfChildren} />;
+}
 
-ContainedButton.args = {
-    color: "success",
-    onClick: () => console.log('Click me'),
-    size: 'small',
-    text: "This these are dynmaic args",
-    variant: "contained",
-};
+export const Playas = Template.bind({});
 
-OutlinedButton.args = {
-    color: "success",
-    size: "large",
-    text: "Outlined",
-    variant: "outlined",
-};
-
-TextButton.args = {
-    color: "error",
-    size: "medium",
-    text: "Text",
-    variant: "text",
+Playas.args = {
+    numberOfChildren: 7,
 };

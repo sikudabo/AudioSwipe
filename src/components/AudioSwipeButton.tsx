@@ -16,7 +16,7 @@ export default function AudioSwipeButton(props: AudioSwipeButtonProps) {
     const { text } = props;
 
     return (
-        <StyledButton {...props}>
+        <StyledButton disableRipple={true} disableFocusRipple={true} disableElevation={true} {...props}>
             {text}
         </StyledButton>
     );

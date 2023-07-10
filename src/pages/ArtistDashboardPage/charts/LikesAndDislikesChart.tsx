@@ -42,7 +42,7 @@ export default function LikesAndDislikesChart({
   });
 
   return (
-    <Card>
+    <Card style={{ borderRadius: 5 }} elevation={5}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingLeft: 20 }}>
         <p style={{ fontSize: 28, fontWeight: 900, marginBottom: 1, }}>
           {title}

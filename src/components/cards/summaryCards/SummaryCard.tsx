@@ -29,11 +29,12 @@ export default function SummaryCard({ bgColor = colors.primary, title, total, ic
     <Card
       sx={{
         py: 5,
-        boxShadow: 0,
         textAlign: 'center',
         color: colors.white,
         backgroundColor: bgColor,
+        borderRadius: 5,
       }}
+      elevation={5}
     >
       <StyledIcon
         sx={{

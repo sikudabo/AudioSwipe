@@ -11,6 +11,7 @@ const artistSchema = new mongoose.Schema({
     createdOn: { default: Date.now, required: true, type: Date },
     downVotes: [
         {
+            fanGender: String,
             fanId: String,
             swipeDate: Date,
         },
@@ -39,6 +40,7 @@ const artistSchema = new mongoose.Schema({
     upVotes: [
         {
             fanId: String,
+            fanGender: String,
             swipeDate: Date,
         },
     ],

@@ -13,7 +13,7 @@ export default function useChart(options: any) {
     label: 'Total',
     color: theme.palette.text.secondary,
     fontSize: theme.typography.subtitle2.fontSize,
-    fontWeight: theme.typography.subtitle2.fontWeight,
+    fontWeight: 900,
     lineHeight: theme.typography.subtitle2.lineHeight,
   };
 
@@ -21,7 +21,7 @@ export default function useChart(options: any) {
     offsetY: 8,
     color: theme.palette.text.primary,
     fontSize: theme.typography.h3.fontSize,
-    fontWeight: theme.typography.h3.fontWeight,
+    fontWeight: 900,
     lineHeight: theme.typography.h3.lineHeight,
   };
 
@@ -29,8 +29,8 @@ export default function useChart(options: any) {
     // Colors
     colors: [
       colors.primary,
-      colors.secondary,
       colors.hotPink,
+      colors.secondary,
       colors.salmonPink,
       colors.success,
       colors.black,
@@ -44,7 +44,7 @@ export default function useChart(options: any) {
       toolbar: { show: false },
       zoom: { enabled: false },
       animations: { enabled: true },
-      foreColor: theme.palette.text.disabled,
+      foreColor: colors.white,
       fontFamily: 'Varela Round' ,
       fontWeight: 900,
     },
@@ -53,7 +53,7 @@ export default function useChart(options: any) {
     states: {
       hover: {
         filter: {
-          type: 'lighten',
+          type: 'darken',
           value: 0.04,
         },
       },
@@ -126,7 +126,7 @@ export default function useChart(options: any) {
       markers: {
         radius: 12,
       },
-      fontWeight: 500,
+      fontWeight: 900,
       itemMargin: { horizontal: 12 },
       labels: {
         colors: theme.palette.text.primary,

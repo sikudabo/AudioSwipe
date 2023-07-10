@@ -3,6 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import { Card, CardHeader, Box } from '@mui/material';
 // components
 import { useChart } from '../../../utils/charts';
+import { colors } from '../../../components';
 
 // ----------------------------------------------------------------------
 
@@ -28,10 +29,11 @@ export default function LikesAndDislikesChart({
     tooltip: {
       shared: true,
       intersect: false,
+      fillSeriesColor: true,
       y: {
         formatter: (y: number | undefined) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} visits`;
+            return `${y.toFixed(0)}`;
           }
           return y;
         },
@@ -40,9 +42,15 @@ export default function LikesAndDislikesChart({
   });
 
   return (
-    <Card {...other}>
-      <CardHeader title={title} subheader={subheader} />
-
+    <Card>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingLeft: 20 }}>
+        <p style={{ fontSize: 28, fontWeight: 900, marginBottom: 1, }}>
+          {title}
+        </p>
+        <p>
+          {subheader}
+        </p>
+      </div>
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={chartData} options={chartOptions} height={364} />
       </Box>

@@ -1,18 +1,13 @@
 import PropTypes from 'prop-types';
 import ReactApexChart from 'react-apexcharts';
+import styled from '@emotion/styled';
 // @mui
 import { Card, CardHeader, Box } from '@mui/material';
 // components
 import useChart from './useChart';
+import { colors } from './colors';
 
 // ----------------------------------------------------------------------
-
-AppWebsiteVisits.propTypes = {
-  title: PropTypes.string,
-  subheader: PropTypes.string,
-  chartData: PropTypes.array.isRequired,
-  chartLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
 
 type AppWebsiteVisitsProps = {
     title?: string;
@@ -35,11 +30,12 @@ export default function AppWebsiteVisits({
     xaxis: { type: 'datetime' },
     tooltip: {
       shared: true,
+      fillSeriesColor: colors.black,
       intersect: false,
       y: {
         formatter: (y: number) => {
           if (typeof y !== 'undefined') {
-            return `${y.toFixed(0)} visits`;
+            return `${y.toFixed(0)}`;
           }
           return y;
         },

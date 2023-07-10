@@ -22,10 +22,10 @@ const Main = styled('div')(({ theme }) => ({
   flexGrow: 1,
   overflow: 'auto',
   minHeight: '100%',
-  paddingTop: APP_BAR_MOBILE + 24,
-  paddingBottom: theme.spacing(10),
+  paddingTop: 0,
+  paddingBottom: 0,
   [theme.breakpoints.up('lg')]: {
-    paddingTop: APP_BAR_DESKTOP + 24,
+    paddingTop:  0,
     paddingLeft: 0,
     paddingRight: 0,
   },

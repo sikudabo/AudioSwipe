@@ -34,7 +34,7 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
             <ArtistDashboardPageContainer columns={12} columnSpacing={0} container>
                 <div className="top-artist-banner">
                     <p className="top-artist-banner-text">
-                        Welcome Back 
+                        Dashboard
                     </p>
                 </div>
                 <Grid className="summary-cards-row" spacing={3} container>
@@ -99,7 +99,7 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                             ]}
                         />
                     </Grid>
-                    <Grid item xs={12} md={6} lg={8}>
+                    <Grid item xs={12} md={6} lg={8} style={{ paddingBottom: 50 }}>
                         <DashboardSongRankingList
                         title="Song Rankings"
                         list={[...Array(5)].map((_, index) => ({

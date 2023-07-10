@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import NavSection from '../../components/DashboardNavSection';
 import navConfig from '../../components/configs/dashboardNavConfig';
 import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
-import { GenderBreakdownChart, LikesAndDislikesChart } from './charts';
+import { DashboardSongRankingList, GenderBreakdownChart, LikesAndDislikesChart } from './charts';
 
 const theme = createTheme({
     palette: {
@@ -97,6 +97,17 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                                 colors.primary,
                                 colors.salmonPink,
                             ]}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={8}>
+                        <DashboardSongRankingList
+                        title="Song Rankings"
+                        list={[...Array(5)].map((_, index) => ({
+                            id: index,
+                            title: `Song ${index}`,
+                            description: `Album ${index}`,
+                            image: `/assets/images/covers/cover_${index + 1}.jpg`,
+                        }))}
                         />
                     </Grid>
                 </Grid>

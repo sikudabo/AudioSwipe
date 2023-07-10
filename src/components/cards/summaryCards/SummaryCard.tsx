@@ -45,9 +45,9 @@ export default function SummaryCard({ bgColor = colors.primary, title, total, ic
         <Iconify icon={icon} width={24} height={24} />
       </StyledIcon>
 
-      <Typography variant="h3">{shortenNumber(total)}</Typography>
+      <Typography variant="h3" style={{ fontWeight: 900 }}>{shortenNumber(total)}</Typography>
 
-      <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
+      <Typography variant="subtitle2" sx={{ opacity: 0.72, fontWeight: 900 }}>
         {title}
       </Typography>
     </Card>

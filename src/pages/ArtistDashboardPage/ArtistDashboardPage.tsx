@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import NavSection from '../../components/DashboardNavSection';
 import navConfig from '../../components/configs/dashboardNavConfig';
 import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
+import { LikesAndDislikesChart } from './charts';
 
 const theme = createTheme({
     palette: {

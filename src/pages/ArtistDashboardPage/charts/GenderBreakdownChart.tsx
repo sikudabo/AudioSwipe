@@ -66,9 +66,15 @@ export default function GenderBreakdownChart({ title, subheader, chartColors, ch
   });
 
   return (
-    <Card>
-      <CardHeader title={title} subheader={subheader} />
-
+    <Card elevation={5}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingLeft: 20 }}>
+            <p style={{ fontSize: 28, fontWeight: 900, marginBottom: 1, }}>
+            {title}
+            </p>
+            <p>
+            {subheader}
+            </p>
+      </div>
       <StyledChartWrapper dir="ltr">
         <ReactApexChart type="pie" series={chartSeries} options={chartOptions} height={280} />
       </StyledChartWrapper>

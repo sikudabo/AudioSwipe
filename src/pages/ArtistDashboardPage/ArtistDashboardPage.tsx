@@ -87,15 +87,16 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                     </Grid>
                     <Grid item xs={12} md={6} lg={4}>
                         <GenderBreakdownChart
-                        title="Likes by Gender"
-                        chartData={[
-                            { label: 'Male', value: 1000 },
-                            { label: 'female', value: 4370 },
-                        ]}
-                        chartColors={[
-                            colors.primary,
-                            colors.salmonPink,
-                        ]}
+                            title="Gender Breakdown"
+                            subheader="Likes by gender"
+                            chartData={[
+                                { label: 'Male', value: 1000 },
+                                { label: 'female', value: 4370 },
+                            ]}
+                            chartColors={[
+                                colors.primary,
+                                colors.salmonPink,
+                            ]}
                         />
                     </Grid>
                 </Grid>

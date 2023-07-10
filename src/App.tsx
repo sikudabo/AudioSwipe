@@ -25,13 +25,12 @@ import './BodyStyles.css';
 import { 
   ArtistDashboardPage,
   ArtistLoginPage, 
+  ArtistSongUploadPage,
   LandingPage, 
   SignupArtistPage 
 } from './pages';
 import CircularProgress from '@mui/material/CircularProgress';
 import { ArtistType } from './typings';
-import navConfig from './components/configs/dashboardNavConfig';
-import NavSection from './components/DashboardNavSection';
 
 const CustomStyledContainer = styled.div`
   padding: 0;
@@ -137,6 +136,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               <Route element={<ArtistLoginPage />} path="login/artist" />
               <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
                 <Route element={<ArtistDashboardPage />} path="main" />
+                <Route element={<ArtistSongUploadPage />} path="upload" />
               </Route>
             </Routes>
           </Router>

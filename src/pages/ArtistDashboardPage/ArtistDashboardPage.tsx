@@ -3,12 +3,14 @@ import {
     Grid
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ArtistDashboardPageContainer } from './styles';
 import { useUserData } from '../../hooks';
 import { ArtistType } from '../../typings';
 import { colors } from '../../components';
 import { createTheme, ThemeProvider } from '@mui/material';
 import NavSection from '../../components/DashboardNavSection';
 import navConfig from '../../components/configs/dashboardNavConfig';
+import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
 
 const theme = createTheme({
     palette: {
@@ -28,11 +30,18 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
-            <Grid style={{ backgroundColor: colors.white, alignItems: 'center', justifyContent: 'center' }} columns={12} columnSpacing={0} container>
-                <p onClick={() => navigate('/')} style={{ cursor: 'pointer', fontSize: 32, fontWeight: 900 }}>
-                    Welcome {artist.artistName}
-                </p>
-            </Grid>
+            <ArtistDashboardPageContainer columns={12} columnSpacing={0} container>
+                <div className="top-artist-banner">
+                    <p className="top-artist-banner-text">
+                        Welcome Back 
+                    </p>
+                </div>
+                <Grid className="summary-cards-row" spacing={3} container>
+                    <Grid xs={12} sm={6} lg={3} item>
+                        <SummaryCard bgColor={colors.salmonPink} color="primary" icon={'ant-design:like-filled'} title="Likes this month" total={71000} />
+                    </Grid>
+                </Grid>
+            </ArtistDashboardPageContainer>
         </ThemeProvider>
     );
 }

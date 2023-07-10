@@ -6,6 +6,7 @@ import { Card, Typography } from '@mui/material';
 import { shortenNumber } from '../../../utils/helpers';
 // components
 import Iconify from '../../artistDashboard/components/Iconify';
+import { colors } from '../../colors';
 
 // ----------------------------------------------------------------------
 
@@ -22,27 +23,23 @@ const StyledIcon = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function SummaryCard({ title, total, icon, color = 'primary', sx, ...other }: any) {
+export default function SummaryCard({ bgColor = colors.primary, title, total, icon, color = 'primary', sx, ...other }: any) {
+    console.log('Other is:', sx);
   return (
     <Card
       sx={{
         py: 5,
         boxShadow: 0,
         textAlign: 'center',
-        color: (theme: any) => theme.palette[color].darker,
-        bgcolor: (theme: any) => theme.palette[color].lighter,
-        ...sx,
+        color: colors.white,
+        backgroundColor: bgColor,
       }}
-      {...other}
     >
       <StyledIcon
         sx={{
-          color: (theme: any) => theme.palette[color].dark,
+          color: colors.white,
           backgroundImage: (theme: any) =>
-            `linear-gradient(135deg, ${alpha(theme.palette[color].dark, 0)} 0%, ${alpha(
-              theme.palette[color].dark,
-              0.24
-            )} 100%)`,
+            `linear-gradient(135deg, ${colors.white} 0%, ${bgColor} 100%)`,
         }}
       >
         <Iconify icon={icon} width={24} height={24} />

@@ -17,6 +17,8 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
 const { 
+    ArtistUploadSong,
+    ArtistUploadSongMetadata,
     ForgotLogin,
     LoginArtist, 
     LoginFan,
@@ -49,6 +51,8 @@ app.use(history({
 }));
 
 // Routes
+app.use(ArtistUploadSong);
+app.use(ArtistUploadSongMetadata);
 app.use(ForgotLogin);
 app.use(LoginArtist);
 app.use(LoginFan);

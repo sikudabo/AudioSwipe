@@ -2,26 +2,26 @@ const mongoose = require('mongoose');
 
 const songSchema = new mongoose.Schema({
     album: { required: true, type: String },
-    albumCoverId: { required: true },
-    artistId: { required: true },
-    artistName: { required: true },
+    albumCoverId: { required: true, type: String },
+    artistId: { required: true , type: String },
+    artistName: { required: true, type: String },
     createdOn: { default: Date.now(), required: true, type: Date },
     disLikes: [
-        new mongoose.Schema({
+        {
             createdOn: { default: Date.now(), required: true, type: Date },
-            fanId: { required: true },
+            fanId: { required: true, type: String },
             gender: { required: true, type: String },
-        }),
+        },
     ],
     likes: [
-        new mongoose.Schema({
+        {
             createdOn: { default: Date.now(), required: true, type: Date },
-            fanId: { required: true },
+            fanId: { required: true, type: String },
             gender: { required: true, type: String },
-        }),
+        },
     ],
     name: { required: true, type: String },
-    songMediaId: { required: true },
+    songMediaId: { required: true, type: String },
 }, {
     collection: 'songs',
 });

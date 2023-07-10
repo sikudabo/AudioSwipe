@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { SongModel } = require('../db/models');
 const Grid = require('gridfs-stream');
 const { GridFsStorage } = require('multer-gridfs-storage');
 const mongoose = require('mongoose');
@@ -36,10 +37,21 @@ const storage = new GridFsStorage({
 
 const uploads = multer({ storage });
 
-router.route('/api/upload/song').put(uploads.single('song'), async (req, res) => {
+router.route('/api/upload/song/metadata').put(uploads.single('albumCover'), async (req, res) => {
     try {
-        const songId = req.file.filename;
-        res.status(200).json({ isSuccess: true, message: 'success', songId });
+        const { artistId, artistName, name, songMediaId } = req.body;
+        const newSong = {
+            artistId,
+            artistName,
+            name,
+            songMediaId,
+        };
+
+        // Invalidate the query on the FE to get the new song from an API we can store on the BE once this completes.
+        await SongModel.saveMany([newSong]).exec();
+
+        res.status(200).json({ isSuccess: true, message: `Successfully uploaded ${name}!`});
+
     } catch(e) {
         console.log('Error uploading a song for an artist:', e.message);
         res.status(200).json({ isSuccess: false, message: 'There was an error uploading that song. Please try again!' });

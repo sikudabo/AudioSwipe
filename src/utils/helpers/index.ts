@@ -6,6 +6,7 @@ import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth} from "../breakpoi
 import { formatUserBirthday } from './formatUserBirthday';
 import { postBinaryData } from './postBinaryData';
 import { resizeImage } from "./resizeImage";
+import { shortenNumber } from "./shortenNumber";
 
 export { 
     checkValidAge,
@@ -17,4 +18,5 @@ export {
     postBinaryData,
     postData,
     resizeImage,
+    shortenNumber,
 };

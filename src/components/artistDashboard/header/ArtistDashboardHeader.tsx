@@ -55,8 +55,8 @@ export default function ArtistDashboardHeader({ onOpenNav }: any) {
 
         <AudioSwipeAppLogo 
             color={colors.secondary}
-            height={50}
-            width={50}
+            height={40}
+            width={40}
         />
         <Box sx={{ flexGrow: 1 }} />
 

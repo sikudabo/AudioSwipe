@@ -68,7 +68,6 @@ export default function ArtistDashboardHeader({ onOpenNav }: any) {
             sm: 1,
           }}
         >
-          <LanguagePopover />
           <AccountPopover />
         </Stack>
       </StyledToolbar>

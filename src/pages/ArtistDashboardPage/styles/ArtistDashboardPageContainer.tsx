@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Grid from '@mui/material/Grid';
+import { colors } from '../../../components';
 
 const ArtistDashboardPageContainer = styled(Grid)`
     padding-left: 20px;
@@ -8,6 +9,7 @@ const ArtistDashboardPageContainer = styled(Grid)`
 
     .top-artist-banner {
         .top-artist-banner-text {
+            color: ${colors.secondary};
             font-size: 32px;
             font-weight: 900;
         }
@@ -16,7 +18,7 @@ const ArtistDashboardPageContainer = styled(Grid)`
     }
 
     .summary-cards-row {
-        
+
     }
 `;
 

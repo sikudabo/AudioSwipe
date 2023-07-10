@@ -11,6 +11,7 @@ import Scrollbar from '../../scrollbar/Scrollbar';
 import NavSection from '../../DashboardNavSection';
 //
 import navConfig from '../../configs/dashboardNavConfig';
+import { colors } from '../../colors';
 
 const CeCePhoto = require('../../../album-cover-media/cece.jpeg');
 

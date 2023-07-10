@@ -40,6 +40,15 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                     <Grid xs={12} sm={6} lg={3} item>
                         <SummaryCard bgColor={colors.salmonPink} color="primary" icon={'ant-design:like-filled'} title="Likes this month" total={71000} />
                     </Grid>
+                    <Grid xs={12} sm={6} lg={3} item>
+                        <SummaryCard bgColor={colors.hotPink} color="primary" icon={'ant-design:dislike-filled'} title="Dislikes this month" total={5400} />
+                    </Grid>
+                    <Grid xs={12} sm={6} lg={3} item>
+                        <SummaryCard bgColor={colors.secondary} color="primary" icon={'ant-design:plus-square-filled'} title="Subscribers added" total={44} />
+                    </Grid>
+                    <Grid xs={12} sm={6} lg={3} item>
+                        <SummaryCard bgColor={colors.primary} color="primary" icon={'ant-design:minus-square-filled'} title="Subscribers lost" total={92} />
+                    </Grid>
                 </Grid>
             </ArtistDashboardPageContainer>
         </ThemeProvider>

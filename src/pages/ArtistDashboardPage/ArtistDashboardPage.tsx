@@ -11,7 +11,7 @@ import { createTheme, ThemeProvider } from '@mui/material';
 import NavSection from '../../components/DashboardNavSection';
 import navConfig from '../../components/configs/dashboardNavConfig';
 import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
-import { LikesAndDislikesChart } from './charts';
+import { GenderBreakdownChart, LikesAndDislikesChart } from './charts';
 
 const theme = createTheme({
     palette: {
@@ -83,6 +83,19 @@ function ArtistDashboardPage_DisplayLayer({ artist }: ArtistDashboardPageDisplay
                                 data: [0, 0, 41, 67, 22, 43, 21, 41, 0, 0, 0, 0],
                                 },
                             ]}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <GenderBreakdownChart
+                        title="Likes by Gender"
+                        chartData={[
+                            { label: 'Male', value: 1000 },
+                            { label: 'female', value: 4370 },
+                        ]}
+                        chartColors={[
+                            colors.primary,
+                            colors.salmonPink,
+                        ]}
                         />
                     </Grid>
                 </Grid>

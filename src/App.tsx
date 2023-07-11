@@ -124,7 +124,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               open={isLoading}
               onClick={handleBackdropClose}
             >
-              <CircularProgress color="secondary" />
+              <CircularProgress color="error" />
             </Backdrop>
             <RouteWatch />
             <ScrollToTop />

@@ -10,15 +10,27 @@ import MusicIcon from '@mui/icons-material/MusicNote';
 import UploadIcon from '@mui/icons-material/UploadFile';
 import { ArtistSongUploadPageContainer } from './styles';
 import { AudioSwipeButton } from '../../components';
+import { postBinaryData } from '../../utils/helpers';
 import { resizeImage } from '../../utils/helpers';
 import { useHandleToastMessage } from '../../utils';
 import { useIsFormLoading } from '../../utils/forms';
+import { useUserData } from '../../hooks';
 
 type ArtistSongUploadPageDisplayLayerProps = {
     albumName: string;
     audioRefTest: any;
     audioSrc: string;
     handleAlbumCoverChange: any;
+    handleAlbumNameChange: (e: {
+        target: {
+            value: string;
+        };
+    }) => void;
+    handleSongNameChange: (e: {
+        target: {
+            value: string;
+        };
+    }) => void;
     handleSongUploadChange: (e: {
         target: {
             files: any;
@@ -41,10 +53,10 @@ function ArtistSongUploadPage_DisplayLayer({
     audioSrc,
     isLoading,
     handleAlbumCoverChange,
+    handleAlbumNameChange,
+    handleSongNameChange,
     handleSongUploadChange,
     handleSubmit,
-    setAlbumName,
-    setSongName,
     songName,
 }: ArtistSongUploadPageDisplayLayerProps) {
     return (
@@ -52,7 +64,7 @@ function ArtistSongUploadPage_DisplayLayer({
             <Paper className="form-paper-wrapper" elevation={5}>
                 <div className="form-header-text-container">
                     <p className="form-header-text">
-                        Upload Song 
+                        Upload Audio
                     </p>
                 </div>
                 <div className="form-content-container">
@@ -72,6 +84,7 @@ function ArtistSongUploadPage_DisplayLayer({
                             color="secondary"
                             helperText="Required"
                             label="Song Name"
+                            onChange={handleSongNameChange}
                             placeholder="Song Name"
                             variant="outlined"
                             fullWidth
@@ -84,6 +97,7 @@ function ArtistSongUploadPage_DisplayLayer({
                             color="secondary"
                             helperText="Required"
                             label="Album Name"
+                            onChange={handleAlbumNameChange}
                             placeholder="Album Name"
                             variant="outlined"
                             fullWidth
@@ -125,6 +139,8 @@ function ArtistSongUploadPage_DisplayLayer({
 }
 
 function useDataLayer() {
+    const { artist } = useUserData();
+    console.log('The artist is:', artist);
     const { showToastMessage } = useHandleToastMessage();
     const {isLoading, setIsLoading } = useIsFormLoading();
     const [albumCover, setAlbumCover] = useState(null); // album cover file
@@ -138,6 +154,16 @@ function useDataLayer() {
         const file = e.target.files[0];
         const resizedAlbumCover = await resizeImage(file);
         setAlbumCover(resizedAlbumCover as any);
+    }
+
+    function handleSongNameChange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setSongName(value);
+    }
+
+    function handleAlbumNameChange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setAlbumName(value);
     }
 
     async function handleSongUploadChange(e: { target: { files: any }}) {
@@ -166,6 +192,33 @@ function useDataLayer() {
             setIsLoading(false);
             return;
         }
+
+        if (!albumCover) {
+            showToastMessage({
+                isError: true,
+                message: 'You must add an album cover',
+            });
+            setIsLoading(false);
+            return;
+        } else if (!songName.trim()) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter an audio name for this file.',
+            });
+            setIsLoading(false);
+            return;
+        } else if (!albumName) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter an album/book name.',
+            });
+            setIsLoading(false);
+            return;
+        }
+
+
+        /* do stuff if this checks pass */
+        console.log('Submitting...');
     }
 
     return {
@@ -173,6 +226,8 @@ function useDataLayer() {
         audioRefTest,
         audioSrc,
         handleAlbumCoverChange,
+        handleAlbumNameChange,
+        handleSongNameChange,
         handleSongUploadChange,
         handleSubmit,
         isLoading,

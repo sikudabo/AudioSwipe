@@ -7,8 +7,8 @@ type Artist = ArtistType & {
 }
 
 type UseUserStateType = {
-    artist: Artist | {};
-};
+  artist: Artist | {} | any;
+}
 
 type UseUserActionsType = {
     clearArtist: () => void;

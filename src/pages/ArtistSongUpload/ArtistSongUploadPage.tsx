@@ -139,8 +139,8 @@ function ArtistSongUploadPage_DisplayLayer({
 }
 
 function useDataLayer() {
-    const { artist } = useUserData();
-    console.log('The artist is:', artist);
+    const { artist, setArtist } = useUserData();
+    const { artistName, genres, _id, userType } = artist;
     const { showToastMessage } = useHandleToastMessage();
     const {isLoading, setIsLoading } = useIsFormLoading();
     const [albumCover, setAlbumCover] = useState(null); // album cover file
@@ -184,7 +184,7 @@ function useDataLayer() {
             return;
         }
 
-        if (audioRefTest!.current!.duration < 29 || audioRefTest!.current!.duration > 31) {
+        if (audioRefTest!.current!.duration < 25 || audioRefTest!.current!.duration > 31) {
             showToastMessage({
                 isError: true,
                 message: 'Your audio clip must be 30-seconds long.',
@@ -217,8 +217,73 @@ function useDataLayer() {
         }
 
 
-        /* do stuff if this checks pass */
-        console.log('Submitting...');
+        const fd = new FormData();
+        fd.append('albumCover', albumCover, 'albumCover.jpeg');
+
+       await postBinaryData({
+            data: fd,
+            url: 'api/saveAlbumCover',
+        }).then(async (response) => {
+            const { isSuccess } = response;
+
+            if (!isSuccess) {
+                showToastMessage({
+                    isError: true,
+                    message: response.message,
+                });
+                setIsLoading(false);
+                return;
+            }
+
+            const { albumCover: responseCover } = response;
+
+            const fd = new FormData();
+            fd.append('album', albumName);
+            fd.append('albumCover', responseCover);
+            fd.append('artistId', _id);
+            fd.append('artistName', artistName);
+            fd.append('genres', genres);
+            fd.append('songArtistType', userType);
+            fd.append('name', songName);
+            fd.append('song', song, 'song.mp3');
+
+            await postBinaryData({
+                data: fd,
+                url: 'api/saveSong',
+            }).then((response) => {
+                const { isSuccess, message, updatedArtist } = response;
+                console.log('The response is:', response);
+                if (!isSuccess) {
+                    showToastMessage({
+                        isError: true,
+                        message: message,
+                    });
+                    setIsLoading(false);
+                    return;
+                }
+
+                showToastMessage({
+                    isError: false,
+                    message: message,
+                });
+                // setArtist(response.updatedArtist);
+                setIsLoading(false);
+                return;
+
+            }).catch((e: Error) => {
+                showToastMessage({
+                    isError: true,
+                    message: 'There was an error. Please try again!',
+                });
+                setIsLoading(false);
+            });
+        }).catch((e: Error) => {
+            showToastMessage({
+                isError: true,
+                message: 'There was an error. Please try again!',
+            });
+            setIsLoading(false);
+        });
     }
 
     return {

@@ -12,6 +12,7 @@ import NavSection from '../../DashboardNavSection';
 //
 import navConfig from '../../configs/dashboardNavConfig';
 import { colors } from '../../colors';
+import { useUserData } from '../../../hooks';
 
 const CeCePhoto = require('../../../album-cover-media/cece.jpeg');
 
@@ -38,12 +39,23 @@ const StyledAccount = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-Nav.propTypes = {
-  openNav: PropTypes.bool,
-  onCloseNav: PropTypes.func,
+type NavProps = {
+  onCloseNav: any;
+  openNav: any;
+}
+
+type NavDisplayLayerProps = NavProps & {
+  artist: any;
 };
 
-export default function Nav({ openNav, onCloseNav }: { openNav: any; onCloseNav: any }) {
+export default function Nav({
+  onCloseNav,
+  openNav,
+}: NavProps) {
+  return <Nav_DisplayLayer onCloseNav={onCloseNav} openNav={openNav} {...useDataLayer()} />; 
+}
+
+function Nav_DisplayLayer({ artist, openNav, onCloseNav }: NavDisplayLayerProps) {
   const { pathname } = useLocation();
 
   const isDesktop = useResponsive('up', 'lg');
@@ -68,15 +80,15 @@ export default function Nav({ openNav, onCloseNav }: { openNav: any; onCloseNav:
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={CeCePhoto} alt="photoURL" />
+            <Avatar src={`http://localhost:2000/api/get-photo/${artist.avatar}`} sx={{ height: 50, width: 50 }} alt={artist.artistName} variant="circular" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary', fontWeight: 900, }}>
-                {account.displayName}
+                {artist.firstName} {artist.lastName}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary', fontWeight: 900 }}>
-                {account.role}
+                {artist.artistName}
               </Typography>
             </Box>
           </StyledAccount>
@@ -132,4 +144,12 @@ export default function Nav({ openNav, onCloseNav }: { openNav: any; onCloseNav:
       )}
     </Box>
   );
+}
+
+function useDataLayer() {
+  const { artist } = useUserData();
+
+  return {
+    artist,
+  };
 }

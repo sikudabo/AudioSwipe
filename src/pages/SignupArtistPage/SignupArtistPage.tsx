@@ -4,6 +4,7 @@ import PhoneInput from 'react-phone-input-material-ui';
 import { useForm } from 'react-hook-form';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {
     Checkbox,
@@ -40,6 +41,7 @@ import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
 import saveNewArtist from './form/saveNewArtist';
 import { useIsFormLoading } from '../../utils/forms/useIsFormLoading';
 import RecordsImage from '../../audio-media/records.jpeg';
+import { useUserData } from '../../hooks';
 
 export default function SignupArtistPage() {
     return <SignupArtistPageDisplayLayer {...useDataLayer()} />;
@@ -551,10 +553,10 @@ function SignupArtistPageDisplayLayer({
                         </>
                     )}
                     <div className="back-next-button-row">
-                        <AudioSwipeButton color="secondary" onClick={handleBackStep} text="back" />
+                        <AudioSwipeButton color="secondary" onClick={handleBackStep} text="BACK" />
                         {currentStep === steps.length? (
-                            <AudioSwipeButton color="secondary" onClick={handleNextStep} text="submit" type="submit" />
-                        ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text={currentStep === 4 ? 'submit' : 'next' } type="button" />
+                            <AudioSwipeButton color="secondary" onClick={handleNextStep} text="SUBMIT" type="submit" />
+                        ):  <AudioSwipeButton color="secondary" onClick={handleNextStep} text={currentStep === 4 ? 'SUBMIT' : 'NEXT' } type="button" />
                         }
                     </div>
                 </form>
@@ -564,7 +566,9 @@ function SignupArtistPageDisplayLayer({
 }
 
 function useDataLayer() {
+    const navigate = useNavigate();
     const { showToastMessage } = useHandleToastMessage();
+    const { setArtist } = useUserData();
     const { isLoading, setIsLoading } = useIsFormLoading();
     const [artistBirthday, setArtistBirthday] = useState(dayjs('2023-03-20'));
     const [selectedGender, setSelectedGender] = useState('female');
@@ -750,12 +754,13 @@ function useDataLayer() {
                 setIsLoading(false);
                 return;
             }
-
+            setArtist(user);
             showToastMessage({
                 isError: false,
                 message: 'Welcome to AudioSwipe!',
             });
             setIsLoading(false);
+            navigate('/artist/dashboard/main')
             return;
         }).catch(e => {
             setIsLoading(false);

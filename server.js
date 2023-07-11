@@ -13,15 +13,18 @@ const serveStatic = require('serve-static');
 const history = require('connect-history-api-fallback');
 const cors = require('cors');
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
 const { 
     ArtistUploadSong,
     ArtistUploadSongMetadata,
     ForgotLogin,
+    GetPhoto,
     LoginArtist, 
     LoginFan,
+    SaveAlbumCover,
+    SaveArtistSong,
     SaveNewArtist,
     SaveNewFan,
 } = require('./routes');
@@ -54,8 +57,11 @@ app.use(history({
 app.use(ArtistUploadSong);
 app.use(ArtistUploadSongMetadata);
 app.use(ForgotLogin);
+app.use(GetPhoto);
 app.use(LoginArtist);
 app.use(LoginFan);
+app.use(SaveAlbumCover);
+app.use(SaveArtistSong);
 app.use(SaveNewArtist);
 app.use(SaveNewFan);
 

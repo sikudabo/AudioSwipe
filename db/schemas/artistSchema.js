@@ -31,6 +31,7 @@ const artistSchema = new mongoose.Schema({
     lastName: { required: true, type: String },
     password: { required: true, type: String },
     phoneNumber: { required: true, type: String },
+    songIds: [String],
     soundcloudLink: String,
     spotifyLink: String,
     state: { required: true, type: String },

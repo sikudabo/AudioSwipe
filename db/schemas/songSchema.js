@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const songSchema = new mongoose.Schema({
     album: { required: true, type: String },
-    albumCoverId: { required: true, type: String },
+    albumCover: { required: true, type: String },
     artistId: { required: true , type: String },
     artistName: { required: true, type: String },
     createdOn: { default: Date.now(), required: true, type: Date },
@@ -24,6 +24,7 @@ const songSchema = new mongoose.Schema({
     name: { required: true, type: String },
     songArtistType: { required: true, type: String },
     songMediaId: { required: true, type: String },
+    utcTime: Date,
 }, {
     collection: 'songs',
 });

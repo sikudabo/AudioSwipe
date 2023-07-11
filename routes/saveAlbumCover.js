@@ -1,31 +1,29 @@
-// const dotenv = require('dotenv').config();
+const express = require('express');
+const router = express.Router();
 const Grid = require('gridfs-stream');
 const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 const mongoose = require('mongoose');
 const multer = require('multer');
 const path = require('path');
-const dotenv = require('dotenv').config();
 
 const dbUri = process.env.DB_URI;
-
-console.log('The dbUri is:', dbUri);
 
 var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
 
-conn.once('open', () => {
+conn.once('open', async () => {
     // Init Stream
-    gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection('uploads');
+    gfs = await Grid(conn.db, mongoose.mongo);
+    await gfs.collection('uploads');
     return 'done';
 });
 
 const storage = new GridFsStorage({
     url: dbUri,
-    file: (req, file) => {
-      return new Promise((resolve, reject) => {
+    file: async (req, file) => {
+      return await new Promise((resolve, reject) => {
           const filename = Date.now() + "-" + file.fieldname + path.extname(file.originalname);
           const fileInfo = {
             filename: filename,
@@ -38,4 +36,17 @@ const storage = new GridFsStorage({
 
 const uploads = multer({ storage });
 
-module.exports = uploads;
+router.route('/api/saveAlbumCover').put(uploads.single('albumCover'), async (req, res) => {
+    const { filename } = req.body;
+
+    try {
+        res.status(200).json({ albumCover: filename, isSuccess: true });
+        return
+    } catch(e) {
+        console.log('There was an error uploading a new album cover for a song, podcast or album cover');
+        res.status(200).json({ isSuccess: false, message: 'There was an error uploading your album cover. Please try again!' });
+        return;
+    }
+});
+
+module.exports = router;

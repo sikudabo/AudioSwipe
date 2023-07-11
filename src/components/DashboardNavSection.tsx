@@ -1,7 +1,8 @@
 import { ReactElement, useEffect, useState } from 'react';
-import { NavLink as RouterLink, useLocation } from 'react-router-dom';
+import { NavLink as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Box, List, ListItemText } from '@mui/material';
 import { StyledNavItem, StyledNavItemIcon } from './navStyles';
+import { useUserData } from '../hooks';
 
 export type NavSectionProps = {
   data: {
@@ -42,11 +43,19 @@ export default function NavSection({ data = [], ...other }: NavSectionProps) {
 }
 
 function NavItem({ item }: any) {
+  const navigate = useNavigate();
   const { title, path, icon, info } = item;
+  const { setArtist } = useUserData();
+  
+  function handleLogout() {
+    setArtist({} as any);
+    navigate('/');
+  }
 
   return (
     <StyledNavItem
-      to={path}
+      onClick={title === 'logout' ? handleLogout : () => {}}
+      to={title ===  'logout' ? '' : path}
       sx={{
         '&.active': {
           color: 'text.primary',

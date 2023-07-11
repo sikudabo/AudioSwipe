@@ -12,10 +12,14 @@ var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTo
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
+let gridfsBucket;
 
 conn.once('open', () => {
     // Init Stream
     gfs = Grid(conn.db, mongoose.mongo);
+    gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+        bucketName: 'uploads',
+    });
     gfs.collection('uploads');
     return 'done';
 });
@@ -38,33 +42,18 @@ const uploads = multer({ storage });
 
 router.route('/api/get-photo/:photo').get(async (req, res) => {
     
-    let photo = req.params.photo;
-    const file = await gfs.files.find({ filename: photo });
+    const photo = req.params.photo;
+    const file = await gfs.files.findOne({ filename: photo });
+    
     if (!file || file.length === 0) {
         console.log('Could not find photo');
         return res.status(404).json({
             err: 'Could not find the photo!',
         });
     }
-    await gfs.files.find({ filename: photo }, async (err, file) => {
-        console.log('This is actually being triggered');
-        console.log('The file returned is:', file);
-        if (err) {
-            console.log('Error:', err.message);
-        }
-        // Check if file
-        if (!file || file.length === 0) {
-          console.log('Could Not Find The Photo');
-          return res.status(404).json({
-            err: 'No file exists'
-          });
-        }
-        else {
-            let readstream = await gfs.createReadStream(file.filename);
-            console.log('The read stream is:', readstream);
-            readstream.pipe(res);
-        }
-    });
+
+    const readStream = gridfsBucket.openDownloadStream(file._id);
+    readStream.pipe(res);
 });
 
 module.exports = router;

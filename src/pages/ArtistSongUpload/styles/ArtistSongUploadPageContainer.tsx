@@ -12,24 +12,28 @@ export const ArtistSongUploadPageContainer = styled(Grid)`
     justify-content: center;
     max-width: 100vw;
     padding-top: 100px;
-
-    .css-klllbb {
-        padding-bottom: 0;
-    }
+    padding-bottom: 20px;
 
     .form-paper-wrapper {
         background-color: ${colors.white};
         border-radius: 5px;
+        height: 75vh
         margin: 0;
-        height: 60vh;
         opacity: 0.9;
         width: 50vw;
 
         @media ${deviceBreakPointsMaxWidth.mobileL} {
-            height: 450px;
+            height: 100%;
             padding-left: 5px;
             padding-right: 5px;
+            overflow: hidden;
             width: 95vw;
+        }
+
+        .btn-container {
+            width: 100%;
+            margin-left: 20px;
+            margin-right: 20px;
         }
 
         .form-header-text-container {
@@ -62,8 +66,22 @@ export const ArtistSongUploadPageContainer = styled(Grid)`
                     width: 75vw;
                 }
             }
+
+            .song-grid {
+                margin: 0 auto;
+                padding-bottom: 20px;
+                width: 50vw;
+            }
+        
+            @media ${deviceBreakPointsMaxWidth.tablet} {
+                .album-cover-grid {
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    width: 75vw;
+                }
+            }
     
-            .song-name-grid {
+            .song-grid {
                 margin: 0 auto;
                 padding-bottom: 20px;
                 padding-left: 10px;

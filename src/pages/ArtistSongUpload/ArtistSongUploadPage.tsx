@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { createElement, useRef, useState } from 'react';
 import {
     Grid,
     IconButton,
@@ -6,12 +6,26 @@ import {
     TextField
 } from '@mui/material';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import MusicIcon from '@mui/icons-material/MusicNote';
+import UploadIcon from '@mui/icons-material/UploadFile';
 import { ArtistSongUploadPageContainer } from './styles';
+import { AudioSwipeButton } from '../../components';
 import { resizeImage } from '../../utils/helpers';
+import { useHandleToastMessage } from '../../utils';
+import { useIsFormLoading } from '../../utils/forms';
 
 type ArtistSongUploadPageDisplayLayerProps = {
     albumName: string;
+    audioRefTest: any;
+    audioSrc: string;
     handleAlbumCoverChange: any;
+    handleSongUploadChange: (e: {
+        target: {
+            files: any;
+        };
+    }) => Promise<void>;
+    handleSubmit: () => void;
+    isLoading: boolean;
     setAlbumName: React.Dispatch<React.SetStateAction<string>>;
     setSongName: React.Dispatch<React.SetStateAction<string>>;
     songName: string;
@@ -23,7 +37,12 @@ export default function ArtistSongUploadPage() {
 
 function ArtistSongUploadPage_DisplayLayer({
     albumName,
+    audioRefTest,
+    audioSrc,
+    isLoading,
     handleAlbumCoverChange,
+    handleSongUploadChange,
+    handleSubmit,
     setAlbumName,
     setSongName,
     songName,
@@ -37,7 +56,16 @@ function ArtistSongUploadPage_DisplayLayer({
                     </p>
                 </div>
                 <div className="form-content-container">
-                    <Grid className="song-name-grid" xs={12}>
+                    <audio 
+                        preload="metadata"
+                        ref={audioRefTest}
+                        src={audioSrc}
+                        style={{
+                            display: 'none',
+                        }}
+                        autoPlay
+                    />
+                    <Grid className="album-name-grid" xs={12}>
                         <TextField
                             aria-label="Song Name"
                             color="secondary"
@@ -68,6 +96,27 @@ function ArtistSongUploadPage_DisplayLayer({
                         </IconButton>
                         Album Cover (required *)
                     </Grid>
+                    <Grid className="album-cover-grid" xs={12}>
+                        <IconButton color="secondary" aria-label="Artist Song Upload" component="label">
+                            <input aria-label="Artist Song Upload" accept="audio/mpeg3" name="song" onChange={handleSongUploadChange} type="file" hidden required />
+                            <MusicIcon />
+                        </IconButton>
+                        Song (Must be 30 secs *)
+                    </Grid>
+                    <Grid className="btn-container" style={{ paddingLeft: 20, paddingRight: 20 }} xs={12}>
+                        <AudioSwipeButton 
+                            color="secondary"
+                            disabled={isLoading}
+                            onClick={handleSubmit}
+                            startIcon={<UploadIcon />}
+                            text="Upload"
+                            variant="contained"
+                            style={{
+                                width: '100%',
+                            }}
+                            fullWidth
+                        />
+                    </Grid>
                 </div>
             </Paper>
         </ArtistSongUploadPageContainer>
@@ -75,10 +124,15 @@ function ArtistSongUploadPage_DisplayLayer({
 }
 
 function useDataLayer() {
+    const { showToastMessage } = useHandleToastMessage();
+    const {isLoading, setIsLoading } = useIsFormLoading();
     const [albumCover, setAlbumCover] = useState(null); // album cover file
     const [albumName, setAlbumName] = useState(''); // album name
     const [song, setSong] = useState(null); // mp3 file for upload
     const [songName, setSongName] = useState('');
+    const [audioSrc, setAudioSrc] = useState('');
+    const audioRefTest = useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
     async function handleAlbumCoverChange(e: { target: { files: any }}) {
         const file = e.target.files[0];
@@ -86,13 +140,48 @@ function useDataLayer() {
         setAlbumCover(resizedAlbumCover as any);
     }
 
-    async function handleSongUploadChange(e: { target: { files: any }}) {
+    async function checkDuration(file: any) {
+       
+        const url = URL.createObjectURL(file);
+    
+        setIsLoading(false);
+    }
 
+    async function handleSongUploadChange(e: { target: { files: any }}) {
+        const file = await e.target.files[0];
+        const src = URL.createObjectURL(file);
+        let audio =  new Audio();
+        setAudioSrc(src);
+        setSong(file);
+    }
+
+    async function handleSubmit() {
+        setIsLoading(true);
+        console.log('The audio ref is', audioRefTest!.current!.duration);
+        if (!song) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a 30 second song.',
+            });
+            setIsLoading(false);
+            return;
+        }
+
+        if (song) {
+            const duration = await checkDuration(song);
+            
+            setIsLoading(false);
+        }
     }
 
     return {
         albumName,
+        audioRefTest,
+        audioSrc,
         handleAlbumCoverChange,
+        handleSongUploadChange,
+        handleSubmit,
+        isLoading,
         setAlbumName,
         setSongName,
         songName,

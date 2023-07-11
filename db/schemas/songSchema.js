@@ -22,6 +22,7 @@ const songSchema = new mongoose.Schema({
         },
     ],
     name: { required: true, type: String },
+    songArtistType: { required: true, type: String },
     songMediaId: { required: true, type: String },
 }, {
     collection: 'songs',

@@ -64,6 +64,7 @@ function ArtistSongUploadPage_DisplayLayer({
                             display: 'none',
                         }}
                         autoPlay
+                        muted
                     />
                     <Grid className="album-name-grid" xs={12}>
                         <TextField
@@ -132,7 +133,6 @@ function useDataLayer() {
     const [songName, setSongName] = useState('');
     const [audioSrc, setAudioSrc] = useState('');
     const audioRefTest = useRef<HTMLAudioElement | null>(null);
-    const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
     async function handleAlbumCoverChange(e: { target: { files: any }}) {
         const file = e.target.files[0];
@@ -140,37 +140,31 @@ function useDataLayer() {
         setAlbumCover(resizedAlbumCover as any);
     }
 
-    async function checkDuration(file: any) {
-       
-        const url = URL.createObjectURL(file);
-    
-        setIsLoading(false);
-    }
-
     async function handleSongUploadChange(e: { target: { files: any }}) {
         const file = await e.target.files[0];
         const src = URL.createObjectURL(file);
-        let audio =  new Audio();
         setAudioSrc(src);
         setSong(file);
     }
 
     async function handleSubmit() {
         setIsLoading(true);
-        console.log('The audio ref is', audioRefTest!.current!.duration);
         if (!song) {
             showToastMessage({
                 isError: true,
-                message: 'You must enter a 30 second song.',
+                message: 'You must enter a 30 sec audio clip.',
             });
             setIsLoading(false);
             return;
         }
 
-        if (song) {
-            const duration = await checkDuration(song);
-            
+        if (audioRefTest!.current!.duration < 29 || audioRefTest!.current!.duration > 31) {
+            showToastMessage({
+                isError: true,
+                message: 'Your audio clip must be 30-seconds long.',
+            });
             setIsLoading(false);
+            return;
         }
     }
 

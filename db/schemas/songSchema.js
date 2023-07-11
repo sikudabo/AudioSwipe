@@ -13,6 +13,7 @@ const songSchema = new mongoose.Schema({
             gender: { required: true, type: String },
         },
     ],
+    genres: [String],
     likes: [
         {
             createdOn: { default: Date.now(), required: true, type: Date },

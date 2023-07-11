@@ -26,6 +26,7 @@ import {
   ArtistDashboardPage,
   ArtistLoginPage, 
   ArtistSongUploadPage,
+  ClipsPage,
   LandingPage, 
   SignupArtistPage 
 } from './pages';
@@ -137,6 +138,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
               <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
                 <Route element={<ArtistDashboardPage />} path="main" />
                 <Route element={<ArtistSongUploadPage />} path="upload" />
+                <Route element={<ClipsPage />} path="clips" />
               </Route>
             </Routes>
           </Router>

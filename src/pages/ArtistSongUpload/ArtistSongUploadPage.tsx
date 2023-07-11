@@ -1,4 +1,5 @@
 import React, { createElement, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Grid,
     IconButton,
@@ -80,12 +81,12 @@ function ArtistSongUploadPage_DisplayLayer({
                     />
                     <Grid className="album-name-grid" xs={12}>
                         <TextField
-                            aria-label="Song Name"
+                            aria-label="Clip Name"
                             color="secondary"
                             helperText="Required"
-                            label="Song Name"
+                            label="Clip Name"
                             onChange={handleSongNameChange}
-                            placeholder="Song Name"
+                            placeholder="Clip Name"
                             variant="outlined"
                             fullWidth
                             required
@@ -149,6 +150,7 @@ function useDataLayer() {
     const [songName, setSongName] = useState('');
     const [audioSrc, setAudioSrc] = useState('');
     const audioRefTest = useRef<HTMLAudioElement | null>(null);
+    const navigate = useNavigate();
 
     async function handleAlbumCoverChange(e: { target: { files: any }}) {
         const file = e.target.files[0];
@@ -266,8 +268,8 @@ function useDataLayer() {
                     isError: false,
                     message: message,
                 });
-                // setArtist(response.updatedArtist);
                 setIsLoading(false);
+                navigate('/artist/dashboard/main');
                 return;
 
             }).catch((e: Error) => {

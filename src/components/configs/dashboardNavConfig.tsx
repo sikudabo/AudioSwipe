@@ -16,8 +16,8 @@ const navConfig = [
     icon: <CloudUploadOutlinedIcon />,
   },
   {
-    title: 'songs',
-    path: '/artist/dashboard/songs',
+    title: 'clips',
+    path: '/artist/dashboard/clips',
     icon: <LibraryMusicOutlinedIcon />
   },
   {

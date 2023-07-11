@@ -13,19 +13,39 @@ mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
 
-conn.once('open', async () => {
+conn.once('open', () => {
     // Init Stream
-    gfs = await Grid(conn.db, mongoose.mongo);
-    await gfs.collection('uploads');
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection('uploads');
     return 'done';
 });
 
+const storage = new GridFsStorage({
+    url: dbUri,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+          const filename = Date.now() + "-" + file.fieldname + path.extname(file.originalname);
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'uploads'
+          };
+          resolve(fileInfo);
+        });
+    }
+});
+
+const uploads = multer({ storage });
+
 router.route('/api/get-photo/:photo').get(async (req, res) => {
-    console.log('I am being hit!');
     
     let photo = req.params.photo;
-    console.log('The photo is:', photo);
-    console.log(gfs.files);
+    const file = await gfs.files.find({ filename: photo });
+    if (!file || file.length === 0) {
+        console.log('Could not find photo');
+        return res.status(404).json({
+            err: 'Could not find the photo!',
+        });
+    }
     await gfs.files.find({ filename: photo }, async (err, file) => {
         console.log('This is actually being triggered');
         console.log('The file returned is:', file);

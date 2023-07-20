@@ -4,6 +4,7 @@ export type SongTableRowType = {
         disLikes: [string] | undefined;
         likes: [string] | undefined;
         name: string;
+        songMediaId: string;
         _id: string;
     };
 };

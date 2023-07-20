@@ -21,6 +21,7 @@ function ClipsPage_DisplayLayer({
     return (
         <ClipsPageContainer container>
             <audio 
+                loop={false}
                 ref={artistAudioPlayerRef}
                 src={`${process.env.REACT_APP_BASE_URI}api/get-audio/1689812059779-song.mp3`}
                 hidden 

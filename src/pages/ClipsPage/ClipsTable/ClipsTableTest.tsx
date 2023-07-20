@@ -23,6 +23,7 @@ const data = [
         _id: 1,
         likes: ['jdnjagnoagdo', 'jkdnoagndagdg', 'dkadokdglng'],
         name: 'Down on donors',
+        songMediaId: '1689812059779-song.mp3',
     },
     {
         albumCover: '1689812059752-albumCover.jpg',
@@ -30,6 +31,7 @@ const data = [
         _id: 2,
         likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
         name: 'The liberal truth',
+        songMediaId: '1689809436712-song.mp3',
     },
 ];
 

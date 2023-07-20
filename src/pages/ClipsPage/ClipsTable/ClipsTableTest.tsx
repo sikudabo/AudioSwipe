@@ -15,6 +15,10 @@ const ClipsTableContainer = styled.div`
     height: 300px;
     text-overflow: clipped;
     width: 100%;
+
+    .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+        outline: none !important;
+    }
 `;
 
 const data = [

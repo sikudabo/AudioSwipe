@@ -1,10 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Grid = require('gridfs-stream');
-const GridFsStorage = require('multer-gridfs-storage').GridFsStorage;
 const mongoose = require('mongoose');
-const multer = require('multer');
-const path = require('path');
 
 const dbUri = process.env.DB_URI;
 
@@ -23,22 +20,6 @@ conn.once('open', () => {
     gfs.collection('uploads');
     return 'done';
 });
-
-const storage = new GridFsStorage({
-    url: dbUri,
-    file: (req, file) => {
-      return new Promise((resolve, reject) => {
-          const filename = Date.now() + "-" + file.fieldname + path.extname(file.originalname);
-          const fileInfo = {
-            filename: filename,
-            bucketName: 'uploads'
-          };
-          resolve(fileInfo);
-        });
-    }
-});
-
-const uploads = multer({ storage });
 
 router.route('/api/get-photo/:photo').get(async (req, res) => {
     

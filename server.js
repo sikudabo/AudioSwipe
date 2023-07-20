@@ -20,6 +20,7 @@ const {
     ArtistUploadSong,
     ArtistUploadSongMetadata,
     ForgotLogin,
+    GetAudio,
     GetPhoto,
     LoginArtist, 
     LoginFan,
@@ -57,6 +58,7 @@ app.use(history({
 app.use(ArtistUploadSong);
 app.use(ArtistUploadSongMetadata);
 app.use(ForgotLogin);
+app.use(GetAudio);
 app.use(GetPhoto);
 app.use(LoginArtist);
 app.use(LoginFan);

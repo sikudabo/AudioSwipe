@@ -1,6 +1,7 @@
 const ArtistUploadSong = require('./artistUploadSong');
 const ArtistUploadSongMetadata = require('./artistUploadSongMetadata');
 const ForgotLogin = require('./forgotLogin');
+const GetAudio = require('./getAudio');
 const GetPhoto = require('./getPhoto');
 const LoginArtist = require('./loginArtist');
 const LoginFan = require('./loginFan');
@@ -13,6 +14,7 @@ module.exports = {
     ArtistUploadSong,
     ArtistUploadSongMetadata,
     ForgotLogin,
+    GetAudio,
     GetPhoto,
     LoginArtist,
     LoginFan,

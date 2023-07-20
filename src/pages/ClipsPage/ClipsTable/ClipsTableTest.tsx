@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF  } from '@mui/x-data-grid';
 import { colors } from '../../../components';
@@ -8,6 +8,8 @@ import {
     ClipsTableNameCell,
     ClipsTablePlayStopButtonCell,
 } from './components/cells';
+import { SongTableRowType } from '../typings/songTableRowType';
+import useFetchArtistSongs from './hooks/useFetchArtistSongs';
 
 const ClipsTableContainer = styled.div`
     background-color: ${colors.white};
@@ -19,6 +21,11 @@ const ClipsTableContainer = styled.div`
         outline: none !important;
     }
 `;
+
+type ClipsTableDisplayLayerProps = {
+    artistSongs: Array<SongTableRowType>;
+    isLoading: boolean;
+}
 
 const data = [
     {
@@ -65,6 +72,10 @@ const columns = [
         headerName: 'Likes',
         minWidth: 200,
         renderCell: ClipsTableLikesCell,
+        type: 'number',
+        valueGetter: (params: any) => {
+            return params.row.likes.length;
+        },
     },
     {
         description: 'Number of dislikes this audio has.',
@@ -72,6 +83,10 @@ const columns = [
         headerName: 'Dislikes',
         minWidth: 200,
         renderCell: ClipsTableDisLikesCell,
+        type: 'number',
+        valueGetter: (params: any) => {
+            return params.row.likes.length;
+        },
     },
     {
         description: 'Play your audio file.',
@@ -82,14 +97,22 @@ const columns = [
     },
 ];
 
-
 export default function ClipsTableTest() {
+    return <ClipsTableTest_DisplayLayer {...useDataLayer()} />
+}
+
+
+function ClipsTableTest_DisplayLayer({
+    artistSongs,
+    isLoading,
+}: ClipsTableDisplayLayerProps) {
     return (
         <ClipsTableContainer>
             <DataGrid 
                 columns={columns}
                 getRowId={(row: any) => row._id}
-                rows={data}
+                loading={isLoading}
+                rows={artistSongs}
                 rowHeight={100}
                 disableColumnSelector
                 disableRowSelectionOnClick
@@ -97,4 +120,19 @@ export default function ClipsTableTest() {
             />
         </ClipsTableContainer>
     );
+}
+
+function useDataLayer() {
+    const { data,isLoading } = useFetchArtistSongs();
+    const [artistSongs, setArtistSongs] = useState(data);
+
+    useEffect(() => {
+        setArtistSongs(data);
+        console.log('The artist songs are:', artistSongs);
+    }, [isLoading]);
+
+    return {
+        artistSongs: typeof artistSongs !== 'undefined' ? artistSongs : [],
+        isLoading,
+    };
 }

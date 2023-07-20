@@ -10,12 +10,11 @@ const ClipsTableDisLikesCellContainer = styled.div`
 
 export default function ClipsTableLikesCell({ row }: SongTableRowType) {
     const { disLikes } = row;
-    const disLikesNum = typeof disLikes !== 'undefined' ? disLikes.length : 0;
 
     return (
         <ClipsTableDisLikesCellContainer>
             <p className="like-text">
-                {disLikesNum}
+                {disLikes?.length}
             </p>
         </ClipsTableDisLikesCellContainer>
     );

@@ -10,7 +10,7 @@ export default async function saveNewArtist({
     }).then((data: any) => {
         return data;
     }).catch(e => {
-        console.log(e.message);
+        return;
     });
 
     return newArtist;

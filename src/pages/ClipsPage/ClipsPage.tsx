@@ -22,7 +22,7 @@ function ClipsPage_DisplayLayer({
         <ClipsPageContainer container>
             <audio 
                 ref={artistAudioPlayerRef}
-                src={CatchWreckMp3}
+                src={`${process.env.REACT_APP_BASE_URI}api/get-audio/1689812059779-song.mp3`}
                 hidden 
             />
             <Grid className="top-clips-page-header" container>

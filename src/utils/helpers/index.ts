@@ -1,4 +1,5 @@
 import postData from "./postData";
+import getData from "./getData";
 import { checkValidAge } from './checkValidAge';
 import { checkValidEmail } from "./checkValidEmail";
 import { checkValidUrl } from './checkValidUrl';
@@ -15,6 +16,7 @@ export {
     deviceBreakPointsMaxWidth,
     deviceBreakPointsMinWidth,
     formatUserBirthday,
+    getData,
     postBinaryData,
     postData,
     resizeImage,

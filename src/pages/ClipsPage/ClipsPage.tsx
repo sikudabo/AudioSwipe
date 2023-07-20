@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import { ClipsPageContainer } from './styles';
-import { useAudioPlayerRef } from '../../contexts/MusicPlayerContext';
+import { useAudioPlayerRef, useUpdateAudioPlayer } from '../../contexts/MusicPlayerContext';
 import ClipsTableTest from './ClipsTable/ClipsTableTest';
 const CatchWreckMp3 = require('../../audio-media/catch-wreck.mp3');
 
@@ -11,10 +11,12 @@ export default function ClipsPage() {
 
 type ClipsPageDisplayLayerProps = {
     artistAudioPlayerRef: any;
+    handlePlay: () => void;
 };
 
 function ClipsPage_DisplayLayer({
     artistAudioPlayerRef,
+    handlePlay,
 }: ClipsPageDisplayLayerProps ) {
     return (
         <ClipsPageContainer container>
@@ -24,7 +26,10 @@ function ClipsPage_DisplayLayer({
                 hidden 
             />
             <Grid className="top-clips-page-header" container>
-                <p className="top-clips-page-header-text">
+                <p 
+                    className="top-clips-page-header-text"
+                    onClick={handlePlay}
+                >
                     Audio Clips 
                 </p>
                 <ClipsTableTest />;
@@ -34,8 +39,14 @@ function ClipsPage_DisplayLayer({
 }
 function useDataLayer() {
     const { artistAudioPlayerRef } = useAudioPlayerRef();
+    const { playAudio } = useUpdateAudioPlayer();
+
+    const handlePlay = () => {
+        playAudio();
+    }
 
     return {
         artistAudioPlayerRef,
+        handlePlay,
     };
 }

@@ -2,6 +2,7 @@ import React, {
     createContext,
     useContext, 
     useRef,
+    useState,
 } from 'react';
 
 const AudioPlayerStateContext = createContext<any>({});
@@ -9,6 +10,7 @@ const AudioPlayerUpdateContext = createContext<any>({});
 
 function AudioPlayerContextProvider({ children }: { children: React.ReactNode }) {
     const artistAudioPlayerRef = useRef();
+    const [currentPlayingSongId, setCurrentPlayingSongId] = useState('');
 
     function changeAudioSource(source: string) {
         (artistAudioPlayerRef.current as any).src = source;
@@ -24,12 +26,16 @@ function AudioPlayerContextProvider({ children }: { children: React.ReactNode })
 
     return (
         <AudioPlayerStateContext.Provider 
-            value={{ artistAudioPlayerRef }}
+            value={{
+                artistAudioPlayerRef,
+                currentPlayingSongId,
+            }}
         >
             <AudioPlayerUpdateContext.Provider 
                 value={{
                     changeAudioSource,
                     playAudio,
+                    setCurrentPlayingSongId,
                     stopAudio,
                 }}
             >

@@ -14,6 +14,7 @@ type ClipsPageDisplayLayerProps = {
     audioSource: string;
     currentPlayingSongId: string;
     handlePlay: () => void;
+    onEndClearId: () => void;
 };
 
 function ClipsPage_DisplayLayer({
@@ -21,11 +22,13 @@ function ClipsPage_DisplayLayer({
     audioSource,
     currentPlayingSongId,
     handlePlay,
+    onEndClearId,
 }: ClipsPageDisplayLayerProps ) {
     return (
         <ClipsPageContainer container>
             <audio 
                 loop={false}
+                onEnded={onEndClearId}
                 ref={artistAudioPlayerRef}
                 src={CatchWreckMp3}
                 hidden 
@@ -33,7 +36,6 @@ function ClipsPage_DisplayLayer({
             <Grid className="top-clips-page-header" container>
                 <p 
                     className="top-clips-page-header-text"
-                    onClick={handlePlay}
                 >
                     Audio Clips 
                 </p>
@@ -44,10 +46,14 @@ function ClipsPage_DisplayLayer({
 }
 function useDataLayer() {
     const { artistAudioPlayerRef, audioSource, currentPlayingSongId } = useAudioPlayerRef();
-    const { playAudio } = useUpdateAudioPlayer();
+    const { playAudio, setCurrentPlayingSongId } = useUpdateAudioPlayer();
 
     const handlePlay = () => {
         playAudio();
+    }
+
+    const onEndClearId = () => {
+        setCurrentPlayingSongId('');
     }
 
     return {
@@ -55,5 +61,6 @@ function useDataLayer() {
         audioSource,
         currentPlayingSongId,
         handlePlay,
+        onEndClearId,
     };
 }

@@ -18,7 +18,6 @@ export const ClipsPageContainer = styled(Grid)`
         .top-clips-page-header-text {
             justify-self: center;
             color: ${colors.white};
-            cursor: pointer;
             font-size: 40px;
             font-weight: 900;
         }

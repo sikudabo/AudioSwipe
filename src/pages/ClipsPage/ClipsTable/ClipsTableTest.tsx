@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Checkbox from '@mui/material/Checkbox';
 import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF  } from '@mui/x-data-grid';
 import { colors } from '../../../components';
 import { 
@@ -37,6 +36,14 @@ const data = [
         likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
         name: 'The liberal truth',
         songMediaId: '1689809436712-song.mp3',
+    },
+    {
+        albumCover: '1689854702677-albumCover.jpg',
+        disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg'],
+        _id: 3,
+        likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
+        name: 'Tucker & Tim',
+        songMediaId: '1689854702706-song.mp3',
     },
 ];
 
@@ -84,7 +91,6 @@ export default function ClipsTableTest() {
                 getRowId={(row: any) => row._id}
                 rows={data}
                 rowHeight={100}
-                checkboxSelection
                 disableColumnSelector
                 disableRowSelectionOnClick
                 hideFooterSelectedRowCount

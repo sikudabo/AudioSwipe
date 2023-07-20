@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import { colors } from '../../../components';
 
 export const ClipsPageContainer = styled(Grid)`
-    background-color: ${colors.hotPink};
+    background-color: ${colors.primary};
     height: 100vh;
     padding-left: 5px;
     padding-right: 5px;
@@ -18,7 +18,8 @@ export const ClipsPageContainer = styled(Grid)`
         .top-clips-page-header-text {
             justify-self: center;
             color: ${colors.white};
-            font-size: 32px;
+            cursor: pointer;
+            font-size: 40px;
             font-weight: 900;
         }
     }

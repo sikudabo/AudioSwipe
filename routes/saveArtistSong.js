@@ -47,7 +47,10 @@ router.route('/api/saveSong').put(uploads.single('song'), async (req, res) => {
             genres, 
             name, 
             song, 
-            songArtistType } = req.body;
+            songArtistType 
+        } = req.body;
+
+    const splitGenres = genres.split(',');
 
     const utcTime = Date.now();
 
@@ -56,7 +59,7 @@ router.route('/api/saveSong').put(uploads.single('song'), async (req, res) => {
         albumCover,
         artistId,
         artistName,
-        genres,
+        genres: splitGenres,
         name,
         song,
         songArtistType,

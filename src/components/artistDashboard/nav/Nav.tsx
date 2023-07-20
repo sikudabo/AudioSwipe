@@ -80,7 +80,7 @@ function Nav_DisplayLayer({ artist, openNav, onCloseNav }: NavDisplayLayerProps)
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none">
           <StyledAccount>
-            <Avatar src={`http://localhost:2000/api/get-photo/${artist.avatar}`} sx={{ height: 50, width: 50 }} alt={artist.artistName} variant="circular" />
+            <Avatar src={`${process.env.REACT_APP_BASE_URI}api/get-photo/${artist.avatar}`} sx={{ height: 50, width: 50 }} alt={artist.artistName} variant="circular" />
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary', fontWeight: 900, }}>

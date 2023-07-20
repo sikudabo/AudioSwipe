@@ -220,7 +220,7 @@ function useDataLayer() {
 
 
         const fd = new FormData();
-        fd.append('albumCover', albumCover, 'albumCover.jpeg');
+        fd.append('albumCover', albumCover, 'album-cover.jpg');
 
        await postBinaryData({
             data: fd,

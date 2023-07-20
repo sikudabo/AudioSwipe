@@ -37,7 +37,7 @@ const storage = new GridFsStorage({
 const uploads = multer({ storage });
 
 router.route('/api/saveAlbumCover').put(uploads.single('albumCover'), async (req, res) => {
-    const { filename } = req.body;
+    const { filename } = req.file;
 
     try {
         res.status(200).json({ albumCover: filename, isSuccess: true });

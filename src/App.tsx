@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Backdrop from '@mui/material/Backdrop';
 import GlobalContextProviders from './GlobalContextProviders';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
@@ -47,6 +48,8 @@ type AppDisplayLayerProps = {
   isDarkMode: boolean;
   isLoading: boolean;
 };
+
+const queryClient = new QueryClient();
 
 function App() {
   return <App_DisplayLayer {...useDatalayer()} />;
@@ -121,29 +124,31 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
         <CustomStyledContainer>
           <CssBaseline />
           <Router>
-            <GlobalContextProviders>
-              <Backdrop
-                sx={{ color: colors.hotPink, zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={isLoading}
-                onClick={handleBackdropClose}
-              >
-                <CircularProgress color="error" />
-              </Backdrop>
-              <RouteWatch />
-              <ScrollToTop />
-              <ToastMessage duration={6000} />
-              <AudioSwipeAppBar />
-              <Routes>
-                <Route element={<LandingPage />} path="/" />
-                <Route element={<SignupArtistPage />} path="signup/artist" />
-                <Route element={<ArtistLoginPage />} path="login/artist" />
-                <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
-                  <Route element={<ArtistDashboardPage />} path="main" />
-                  <Route element={<ArtistSongUploadPage />} path="upload" />
-                  <Route element={<ClipsPage />} path="clips" />
-                </Route>
-              </Routes>
-            </GlobalContextProviders>
+            <QueryClientProvider client={queryClient}>
+              <GlobalContextProviders>
+                <Backdrop
+                  sx={{ color: colors.hotPink, zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={isLoading}
+                  onClick={handleBackdropClose}
+                >
+                  <CircularProgress color="error" />
+                </Backdrop>
+                <RouteWatch />
+                <ScrollToTop />
+                <ToastMessage duration={6000} />
+                <AudioSwipeAppBar />
+                <Routes>
+                  <Route element={<LandingPage />} path="/" />
+                  <Route element={<SignupArtistPage />} path="signup/artist" />
+                  <Route element={<ArtistLoginPage />} path="login/artist" />
+                  <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
+                    <Route element={<ArtistDashboardPage />} path="main" />
+                    <Route element={<ArtistSongUploadPage />} path="upload" />
+                    <Route element={<ClipsPage />} path="clips" />
+                  </Route>
+                </Routes>
+              </GlobalContextProviders>
+            </QueryClientProvider>
           </Router>
         </CustomStyledContainer >
       </ThemeProvider>

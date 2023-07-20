@@ -9,7 +9,6 @@ export default function RouteWatch() {
     const { isLoggedIn } = typeof artist !== 'undefined' ? artist as any : { isLoggedIn: false };
 
     useEffect(() => {
-        console.log('The path name is:', pathname);
         if (!isLoggedIn && pathname === '/artist/dashboard/main') {
             navigate('/');
         } else if (isLoggedIn && pathname === '/') {

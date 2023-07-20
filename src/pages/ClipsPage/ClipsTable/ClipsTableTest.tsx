@@ -7,6 +7,7 @@ import {
     ClipsTableDisLikesCell,
     ClipsTableLikesCell,
     ClipsTableNameCell,
+    ClipsTablePlayStopButtonCell,
 } from './components/cells';
 
 const ClipsTableContainer = styled.div`
@@ -60,6 +61,13 @@ const columns = [
         headerName: 'Dislikes',
         minWidth: 200,
         renderCell: ClipsTableDisLikesCell,
+    },
+    {
+        description: 'Play your audio file.',
+        field: 'songMediaId',
+        headerName: 'Play',
+        minWidth: 200,
+        renderCell: ClipsTablePlayStopButtonCell,
     },
 ];
 

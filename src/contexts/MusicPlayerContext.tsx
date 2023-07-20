@@ -11,6 +11,7 @@ const AudioPlayerUpdateContext = createContext<any>({});
 function AudioPlayerContextProvider({ children }: { children: React.ReactNode }) {
     const artistAudioPlayerRef = useRef();
     const [currentPlayingSongId, setCurrentPlayingSongId] = useState('');
+    const [audioSource, setAudioSource] = useState('');
 
     function changeAudioSource(source: string) {
         (artistAudioPlayerRef.current as any).src = source;
@@ -21,13 +22,15 @@ function AudioPlayerContextProvider({ children }: { children: React.ReactNode })
     }
 
     function stopAudio() {
-        (artistAudioPlayerRef as any).current.stop();
+        (artistAudioPlayerRef as any).current.pause();
+        (artistAudioPlayerRef as any).current.currenTime = 0;
     }
 
     return (
         <AudioPlayerStateContext.Provider 
             value={{
                 artistAudioPlayerRef,
+                audioSource,
                 currentPlayingSongId,
             }}
         >
@@ -35,6 +38,7 @@ function AudioPlayerContextProvider({ children }: { children: React.ReactNode })
                 value={{
                     changeAudioSource,
                     playAudio,
+                    setAudioSource,
                     setCurrentPlayingSongId,
                     stopAudio,
                 }}

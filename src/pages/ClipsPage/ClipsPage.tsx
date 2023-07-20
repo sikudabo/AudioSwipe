@@ -11,11 +11,15 @@ export default function ClipsPage() {
 
 type ClipsPageDisplayLayerProps = {
     artistAudioPlayerRef: any;
+    audioSource: string;
+    currentPlayingSongId: string;
     handlePlay: () => void;
 };
 
 function ClipsPage_DisplayLayer({
     artistAudioPlayerRef,
+    audioSource,
+    currentPlayingSongId,
     handlePlay,
 }: ClipsPageDisplayLayerProps ) {
     return (
@@ -23,7 +27,7 @@ function ClipsPage_DisplayLayer({
             <audio 
                 loop={false}
                 ref={artistAudioPlayerRef}
-                src={`${process.env.REACT_APP_BASE_URI}api/get-audio/1689812059779-song.mp3`}
+                src={CatchWreckMp3}
                 hidden 
             />
             <Grid className="top-clips-page-header" container>
@@ -39,7 +43,7 @@ function ClipsPage_DisplayLayer({
     );
 }
 function useDataLayer() {
-    const { artistAudioPlayerRef } = useAudioPlayerRef();
+    const { artistAudioPlayerRef, audioSource, currentPlayingSongId } = useAudioPlayerRef();
     const { playAudio } = useUpdateAudioPlayer();
 
     const handlePlay = () => {
@@ -48,6 +52,8 @@ function useDataLayer() {
 
     return {
         artistAudioPlayerRef,
+        audioSource,
+        currentPlayingSongId,
         handlePlay,
     };
 }

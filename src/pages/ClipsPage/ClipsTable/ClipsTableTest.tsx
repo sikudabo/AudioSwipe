@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF  } from '@mui/x-data-grid';
 import { colors } from '../../../components';
@@ -10,6 +10,7 @@ import {
 } from './components/cells';
 import { SongTableRowType } from '../typings/songTableRowType';
 import useFetchArtistSongs from './hooks/useFetchArtistSongs';
+import useFetchTestData from './hooks/useFetchTestData';
 
 const ClipsTableContainer = styled.div`
     background-color: ${colors.white};
@@ -123,16 +124,15 @@ function ClipsTableTest_DisplayLayer({
 }
 
 function useDataLayer() {
-    const { data,isLoading } = useFetchArtistSongs();
-    const [artistSongs, setArtistSongs] = useState(data);
+    const { data: artistSongs = [], error, isLoading, status, isFetching } = useFetchArtistSongs();
+    const { data, isLoading: isTestLoading } = useFetchTestData();
 
-    useEffect(() => {
-        setArtistSongs(data);
-        console.log('The artist songs are:', artistSongs);
-    }, [isLoading]);
+    console.log('The artistSongs is:', artistSongs);
+
+    // console.log('The test data is:', data);
 
     return {
-        artistSongs: typeof artistSongs !== 'undefined' ? artistSongs : [],
+        artistSongs,
         isLoading,
     };
 }

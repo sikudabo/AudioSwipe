@@ -5,7 +5,7 @@ type GetDataProps = {
 };
 
 export default async function getData({ url }: GetDataProps) {
-    return axios({
+    return await axios({
         method: 'GET',
         url: `${process.env.REACT_APP_BASE_URI}${url}`,
     }).then(response => {

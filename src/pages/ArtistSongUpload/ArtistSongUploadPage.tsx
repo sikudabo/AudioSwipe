@@ -254,7 +254,6 @@ function useDataLayer() {
                 url: 'api/saveSong',
             }).then((response) => {
                 const { isSuccess, message, updatedArtist } = response;
-                console.log('The response is:', response);
                 if (!isSuccess) {
                     showToastMessage({
                         isError: true,

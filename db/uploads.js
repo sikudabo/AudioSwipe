@@ -8,8 +8,6 @@ const dotenv = require('dotenv').config();
 
 const dbUri = process.env.DB_URI;
 
-console.log('The dbUri is:', dbUri);
-
 var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 

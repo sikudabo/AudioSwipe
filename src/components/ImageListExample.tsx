@@ -51,7 +51,6 @@ const images: any = [{
 export default function ImageListExample() {
     const arr = ['1', '1', '2', '3', '4'];
     const tester = arr.find(element => element === '1');
-    console.log('The tester result is:', tester);
     return (
         <Hidden only={['lg', 'xl']}>
         <ImageList cols={2} gap={8} sx={{ minHeight: 450, margin: 'auto', overFlow: 'scroll', width: 500, padding: 0 }}>

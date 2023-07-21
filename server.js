@@ -29,6 +29,7 @@ const {
     SaveArtistSong,
     SaveNewArtist,
     SaveNewFan,
+    TestRoute,
 } = require('./routes');
 
 startDb();
@@ -68,6 +69,7 @@ app.use(SaveAlbumCover);
 app.use(SaveArtistSong);
 app.use(SaveNewArtist);
 app.use(SaveNewFan);
+app.use(TestRoute);
 
 app.use(serveStatic(path.join(__dirname, 'build')));
 

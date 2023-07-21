@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from '@emotion/styled';
-import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF  } from '@mui/x-data-grid';
+import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF, GridRowApi, GridRowId, GridRowParams  } from '@mui/x-data-grid';
 import { colors } from '../../../components';
 import { 
     ClipsTableDisLikesCell,
@@ -8,9 +8,16 @@ import {
     ClipsTableNameCell,
     ClipsTablePlayStopButtonCell,
 } from './components/cells';
-import { SongTableRowType } from '../typings/songTableRowType';
+import { SongDataType, SongTableRowType } from '../typings/songTableRowType';
 import useFetchArtistSongs from './hooks/useFetchArtistSongs';
 import useFetchTestData from './hooks/useFetchTestData';
+import axios from 'axios';
+import { useUserData } from '../../../hooks';
+import {
+    MaterialReactTable,
+    type MRT_ColumnDef,
+
+} from 'material-react-table';
 
 const ClipsTableContainer = styled.div`
     background-color: ${colors.white};
@@ -24,15 +31,15 @@ const ClipsTableContainer = styled.div`
 `;
 
 type ClipsTableDisplayLayerProps = {
-    artistSongs: Array<SongTableRowType>;
+    artistSongs: any;
     isLoading: boolean;
 }
 
-const data = [
+const data: SongDataType[] = [
     {
         albumCover: '1689809436654-albumCover.jpeg',
         disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg', 'kdnakgkdkagmk', 'dakdmgakgakgka', 'kdsmgaksdgmagmkla', 'kdgakmkgmkamgkgak'],
-        _id: 1,
+        _id: "1",
         likes: ['jdnjagnoagdo', 'jkdnoagndagdg', 'dkadokdglng'],
         name: 'Down on donors',
         songMediaId: '1689812059779-song.mp3',
@@ -40,7 +47,7 @@ const data = [
     {
         albumCover: '1689812059752-albumCover.jpg',
         disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg'],
-        _id: 2,
+        _id: "2",
         likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
         name: 'The liberal truth',
         songMediaId: '1689809436712-song.mp3',
@@ -48,12 +55,34 @@ const data = [
     {
         albumCover: '1689854702677-albumCover.jpg',
         disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg'],
-        _id: 3,
+        _id: "3",
         likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
         name: 'Tucker & Tim',
         songMediaId: '1689854702706-song.mp3',
     },
 ];
+
+const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
+    () => [
+        {
+            accessorKey: 'name',
+            header: 'Clip',
+        },
+        {
+            accessorKey: 'likes',
+            header: 'Likes',
+        },
+        {
+            accessorKey: 'disLikes',
+            header: 'Dislikes',
+        },
+        {
+            accessorKey: 'songMediaId',
+            header: 'Play',
+        },
+    ],
+    []
+);
 
 const columns = [
     {
@@ -107,14 +136,17 @@ function ClipsTableTest_DisplayLayer({
     artistSongs,
     isLoading,
 }: ClipsTableDisplayLayerProps) {
+    console.log(artistSongs);
     return (
         <ClipsTableContainer>
             <DataGrid 
                 columns={columns}
                 getRowId={(row: any) => row._id}
                 loading={isLoading}
-                rows={artistSongs}
-                rowHeight={100}
+                paginationMode="server"
+                rows={data}
+                autoHeight
+                autoPageSize
                 disableColumnSelector
                 disableRowSelectionOnClick
                 hideFooterSelectedRowCount
@@ -124,12 +156,7 @@ function ClipsTableTest_DisplayLayer({
 }
 
 function useDataLayer() {
-    const { data: artistSongs = [], error, isLoading, status, isFetching } = useFetchArtistSongs();
-    const { data, isLoading: isTestLoading } = useFetchTestData();
-
-    console.log('The artistSongs is:', artistSongs);
-
-    // console.log('The test data is:', data);
+    const { data: artistSongs = [], isLoading } = useFetchArtistSongs();
 
     return {
         artistSongs,

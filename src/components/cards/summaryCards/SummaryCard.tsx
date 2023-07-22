@@ -24,7 +24,6 @@ const StyledIcon = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function SummaryCard({ bgColor = colors.primary, title, total, icon, color = 'primary', sx, ...other }: any) {
-    console.log('Other is:', sx);
   return (
     <Card
       sx={{

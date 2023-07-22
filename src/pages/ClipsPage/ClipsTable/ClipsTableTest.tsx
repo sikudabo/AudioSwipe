@@ -16,6 +16,9 @@ import { useUserData } from '../../../hooks';
 import {
     MaterialReactTable,
     type MRT_ColumnDef,
+    type MRT_ColumnFiltersState,
+    type MRT_PaginationState,
+    type MRT_SortingState,
 
 } from 'material-react-table';
 
@@ -32,7 +35,11 @@ const ClipsTableContainer = styled.div`
 
 type ClipsTableDisplayLayerProps = {
     artistSongs: any;
+    isError: boolean;
+    isFetching: boolean;
     isLoading: boolean;
+    name: string;
+    newColumns: MRT_ColumnDef<SongDataType>[];
 }
 
 const data: SongDataType[] = [
@@ -62,7 +69,7 @@ const data: SongDataType[] = [
     },
 ];
 
-const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
+/* const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
     () => [
         {
             accessorKey: 'name',
@@ -82,7 +89,7 @@ const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
         },
     ],
     []
-);
+); */
 
 const columns = [
     {
@@ -134,9 +141,24 @@ export default function ClipsTableTest() {
 
 function ClipsTableTest_DisplayLayer({
     artistSongs,
+    isError,
+    isFetching,
     isLoading,
+    name,
+    newColumns,
 }: ClipsTableDisplayLayerProps) {
-    console.log(artistSongs);
+    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
+        [],
+    );
+    const [globalFilter, setGlobalFilter] = useState('');
+    const [sorting, setSorting] = useState<MRT_SortingState>([]);
+    const [pagination, setPagination] = useState<MRT_PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    });
+
+    console.log('The songs are:', artistSongs);
+
     return (
         <ClipsTableContainer>
             <DataGrid 
@@ -144,7 +166,7 @@ function ClipsTableTest_DisplayLayer({
                 getRowId={(row: any) => row._id}
                 loading={isLoading}
                 paginationMode="server"
-                rows={data}
+                rows={artistSongs}
                 autoHeight
                 autoPageSize
                 disableColumnSelector
@@ -156,10 +178,36 @@ function ClipsTableTest_DisplayLayer({
 }
 
 function useDataLayer() {
-    const { data: artistSongs = [], isLoading } = useFetchArtistSongs();
+    const { data: artistSongs = [], isError, isFetching, isLoading } = useFetchArtistSongs();
+    const { data: nameData } = useFetchTestData();
+    const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
+        () => [
+            {
+                accessorKey: 'name',
+                header: 'Clip',
+            },
+            {
+                accessorKey: 'likes',
+                header: 'Likes',
+            },
+            {
+                accessorKey: 'disLikes',
+                header: 'Dislikes',
+            },
+            {
+                accessorKey: 'songMediaId',
+                header: 'Play',
+            },
+        ],
+        []
+    );
 
     return {
         artistSongs,
+        isError,
+        isFetching,
         isLoading,
+        name: "Jimmy",
+        newColumns,
     };
 }

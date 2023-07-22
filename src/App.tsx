@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Backdrop from '@mui/material/Backdrop';
 import GlobalContextProviders from './GlobalContextProviders';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';
@@ -125,6 +126,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
           <CssBaseline />
           <Router>
             <QueryClientProvider client={queryClient}>
+              <ReactQueryDevtools />
               <GlobalContextProviders>
                 <Backdrop
                   sx={{ color: colors.hotPink, zIndex: (theme) => theme.zIndex.drawer + 1 }}

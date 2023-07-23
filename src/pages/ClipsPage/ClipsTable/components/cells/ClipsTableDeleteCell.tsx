@@ -30,8 +30,6 @@ function ClipsTableDeleteCell_DisplayLayer({ handleDelete }: ClipsTableDeleteCel
     );
 }
 
-
-// Skeleton that will have the delete functionality in it. 
 function useDataLayer(_id: string, songMediaId: string) {
     const queryClient = useQueryClient();
     const { setIsLoading } = useIsFormLoading();

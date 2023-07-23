@@ -577,7 +577,6 @@ function useDataLayer() {
     const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
     const [artistType, setArtistType] = useState('musician');
     const [avatar, setAvatar] = useState(null);
-    const { artist } = useUserData();
 
     async function handleSave(data: ArtistType) {
         const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
@@ -746,6 +745,7 @@ function useDataLayer() {
             data: formData,
         }).then(response => {
             const { isSuccess, message, user } = response;
+            let artist = user;
 
             if (!isSuccess) {
                 showToastMessage({
@@ -755,9 +755,8 @@ function useDataLayer() {
                 setIsLoading(false);
                 return;
             }
-            setArtist(user);
-            console.log('The artist is:', artist);
             artist.isLoggedIn = true;
+            setArtist(user);
             showToastMessage({
                 isError: false,
                 message: 'Welcome to AudioSwipe!',

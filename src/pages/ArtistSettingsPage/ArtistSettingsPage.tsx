@@ -30,7 +30,7 @@ import {
 import { ArtistSettingsPageContainer } from './styles/ArtistSettingsPageContainer';
 import { AudioSwipeButton } from '../../components';
 import { ArtistType } from '../../typings';
-import { useIsFormLoading } from '../../utils/forms';
+import { useHandleToastMessage, useIsFormLoading } from '../../utils/forms';
 import { useUserData } from '../../hooks';
 import { checkValidEmail, checkValidUrl, postData, postBinaryData, resizeImage } from '../../utils/helpers';
 import { genres } from '../../utils/constants';
@@ -442,6 +442,7 @@ function useDataLayer() {
     const [newSoundcloudLink, setNewSoundcloudLink] = useState(soundcloudLink);
     const [newYoutubeLink, setNewYoutubeLink] = useState(youtubeLink);
     const [newGenres, setNewGenres] = useState(genres);
+    const { showToastMessage } = useHandleToastMessage();
 
     function handleArtistTypeChange(e: { target: { value: string }}) {
         const { value } = e.target;
@@ -460,7 +461,46 @@ function useDataLayer() {
     }
 
     function handleSave(data: ArtistType) {
-        console.log('The data is:', data);
+        const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
+
+        if(spotifyLink?.trim()) {
+            if (!checkValidUrl(spotifyLink.trim())) {
+                showToastMessage({
+                    isError: true,
+                    message: 'Your Spotify link must be a valid URL',
+                }); 
+                return;
+            }
+        } 
+
+        if(soundcloudLink?.trim()) {
+            if (!checkValidUrl(soundcloudLink?.trim())) {
+                showToastMessage({
+                    isError: true,
+                    message: 'Your Soundclound link must be a valid url.',
+                });
+                return;
+            }
+        }
+
+        if (youtubeLink?.trim()) {
+            if (!checkValidUrl(youtubeLink)) {
+                showToastMessage({
+                    isError: true,
+                    message: 'Your YouTube link must be a valid URL.',
+                });
+                return;
+            }
+        }
+
+        if (newPhoneNumber.length < 11) {
+            showToastMessage({
+                isError: true,
+                message: 'You must enter a valid phone number.',
+            });
+
+            return;
+        }
     }
 
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
 import { useForm } from 'react-hook-form';
@@ -57,6 +57,7 @@ type ArtistSettingsPageDisplayLayerProps = {
     newState: string;
     newUsername: string;
     newYoutubeLink?: string;
+    setNewUsername: React.Dispatch<any>;
 };
 
 function ArtistSettingsPage_DisplayLayer({
@@ -76,6 +77,7 @@ function ArtistSettingsPage_DisplayLayer({
     newState,
     newUsername,
     newYoutubeLink,
+    setNewUsername,
 }: ArtistSettingsPageDisplayLayerProps) {
     const { handleSubmit, register, setValue, watch } = useForm<ArtistType>({
         defaultValues: {
@@ -94,7 +96,19 @@ function ArtistSettingsPage_DisplayLayer({
         },
         mode: 'onChange',
     });
-    
+
+    const currentUsername = watch('username');
+    const currentBio = watch('bio');
+    const [bioLength, setBioLength] = useState(currentBio?.length);
+
+    useMemo(() => {
+        setValue('username', currentUsername?.trim());
+    }, [currentUsername, setValue])
+
+    useMemo(() => {
+        setBioLength(currentBio?.length)
+    }, [currentBio]);
+
     return (
         <ArtistSettingsPageContainer>
             <div className="top-text-container">
@@ -120,9 +134,9 @@ function ArtistSettingsPage_DisplayLayer({
                                 helperText="Required"
                                 label="First Name"
                                 variant="outlined"
-                                value={newFirstName}
                                 fullWidth
                                 required
+                                {...register('firstName', { required: true })}
                             />
                         </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -132,9 +146,11 @@ function ArtistSettingsPage_DisplayLayer({
                                     helperText="Required"
                                     label="Last Name"
                                     variant="outlined"
-                                    value={newLastName}
                                     fullWidth
                                     required
+                                    {...register('lastName', { 
+                                        required: 'This field was required',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -144,9 +160,11 @@ function ArtistSettingsPage_DisplayLayer({
                                     helperText="Required"
                                     label="Stage Name"
                                     variant="outlined"
-                                    value={newArtistName}
                                     fullWidth
                                     required
+                                    {...register('artistName', { 
+                                        required: 'This field was required',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -156,9 +174,11 @@ function ArtistSettingsPage_DisplayLayer({
                                     helperText="Required"
                                     label="username"
                                     variant="outlined"
-                                    value={newUsername}
                                     fullWidth
                                     required
+                                    {...register('username', { 
+                                        required: 'This field was required',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="last-name-grid" xs={12}>
@@ -169,25 +189,28 @@ function ArtistSettingsPage_DisplayLayer({
                                     inputProps={{ minLength: 6 }}
                                     label="password"
                                     type="password"
-                                    variant="outlined"
                                     value={newPassword}
                                     fullWidth
                                     required
+                                    {...register('password', { 
+                                        required: 'This field was required',
+                                        validate: v => v.trim().length >= 6,
+                                    })}
                                 />
                             </Grid>
                             <Grid className="bio-grid" xs={12}>
                                 <TextField
                                     aria-label="Bio"
                                     color="info"
-                                    helperText="Optional"
+                                    helperText={`Optional (${bioLength}/250)`}
                                     inputProps={{ maxLength: 250 }}
                                     label="Bio"
                                     maxRows={4}
                                     minRows={4}
                                     variant="outlined"
-                                    value={newBio}
                                     fullWidth
                                     multiline
+                                    {...register('bio')}
                                 />
                             </Grid>
                             <Grid className="avatar-grid" xs={12}>
@@ -205,9 +228,11 @@ function ArtistSettingsPage_DisplayLayer({
                                     label="Email"
                                     type="email"
                                     variant="outlined"
-                                    value={newEmail}
                                     fullWidth
                                     required
+                                    {...register('email', { 
+                                        required: 'This field was required',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -229,9 +254,11 @@ function ArtistSettingsPage_DisplayLayer({
                                     helperText="Required"
                                     label="City"
                                     variant="outlined"
-                                    value={newCity}
                                     fullWidth
                                     required
+                                    {...register('city', { 
+                                        required: 'This field was required',
+                                    })}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -295,10 +322,10 @@ function ArtistSettingsPage_DisplayLayer({
                                     color="info"
                                     helperText="Spotify URL (Optional)"
                                     label="Spotify URL"
-                                    value={newSpotifyLink}
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('spotifyLink')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -307,10 +334,10 @@ function ArtistSettingsPage_DisplayLayer({
                                     color="info"
                                     helperText="YouTube URL (Optional)"
                                     label="YouTube URL"
-                                    value={newYoutubeLink}
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('youtubeLink')}
                                 />
                             </Grid>
                             <Grid className="first-name-grid" xs={12}>
@@ -319,10 +346,10 @@ function ArtistSettingsPage_DisplayLayer({
                                     color="info"
                                     helperText="SoundCloud URL (Optional)"
                                     label="SoundCloud URL"
-                                    value={newSoundcloudLink}
                                     variant="outlined"
                                     fullWidth
                                     required
+                                    {...register('soundcloudLink')}
                                 />
                             </Grid>
                             <Grid className="artist-type-grid" xs={12}>
@@ -401,5 +428,6 @@ function useDataLayer() {
         newState,
         newUsername,
         newYoutubeLink,
+        setNewUsername,
     };
 }

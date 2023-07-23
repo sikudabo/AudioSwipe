@@ -107,10 +107,16 @@ function SignupArtistPageDisplayLayer({
     });
 
     const currentUsername = watch('username');
+    const currentBio = watch('bio');
+    const [bioLength, setBioLength] = useState(currentBio?.length);
 
     useMemo(() => {
         setValue('username', currentUsername?.trim());
     }, [currentUsername, setValue]);
+
+    useMemo(() => {
+        setBioLength(currentBio?.length)
+    }, [currentBio]);
 
     const steps = [
         "Peronsal Information",
@@ -253,7 +259,6 @@ function SignupArtistPageDisplayLayer({
                                     required
                                     {...register('lastName', { 
                                     required: 'This field was required',
-                                    validate: v => v.trim() !== 'joey',
                                     })}
                                 />
                             </Grid>
@@ -302,7 +307,7 @@ function SignupArtistPageDisplayLayer({
                                 <TextField
                                     aria-label="Bio"
                                     color="secondary"
-                                    helperText="Optional"
+                                    helperText={`Optional (${bioLength}/250)`}
                                     inputProps={{ maxLength: 250 }}
                                     label="Bio"
                                     maxRows={4}

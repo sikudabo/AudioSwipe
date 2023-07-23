@@ -6,6 +6,7 @@ import { deleteData } from '../../../../../utils/helpers';
 import { SongTableRowType } from '../../../typings/songTableRowType';
 import { useHandleToastMessage } from '../../../../../utils';
 import { useIsFormLoading } from '../../../../../utils/forms';
+import { useUpdateAudioPlayer } from '../../../../../contexts/MusicPlayerContext';
 
 export default function ClipsTableDeleteCell({ row }: SongTableRowType) {
     const { _id, songMediaId } = row;
@@ -35,6 +36,7 @@ function useDataLayer(_id: string, songMediaId: string) {
     const queryClient = useQueryClient();
     const { setIsLoading } = useIsFormLoading();
     const { showToastMessage } = useHandleToastMessage();
+    const { stopAudio } = useUpdateAudioPlayer();
 
     async function handleDelete() {
         setIsLoading(true);
@@ -51,6 +53,7 @@ function useDataLayer(_id: string, songMediaId: string) {
                     isError: false,
                     message,
                 });
+                stopAudio();
                 return;
             }
 

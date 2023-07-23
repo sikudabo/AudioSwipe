@@ -33,7 +33,7 @@ const data = [
 export default function useFetchArtistSongs() {
     const { artist } = useUserData();
     const { _id } = artist;
-    return useQuery(['fetchArtistSongs', _id], async () => {
+    return useQuery(['fetchArtistSongs'], async () => {
         const artistSongsResponse = await axios({
             method: 'GET',
             url: `${process.env.REACT_APP_BASE_URI}api/get-artist-audio/${_id}`,
@@ -42,6 +42,7 @@ export default function useFetchArtistSongs() {
         });
         return artistSongsResponse;
     },  {
+            refetchInterval: 1000,
             refetchIntervalInBackground: true,
         },
     );

@@ -32,7 +32,7 @@ import { AudioSwipeButton } from '../../components';
 import { ArtistType } from '../../typings';
 import { useIsFormLoading } from '../../utils/forms';
 import { useUserData } from '../../hooks';
-import { checkValidEmail, checkValidUrl, postData, postBinaryData } from '../../utils/helpers';
+import { checkValidEmail, checkValidUrl, postData, postBinaryData, resizeImage } from '../../utils/helpers';
 import { genres } from '../../utils/constants';
 import { states } from '../../utils/constants';
 
@@ -41,9 +41,23 @@ export default function ArtistSettingsPage() {
 }
 
 type ArtistSettingsPageDisplayLayerProps = {
+    handleArtistTypeChange: (e: {
+        target: {
+            value: string;
+        };
+    }) => void;
+    handleAvatarChange: (e: {
+        target: {
+            files: any;
+        };
+    }) => Promise<void>;
+    handleGenreSelectionChange: (e: {
+        target: {
+            value: any;
+        };
+    }) => void;
     newArtistName: string;
     newArtistType: string;
-    newAvatar: string;
     newBio: string;
     newCity: string;
     newEmail: string;
@@ -57,13 +71,16 @@ type ArtistSettingsPageDisplayLayerProps = {
     newState: string;
     newUsername: string;
     newYoutubeLink?: string;
-    setNewUsername: React.Dispatch<any>;
+    setNewPhoneNumber: React.Dispatch<any>
+    setNewState: React.Dispatch<any>;
 };
 
 function ArtistSettingsPage_DisplayLayer({
+    handleArtistTypeChange,
+    handleAvatarChange,
+    handleGenreSelectionChange,
     newArtistName,
     newArtistType,
-    newAvatar,
     newBio,
     newCity,
     newEmail,
@@ -77,7 +94,8 @@ function ArtistSettingsPage_DisplayLayer({
     newState,
     newUsername,
     newYoutubeLink,
-    setNewUsername,
+    setNewPhoneNumber,
+    setNewState,
 }: ArtistSettingsPageDisplayLayerProps) {
     const { handleSubmit, register, setValue, watch } = useForm<ArtistType>({
         defaultValues: {
@@ -402,7 +420,7 @@ function useDataLayer() {
     const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber);
     const [newCity, setNewCity] = useState(city);
     const [newState, setNewState] = useState(state);
-    const [newAvatar, setNewAvatar] = useState(avatar);
+    const [newAvatar, setNewAvatar] = useState(null);
     const [newArtistType, setNewArtistType] = useState(artistType);
     const [newBio, setNewBio] = useState(bio);
     const [newArtistName, setNewArtistName] = useState(artistName);
@@ -410,11 +428,29 @@ function useDataLayer() {
     const [newSoundcloudLink, setNewSoundcloudLink] = useState(soundcloudLink);
     const [newYoutubeLink, setNewYoutubeLink] = useState(youtubeLink);
     const [newGenres, setNewGenres] = useState(genres);
+
+    function handleArtistTypeChange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setNewArtistType(value);
+    }
+
+    async function handleAvatarChange(e: { target: { files: any }}) {
+        const file = e.target.files[0];
+        const resizedAvatar = await resizeImage(file);
+        setNewAvatar(resizedAvatar as any);
+    }
+
+    function handleGenreSelectionChange(e: {target: { value: any }}) {
+        const { value: values } = e.target;
+        setNewGenres(values);
+    }
     
     return {
+        handleArtistTypeChange,
+        handleAvatarChange,
+        handleGenreSelectionChange,
         newArtistName,
         newArtistType,
-        newAvatar,
         newBio,
         newCity,
         newEmail,
@@ -428,6 +464,7 @@ function useDataLayer() {
         newState,
         newUsername,
         newYoutubeLink,
-        setNewUsername,
+        setNewPhoneNumber,
+        setNewState,
     };
 }

@@ -56,6 +56,11 @@ type ArtistSettingsPageDisplayLayerProps = {
             value: any;
         };
     }) => void;
+    handleSelectedArtistStatechange: (e: {
+        target: {
+            value: string;
+        };
+    }) => void;
     newArtistName: string;
     newArtistType: string;
     newBio: string;
@@ -79,6 +84,7 @@ function ArtistSettingsPage_DisplayLayer({
     handleArtistTypeChange,
     handleAvatarChange,
     handleGenreSelectionChange,
+    handleSelectedArtistStatechange,
     newArtistName,
     newArtistType,
     newBio,
@@ -233,7 +239,7 @@ function ArtistSettingsPage_DisplayLayer({
                             </Grid>
                             <Grid className="avatar-grid" xs={12}>
                                 <IconButton color="info" aria-label="upload picture" component="label">
-                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" type="file" hidden required />
+                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" onChange={handleAvatarChange} type="file" hidden required />
                                     <PhotoCameraIcon />
                                 </IconButton>
                                 Avatar
@@ -262,6 +268,7 @@ function ArtistSettingsPage_DisplayLayer({
                                         label: "Phone number (Required)",
                                         required: true,
                                     }}
+                                    onChange={(e: string) => setNewPhoneNumber(e)}
                                     value={newPhoneNumber}
                                 />
                             </Grid>
@@ -283,6 +290,7 @@ function ArtistSettingsPage_DisplayLayer({
                                 <Select
                                     color="info"
                                     defaultValue={states[0]}
+                                    onChange={handleSelectedArtistStatechange}
                                     value={newState}   
                                     fullWidth       
                                 >
@@ -307,6 +315,7 @@ function ArtistSettingsPage_DisplayLayer({
                                         color="info"
                                         id="artist-genres"
                                         input={<OutlinedInput />}
+                                        onChange={handleGenreSelectionChange}
                                         placeholder="Genre"
                                         renderValue={(selected) => (
                                             <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
@@ -377,6 +386,8 @@ function ArtistSettingsPage_DisplayLayer({
                                     </FormLabel>
                                     <RadioGroup
                                         aria-labelledby="demo-controlled-radio-buttons-group"
+                                        onChange={handleArtistTypeChange}
+                                        value={newArtistType}
                                     >
                                         <FormControlLabel color="info" value="author" control={<Radio color="info" />} label="Author" />
                                         <FormControlLabel color="info" value="musician" control={<Radio color="info" />} label="Musician" />
@@ -440,6 +451,11 @@ function useDataLayer() {
         setNewAvatar(resizedAvatar as any);
     }
 
+    function handleSelectedArtistStatechange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setNewState(value);
+    }
+
     function handleGenreSelectionChange(e: {target: { value: any }}) {
         const { value: values } = e.target;
         setNewGenres(values);
@@ -449,6 +465,7 @@ function useDataLayer() {
         handleArtistTypeChange,
         handleAvatarChange,
         handleGenreSelectionChange,
+        handleSelectedArtistStatechange,
         newArtistName,
         newArtistType,
         newBio,

@@ -1,5 +1,6 @@
-import postData from "./postData";
+import deleteData from "./deleteData";
 import getData from "./getData";
+import postData from "./postData";
 import { checkValidAge } from './checkValidAge';
 import { checkValidEmail } from "./checkValidEmail";
 import { checkValidUrl } from './checkValidUrl';
@@ -13,6 +14,7 @@ export {
     checkValidAge,
     checkValidEmail,
     checkValidUrl,
+    deleteData,
     deviceBreakPointsMaxWidth,
     deviceBreakPointsMinWidth,
     formatUserBirthday,

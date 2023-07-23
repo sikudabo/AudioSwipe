@@ -4,8 +4,8 @@ import IconButton from '@mui/material/IconButton';
 import { SongTableRowType } from '../../../typings/songTableRowType';
 
 export default function ClipsTableDeleteCell({ row }: SongTableRowType) {
-    const { _id } = row;
-    return <ClipsTableDeleteCell_DisplayLayer {...useDataLayer(_id)} />;
+    const { _id, songMediaId } = row;
+    return <ClipsTableDeleteCell_DisplayLayer {...useDataLayer(_id, songMediaId)} />;
 }
 
 function ClipsTableDeleteCell_DisplayLayer() {
@@ -22,8 +22,11 @@ function ClipsTableDeleteCell_DisplayLayer() {
 
 
 // Skeleton that will have the delete functionality in it. 
-function useDataLayer(_id: string) {
-    console.log('The song id is:', _id);
+function useDataLayer(_id: string, songMediaId: string) {
+    
+    function handleDelete() {
+        
+    }
     return {
 
     }

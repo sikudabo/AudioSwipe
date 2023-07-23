@@ -165,5 +165,10 @@ export const ArtistSettingsPageContainer = styled(Grid)`
                 }
             }
         }
+
+        .submit-button-container {
+            padding-top: 20px;
+            width: 100%;
+        }
     }
 `;

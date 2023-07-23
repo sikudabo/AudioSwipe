@@ -56,6 +56,7 @@ type ArtistSettingsPageDisplayLayerProps = {
             value: any;
         };
     }) => void;
+    handleSave: (data: ArtistType) => void;
     handleSelectedArtistStatechange: (e: {
         target: {
             value: string;
@@ -84,6 +85,7 @@ function ArtistSettingsPage_DisplayLayer({
     handleArtistTypeChange,
     handleAvatarChange,
     handleGenreSelectionChange,
+    handleSave,
     handleSelectedArtistStatechange,
     newArtistName,
     newArtistType,
@@ -150,7 +152,7 @@ function ArtistSettingsPage_DisplayLayer({
                             Update 
                         </div>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit(handleSave)}>
                         <Grid className="first-name-grid" xs={12}>
                             <TextField
                                 aria-label="First Name"
@@ -213,7 +215,6 @@ function ArtistSettingsPage_DisplayLayer({
                                     inputProps={{ minLength: 6 }}
                                     label="password"
                                     type="password"
-                                    value={newPassword}
                                     fullWidth
                                     required
                                     {...register('password', { 
@@ -239,7 +240,7 @@ function ArtistSettingsPage_DisplayLayer({
                             </Grid>
                             <Grid className="avatar-grid" xs={12}>
                                 <IconButton color="info" aria-label="upload picture" component="label">
-                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" name="avatar" onChange={handleAvatarChange} type="file" hidden required />
+                                    <input aria-label="Artist Profile Picture" accept="image/jpeg, image/jpg, image/png" onChange={handleAvatarChange} type="file" hidden />
                                     <PhotoCameraIcon />
                                 </IconButton>
                                 Avatar
@@ -256,6 +257,7 @@ function ArtistSettingsPage_DisplayLayer({
                                     required
                                     {...register('email', { 
                                         required: 'This field was required',
+                                        validate: (v:string) => checkValidEmail(v),
                                     })}
                                 />
                             </Grid>
@@ -351,7 +353,6 @@ function ArtistSettingsPage_DisplayLayer({
                                     label="Spotify URL"
                                     variant="outlined"
                                     fullWidth
-                                    required
                                     {...register('spotifyLink')}
                                 />
                             </Grid>
@@ -363,7 +364,6 @@ function ArtistSettingsPage_DisplayLayer({
                                     label="YouTube URL"
                                     variant="outlined"
                                     fullWidth
-                                    required
                                     {...register('youtubeLink')}
                                 />
                             </Grid>
@@ -375,7 +375,7 @@ function ArtistSettingsPage_DisplayLayer({
                                     label="SoundCloud URL"
                                     variant="outlined"
                                     fullWidth
-                                    required
+
                                     {...register('soundcloudLink')}
                                 />
                             </Grid>
@@ -395,6 +395,9 @@ function ArtistSettingsPage_DisplayLayer({
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
+                        <div className="submit-button-container">
+                            <AudioSwipeButton color="primary" text="Submit" type="submit" variant="contained" fullWidth />
+                        </div>
                     </form>
                 </Paper>
             </div>
@@ -451,20 +454,25 @@ function useDataLayer() {
         setNewAvatar(resizedAvatar as any);
     }
 
-    function handleSelectedArtistStatechange(e: { target: { value: string }}) {
-        const { value } = e.target;
-        setNewState(value);
-    }
-
     function handleGenreSelectionChange(e: {target: { value: any }}) {
         const { value: values } = e.target;
         setNewGenres(values);
+    }
+
+    function handleSave(data: ArtistType) {
+        console.log('The data is:', data);
+    }
+
+    function handleSelectedArtistStatechange(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setNewState(value);
     }
     
     return {
         handleArtistTypeChange,
         handleAvatarChange,
         handleGenreSelectionChange,
+        handleSave,
         handleSelectedArtistStatechange,
         newArtistName,
         newArtistType,

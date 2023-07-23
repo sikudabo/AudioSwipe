@@ -22,21 +22,21 @@ conn.once('open', () => {
     return 'done';
 });
 
-router.route('/api/delete-song/:songId/:songMediaId').delete(async () => {
+router.route('/api/delete-song/:songId/:songMediaId').delete(async (req, res) => {
     const { songId, songMediaId } = req.params;
 
-    try {
-        SongModel.deleteMany({ _id: songId });
+        await SongModel.deleteMany({ _id: songId });
 
-        await gfs.remove({ filename: songMediaId });
+        const { _id } = await gfs.files.findOne({ filename: songMediaId });
+
+        await gridfsBucket.delete(_id);
 
         res.status(200).json({ isSuccess: true, message: 'Successfully deleted that song.' });
 
-    } catch(e) {
         console.log('There was an error deleting a song!!!!!!!!');
         console.log(e.message);
         res.status(500).json({ isSuccess: false, error: e.message, message: 'There was an error deleting a song!' });
-    }
+
 });
 
 module.exports = router;

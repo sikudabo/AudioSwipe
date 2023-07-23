@@ -1,3 +1,4 @@
+const ArtistDeleteSong = require('./artistDeleteSong');
 const ArtistUploadSong = require('./artistUploadSong');
 const ArtistUploadSongMetadata = require('./artistUploadSongMetadata');
 const ForgotLogin = require('./forgotLogin');
@@ -13,6 +14,7 @@ const SaveNewFan = require('./saveNewFan');
 const TestRoute = require('./testRoute');
 
 module.exports = {
+    ArtistDeleteSong,
     ArtistUploadSong,
     ArtistUploadSongMetadata,
     ForgotLogin,

@@ -10,7 +10,6 @@ import {
 } from './components/cells';
 import { SongDataType, SongTableRowType } from '../typings/songTableRowType';
 import useFetchArtistSongs from './hooks/useFetchArtistSongs';
-import useFetchTestData from './hooks/useFetchTestData';
 import axios from 'axios';
 import { useUserData } from '../../../hooks';
 import {
@@ -177,7 +176,6 @@ function ClipsTableTest_DisplayLayer({
 
 function useDataLayer() {
     const { data: artistSongs = [], isError, isFetching, isLoading } = useFetchArtistSongs();
-    const { data: nameData } = useFetchTestData();
     const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
         () => [
             {

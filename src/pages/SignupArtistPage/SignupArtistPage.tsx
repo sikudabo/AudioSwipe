@@ -33,11 +33,10 @@ import {
 import { ArtistType } from '../../typings';
 import { SignupArtistContainer } from './components/SignupArtistContainer';
 import { AudioSwipeButton } from '../../components';
-import { checkValidAge, checkValidEmail, formatUserBirthday, resizeImage } from '../../utils/helpers';
+import { checkValidAge, checkValidEmail, checkValidUrl, formatUserBirthday, resizeImage } from '../../utils/helpers';
 import { states } from '../../utils/constants';
 import { genres } from '../../utils/constants/genres';
 import { useHandleToastMessage } from '../../utils';
-import { checkValidUrl } from '../../utils/helpers/checkValidUrl';
 import saveNewArtist from './form/saveNewArtist';
 import { useIsFormLoading } from '../../utils/forms/useIsFormLoading';
 import RecordsImage from '../../audio-media/records.jpeg';
@@ -452,43 +451,42 @@ function SignupArtistPageDisplayLayer({
                     {currentStep === 3 && (
                         <>
                             <Grid className="genre-options-grid" xs={12}>
-                            <FormControl sx={{ width: '100%' }}>
-                                <InputLabel 
-                                    color="secondary"
-                                    id="select-label"
-                                >
-                                </InputLabel>
-                                <Select 
-                                    aria-label="Artist Genres"
-                                    color="secondary"
-                                    id="artist-genres"
-                                    input={<OutlinedInput />}
-                                    placeholder="Genre"
-                                    onChange={handleGenreSelectionChange}
-                                    renderValue={(selected) => (
-                                        <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
-                                            {selected.map((value: string, index: number) => (
-                                                <Chip color="secondary" key={index} label={value} variant="outlined" />
-                                            ))}
-                                        </Box>
-                                    )}
-                                    value={selectedGenres}
-                                    fullWidth
-                                    multiple
-                                    required
-                                >
-                                    {genres.map((genre, index) => (
-                                        <MenuItem 
-                                            disabled={selectedGenres.length > 2 && !selectedGenres.includes(genre)}
-                                            key={index}
-                                            value={genre}
-                                        >
-                                            <Checkbox checked={selectedGenres.indexOf(genre) > -1} color="secondary" />
-                                            <ListItemText primary={genre} />
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                                <FormHelperText>Required (Up to 3)</FormHelperText>
+                                <FormControl sx={{ width: '100%' }}>
+                                    <InputLabel 
+                                        color="secondary"
+                                        id="select-label"
+                                    />
+                                    <Select 
+                                        aria-label="Artist Genres"
+                                        color="secondary"
+                                        id="artist-genres"
+                                        input={<OutlinedInput />}
+                                        placeholder="Genre"
+                                        onChange={handleGenreSelectionChange}
+                                        renderValue={(selected) => (
+                                            <Box sx={{ display: 'flex', flexWrap: 'nowrap', gap: 0.5 }}>
+                                                {selected.map((value: string, index: number) => (
+                                                    <Chip color="secondary" key={index} label={value} variant="outlined" />
+                                                ))}
+                                            </Box>
+                                        )}
+                                        value={selectedGenres}
+                                        fullWidth
+                                        multiple
+                                        required
+                                    >
+                                        {genres.map((genre, index) => (
+                                            <MenuItem 
+                                                disabled={selectedGenres.length > 2 && !selectedGenres.includes(genre)}
+                                                key={index}
+                                                value={genre}
+                                            >
+                                                <Checkbox checked={selectedGenres.indexOf(genre) > -1} color="secondary" />
+                                                <ListItemText primary={genre} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                    <FormHelperText>Required (Up to 3)</FormHelperText>
                                 </FormControl>
                             </Grid>
                             <Grid className="artist-type-grid" sx={{ mt: 50 }} xs={12}>

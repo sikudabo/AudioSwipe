@@ -157,8 +157,6 @@ function ClipsTableTest_DisplayLayer({
         pageSize: 10,
     });
 
-    console.log('The songs are:', artistSongs);
-
     return (
         <ClipsTableContainer>
             <DataGrid 

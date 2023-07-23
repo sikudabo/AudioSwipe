@@ -10,7 +10,6 @@ export default function useFetchTestData() {
         }).then(res => {
             return res.data;
         }).catch(e => {
-            console.log('There was an error:', e.message);
         });
 
         return testData;

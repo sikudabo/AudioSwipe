@@ -36,7 +36,7 @@ export default function useFetchArtistSongs() {
     return useQuery(['fetchArtistSongs', _id], async () => {
         const artistSongsResponse = await axios({
             method: 'GET',
-            url: `http://${process.env.REACT_APP_BASE_URI}api/get-artist-audio/${_id}`,
+            url: `${process.env.REACT_APP_BASE_URI}api/get-artist-audio/${_id}`,
         }).then(response => {
             return response.data.artistAudio;
         });

@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { DataGrid, GRID_CHECKBOX_SELECTION_COL_DEF, GridRowApi, GridRowId, GridRowParams  } from '@mui/x-data-grid';
 import { colors } from '../../../components';
 import { 
+    ClipsTableDeleteCell,
     ClipsTableDisLikesCell,
     ClipsTableLikesCell,
     ClipsTableNameCell,
@@ -10,16 +11,6 @@ import {
 } from './components/cells';
 import { SongDataType, SongTableRowType } from '../typings/songTableRowType';
 import useFetchArtistSongs from './hooks/useFetchArtistSongs';
-import axios from 'axios';
-import { useUserData } from '../../../hooks';
-import {
-    MaterialReactTable,
-    type MRT_ColumnDef,
-    type MRT_ColumnFiltersState,
-    type MRT_PaginationState,
-    type MRT_SortingState,
-
-} from 'material-react-table';
 
 const ClipsTableContainer = styled.div`
     background-color: ${colors.white};
@@ -30,15 +21,23 @@ const ClipsTableContainer = styled.div`
     .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
         outline: none !important;
     }
+
+    &.MuiDataGrid-root .MuiDataGrid-cell:focus {
+        outline: none !important;
+    }
+
+    .MuiDataGrid-columnHeader:focus {
+        outline: none;
+    }
+
+    .MuiDataGrid-colCell:focus {
+        outline: none;
+    }
 `;
 
 type ClipsTableDisplayLayerProps = {
     artistSongs: any;
-    isError: boolean;
-    isFetching: boolean;
     isLoading: boolean;
-    name: string;
-    newColumns: MRT_ColumnDef<SongDataType>[];
 }
 
 const data: SongDataType[] = [
@@ -67,28 +66,6 @@ const data: SongDataType[] = [
         songMediaId: '1689854702706-song.mp3',
     },
 ];
-
-/* const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
-    () => [
-        {
-            accessorKey: 'name',
-            header: 'Clip',
-        },
-        {
-            accessorKey: 'likes',
-            header: 'Likes',
-        },
-        {
-            accessorKey: 'disLikes',
-            header: 'Dislikes',
-        },
-        {
-            accessorKey: 'songMediaId',
-            header: 'Play',
-        },
-    ],
-    []
-); */
 
 const columns = [
     {
@@ -125,11 +102,29 @@ const columns = [
         },
     },
     {
+        alignment: 'right',
         description: 'Play your audio file.',
+        disableColumnMenu: true,
+        disableReorder: true,
         field: 'songMediaId',
+        filterable: false,
+        headerAlignment: 'right',
         headerName: 'Play',
         minWidth: 200,
         renderCell: ClipsTablePlayStopButtonCell,
+        sortable: false,
+    },
+    {
+        description: 'Delete a song.',
+        disableColumnMenu: true,
+        disableReorder: true,
+        field: '_id',
+        filterable: false,
+        flex: 1,
+        headerName: 'Delete',
+        minWidth: 200,
+        renderCell: ClipsTableDeleteCell,
+        sortable: false,
     },
 ];
 
@@ -140,21 +135,8 @@ export default function ClipsTableTest() {
 
 function ClipsTableTest_DisplayLayer({
     artistSongs,
-    isError,
-    isFetching,
     isLoading,
-    name,
-    newColumns,
 }: ClipsTableDisplayLayerProps) {
-    const [columnFilters, setColumnFilters] = useState<MRT_ColumnFiltersState>(
-        [],
-    );
-    const [globalFilter, setGlobalFilter] = useState('');
-    const [sorting, setSorting] = useState<MRT_SortingState>([]);
-    const [pagination, setPagination] = useState<MRT_PaginationState>({
-        pageIndex: 0,
-        pageSize: 10,
-    });
 
     return (
         <ClipsTableContainer>
@@ -175,35 +157,10 @@ function ClipsTableTest_DisplayLayer({
 }
 
 function useDataLayer() {
-    const { data: artistSongs = [], isError, isFetching, isLoading } = useFetchArtistSongs();
-    const newColumns = useMemo<MRT_ColumnDef<SongDataType>[]>(
-        () => [
-            {
-                accessorKey: 'name',
-                header: 'Clip',
-            },
-            {
-                accessorKey: 'likes',
-                header: 'Likes',
-            },
-            {
-                accessorKey: 'disLikes',
-                header: 'Dislikes',
-            },
-            {
-                accessorKey: 'songMediaId',
-                header: 'Play',
-            },
-        ],
-        []
-    );
+    const { data: artistSongs = [], isLoading } = useFetchArtistSongs();
 
     return {
         artistSongs,
-        isError,
-        isFetching,
         isLoading,
-        name: "Jimmy",
-        newColumns,
     };
 }

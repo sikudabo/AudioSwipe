@@ -77,6 +77,24 @@ function ArtistSettingsPage_DisplayLayer({
     newUsername,
     newYoutubeLink,
 }: ArtistSettingsPageDisplayLayerProps) {
+    const { handleSubmit, register, setValue, watch } = useForm<ArtistType>({
+        defaultValues: {
+            firstName: newFirstName,
+            lastName: newLastName,
+            username: newUsername,
+            password: newPassword,
+            artistName: newArtistName,
+            city: newCity,
+            state: newState,
+            email: newEmail,
+            bio: newBio,
+            spotifyLink: newSpotifyLink,
+            soundcloudLink: newSoundcloudLink,
+            youtubeLink: newYoutubeLink,
+        },
+        mode: 'onChange',
+    });
+    
     return (
         <ArtistSettingsPageContainer>
             <div className="top-text-container">

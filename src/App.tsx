@@ -28,6 +28,7 @@ import './BodyStyles.css';
 import { 
   ArtistDashboardPage,
   ArtistLoginPage, 
+  ArtistSettingsPage,
   ArtistSongUploadPage,
   ClipsPage,
   LandingPage, 
@@ -146,6 +147,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
                     <Route element={<ArtistDashboardPage />} path="main" />
                     <Route element={<ArtistSongUploadPage />} path="upload" />
                     <Route element={<ClipsPage />} path="clips" />
+                    <Route element={<ArtistSettingsPage />} path="settings" />
                   </Route>
                 </Routes>
               </GlobalContextProviders>

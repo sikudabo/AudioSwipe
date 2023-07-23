@@ -2,6 +2,7 @@ import { useState } from 'react';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
+import { useUserData } from '../../../hooks';
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +31,7 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const { artist } = useUserData();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -52,11 +54,11 @@ export default function AccountPopover() {
             height: '100%',
             borderRadius: '50%',
             position: 'absolute',
-            bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+            bgcolor: (theme) => alpha(theme.palette.grey[900], 0.3),
           }
         }}
         >
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar src={`${process.env.REACT_APP_BASE_URI}api/get-photo/${artist.avatar}`} alt="photoURL" />
         </IconButton>
 
       <Popover
@@ -80,10 +82,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+            {artist.artistName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {artist.firstName} {artist.lastName}
           </Typography>
         </Box>
 

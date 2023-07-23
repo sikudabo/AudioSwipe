@@ -126,7 +126,6 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
           <CssBaseline />
           <Router>
             <QueryClientProvider client={queryClient}>
-              <ReactQueryDevtools />
               <GlobalContextProviders>
                 <Backdrop
                   sx={{ color: colors.hotPink, zIndex: (theme) => theme.zIndex.drawer + 1 }}

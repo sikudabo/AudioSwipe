@@ -33,22 +33,6 @@ function ClipsPage_DisplayLayer({
     isLoading,
     onEndClearId,
 }: ClipsPageDisplayLayerProps ) {
-    const [testData, setTestData] = useState(data);
-
-    useEffect(() => {
-        if (!data) {
-            alert('No data');
-            return;
-        }
-        // console.log('The data is:', data[1]);
-        setTestData(data);
-    }, [data]);
-
-    if (isLoading) {
-        return (
-            <div>Loading...</div>
-        )
-    }
 
     return (
         <ClipsPageContainer container>
@@ -63,22 +47,8 @@ function ClipsPage_DisplayLayer({
                 <p 
                     className="top-clips-page-header-text"
                 >
-                    Audio Clips 
-                    <div>
-                        {testData?.length}
-                    </div>
+                    Audio Clips
                 </p>
-                {typeof data !== 'undefined' && data.length > 0 && (
-                    <div>
-                        {data.map((person, index) => (
-                            <div
-                                key={index}
-                            >
-                                They are {person.name} and their age is {person.age}.
-                            </div>
-                        ))}
-                    </div>
-                )}
                 <ClipsTableTest />
             </Grid>
         </ClipsPageContainer>

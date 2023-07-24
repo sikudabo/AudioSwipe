@@ -7,6 +7,7 @@ import { checkValidUrl } from './checkValidUrl';
 import { deviceBreakPointsMaxWidth, deviceBreakPointsMinWidth} from "../breakpoints";
 import { formatUserBirthday } from './formatUserBirthday';
 import { postBinaryData } from './postBinaryData';
+import { putBinaryData } from "./putBinaryData";
 import { resizeImage } from "./resizeImage";
 import { shortenNumber } from "./shortenNumber";
 
@@ -21,6 +22,7 @@ export {
     getData,
     postBinaryData,
     postData,
+    putBinaryData,
     resizeImage,
     shortenNumber,
 };

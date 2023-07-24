@@ -11,7 +11,7 @@ import MusicIcon from '@mui/icons-material/MusicNote';
 import UploadIcon from '@mui/icons-material/UploadFile';
 import { ArtistSongUploadPageContainer } from './styles';
 import { AudioSwipeButton } from '../../components';
-import { postBinaryData } from '../../utils/helpers';
+import { putBinaryData } from '../../utils/helpers';
 import { resizeImage } from '../../utils/helpers';
 import { useHandleToastMessage } from '../../utils';
 import { useIsFormLoading } from '../../utils/forms';
@@ -222,7 +222,7 @@ function useDataLayer() {
         const fd = new FormData();
         fd.append('albumCover', albumCover, 'album-cover.jpg');
 
-       await postBinaryData({
+       await putBinaryData({
             data: fd,
             url: 'api/saveAlbumCover',
         }).then(async (response) => {
@@ -249,7 +249,7 @@ function useDataLayer() {
             fd.append('name', songName);
             fd.append('song', song, 'song.mp3');
 
-            await postBinaryData({
+            await putBinaryData({
                 data: fd,
                 url: 'api/saveSong',
             }).then((response) => {

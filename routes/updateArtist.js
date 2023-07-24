@@ -23,23 +23,6 @@ router.route('/api/update-artist').post(async (req, res) => {
 
     const splitGenres = genres.split(',');
 
-    const updatedArtist = {
-        artistName,
-        artistType,
-        bio,
-        city,
-        email,
-        firstName,
-        genres: splitGenres,
-        lastName,
-        password,
-        spotifyLink,
-        soundcloudLink,
-        state,
-        username,
-        youtubeLink,
-    };
-
     try {
         await ArtistModel.updateOne({ _id }, { 
             $set: {
@@ -49,7 +32,7 @@ router.route('/api/update-artist').post(async (req, res) => {
                 city,
                 email,
                 firstName,
-                genres,
+                genres: splitGenres,
                 lastName,
                 password,
                 spotifyLink,

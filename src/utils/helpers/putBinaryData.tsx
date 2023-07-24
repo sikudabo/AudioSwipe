@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-type PostBinaryDataProps = {
+type PutBinaryDataProps = {
     data: any;
     url: string;
 };
 
-export const postBinaryData = async ({ data, url }: PostBinaryDataProps) => {
+export const putBinaryData = async ({ data, url }: PutBinaryDataProps) => {
     return await axios({
         data,
         headers: {
             'Content-Type': 'multipart/form-data',
             'Content-Encoding': 'mutipart/form-data',
         },
-        method: 'POST',
+        method: 'PUT',
         url: `${process.env.REACT_APP_BASE_URI}${url}`,
     }).then(response => {
         return response.data;

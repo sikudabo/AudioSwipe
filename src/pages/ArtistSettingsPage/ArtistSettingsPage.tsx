@@ -429,7 +429,7 @@ function useDataLayer() {
     } = artist;
     const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber);
     const [newState, setNewState] = useState(state);
-    const [newAvatar, setNewAvatar] = useState(null);
+    const [newAvatar, setNewAvatar]: any = useState(null);
     const [newArtistType, setNewArtistType] = useState(artistType);
     const [newGenres, setNewGenres] = useState(genres);
     const { showToastMessage } = useHandleToastMessage();
@@ -441,9 +441,48 @@ function useDataLayer() {
     }
 
     async function handleAvatarChange(e: { target: { files: any }}) {
+        setIsLoading(true);
         const file = e.target.files[0];
-        const resizedAvatar = await resizeImage(file);
-        setNewAvatar(resizedAvatar as any);
+        const resizedAvatar: any = await resizeImage(file);
+        await setNewAvatar(resizedAvatar);
+        const fd = new FormData();
+        fd.append('avatar', resizedAvatar, 'avatar.jpg');
+        
+        await postBinaryData({
+            data: fd,
+            url: `api/update-avatar/${_id}/${avatar}`,
+        }).then(response => {
+            console.log('The response is:', response);
+            const { isSuccess, message, updatedArtist } = response;
+
+            if (isSuccess) {
+                let artist = updatedArtist;
+                artist.isLoggedIn = true;
+                setArtist(artist);
+                showToastMessage({
+                    isError: false,
+                    message,
+                });
+                setIsLoading(false);
+                return;
+            }
+
+            setIsLoading(false);
+            showToastMessage({
+                isError: true,
+                message,
+            });
+            return;
+        }).catch(e => {
+            console.log(e.message);
+            setIsLoading(false);
+            showToastMessage({
+                isError: false,
+                message: 'There was an error updating your avatar. Please try again.',
+            });
+
+            return;
+        });
     }
 
     function handleGenreSelectionChange(e: {target: { value: any }}) {

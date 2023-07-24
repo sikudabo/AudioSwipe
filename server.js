@@ -18,6 +18,7 @@ const Grid = require('gridfs-stream');
 const sslRedirect = require('heroku-ssl-redirect');
 const { 
     ArtistDeleteSong,
+    ArtistUpdateAvatar,
     ArtistUploadSong,
     ArtistUploadSongMetadata,
     ForgotLogin,
@@ -60,6 +61,7 @@ app.use(history({
 
 // Routes
 app.use(ArtistDeleteSong);
+app.use(ArtistUpdateAvatar);
 app.use(ArtistUploadSong);
 app.use(ArtistUploadSongMetadata);
 app.use(ForgotLogin);

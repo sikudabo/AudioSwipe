@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getData } from '../../../../utils/helpers';
 import { useUserData } from '../../../../hooks';
 import axios from 'axios';

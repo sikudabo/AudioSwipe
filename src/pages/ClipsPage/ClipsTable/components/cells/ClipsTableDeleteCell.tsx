@@ -1,7 +1,7 @@
 import React from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { deleteData } from '../../../../../utils/helpers';
 import { SongTableRowType } from '../../../typings/songTableRowType';
 import { useHandleToastMessage } from '../../../../../utils';
@@ -45,7 +45,7 @@ function useDataLayer(_id: string, songMediaId: string) {
             const { isSuccess, message } = response;
 
             if (isSuccess) {
-                queryClient.invalidateQueries('fetchArtistSongs');
+                queryClient.invalidateQueries(['fetchArtistSongs']);
                 setIsLoading(false);
                 showToastMessage({
                     isError: false,

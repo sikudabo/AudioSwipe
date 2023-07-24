@@ -3,8 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 import Backdrop from '@mui/material/Backdrop';
 import GlobalContextProviders from './GlobalContextProviders';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ThemeOptions, ThemeProvider, createTheme } from '@mui/material/styles';

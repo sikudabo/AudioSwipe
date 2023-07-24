@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { FanModel } = require('../db/models');
 
-router.route('/api/loginFan').post(async (req, res) => {
+router.route('/api/login-fan').post(async (req, res) => {
+    console.log('I am being hit!');
     const { email, password } = req.body;
     const isValid = await FanModel.findOne({ email, password }).exec();
 

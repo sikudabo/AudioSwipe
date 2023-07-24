@@ -39,7 +39,7 @@ const storage = new GridFsStorage({
 
 const uploads = multer({ storage });
 
-router.route('/api/saveFan').put(uploads.single('avatar'), async (req, res) => {
+router.route('/api/save-fan').put(uploads.single('avatar'), async (req, res) => {
     const { birthday, firstName, lastName, email, password, gender, phoneNumber } = req.body;
     console.log('The body is:', req.body);
 

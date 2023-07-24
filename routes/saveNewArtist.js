@@ -12,7 +12,7 @@ const dotenv = require('dotenv').config();
 const dbUri = process.env.DB_URI;
 
 var conn = mongoose.createConnection(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 let gfs;
 
@@ -42,7 +42,6 @@ const uploads = multer({ storage });
 
 
 router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) => {
-    await mongoose.connect('mongodb://localhost:27017/audioswipe');
 
     const {
         artistType,

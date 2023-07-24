@@ -12,6 +12,7 @@ const SaveArtistSong = require('./saveArtistSong');
 const SaveNewArtist = require('./saveNewArtist');
 const SaveNewFan = require('./saveNewFan');
 const TestRoute = require('./testRoute');
+const UpdateArtist = require('./updateArtist');
 
 module.exports = {
     ArtistDeleteSong,
@@ -28,4 +29,5 @@ module.exports = {
     SaveNewArtist,
     SaveNewFan,
     TestRoute,
+    UpdateArtist,
 };

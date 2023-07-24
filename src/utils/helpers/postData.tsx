@@ -8,7 +8,7 @@ type PostDataProps = {
 
 export default function postData({ url, data, contentType }: PostDataProps) {
     return axios({
-        data: JSON.stringify(data),
+        data,
         method: 'POST',
         url,
         headers: {

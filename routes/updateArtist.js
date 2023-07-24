@@ -21,6 +21,8 @@ router.route('/api/update-artist').post(async (req, res) => {
         _id,
     } = req.body;
 
+    const splitGenres = genres.split(',');
+
     const updatedArtist = {
         artistName,
         artistType,
@@ -28,7 +30,7 @@ router.route('/api/update-artist').post(async (req, res) => {
         city,
         email,
         firstName,
-        genres,
+        genres: splitGenres,
         lastName,
         password,
         spotifyLink,
@@ -60,8 +62,8 @@ router.route('/api/update-artist').post(async (req, res) => {
 
         const updatedArtist = await ArtistModel.findOne({ _id }).exec();
 
-        res.status(200).json({ isSuccess: true, updatedArtist: updatedArtist });
-        
+        res.status(200).json({ isSuccess: true, message: 'Settings successfully updated!', updatedArtist: updatedArtist });
+
     } catch(e) {
         console.log('There was an error updating an artist!!!!!!!!!');
         console.log(e.message);
@@ -69,3 +71,5 @@ router.route('/api/update-artist').post(async (req, res) => {
     }
 
 });
+
+module.exports = router;

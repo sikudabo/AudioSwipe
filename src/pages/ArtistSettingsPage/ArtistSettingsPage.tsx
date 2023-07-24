@@ -62,6 +62,7 @@ type ArtistSettingsPageDisplayLayerProps = {
             value: string;
         };
     }) => void;
+    isLoading: boolean;
     artistName: string;
     newArtistType: string;
     bio: string;
@@ -87,6 +88,7 @@ function ArtistSettingsPage_DisplayLayer({
     handleGenreSelectionChange,
     handleSave,
     handleSelectedArtistStatechange,
+    isLoading,
     artistName,
     newArtistType,
     bio,
@@ -395,7 +397,7 @@ function ArtistSettingsPage_DisplayLayer({
                                 </FormControl>
                             </Grid>
                         <div className="submit-button-container">
-                            <AudioSwipeButton color="primary" text="Submit" type="submit" variant="contained" fullWidth />
+                            <AudioSwipeButton color="primary" disabled={isLoading} text="Submit" type="submit" variant="contained" fullWidth />
                         </div>
                     </form>
                 </Paper>
@@ -431,6 +433,7 @@ function useDataLayer() {
     const [newArtistType, setNewArtistType] = useState(artistType);
     const [newGenres, setNewGenres] = useState(genres);
     const { showToastMessage } = useHandleToastMessage();
+    const { isLoading, setIsLoading } = useIsFormLoading();
 
     function handleArtistTypeChange(e: { target: { value: string }}) {
         const { value } = e.target;
@@ -449,10 +452,12 @@ function useDataLayer() {
     }
 
     async function handleSave(data: ArtistType) {
+        setIsLoading(true);
         const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
 
         if(spotifyLink?.trim()) {
             if (!checkValidUrl(spotifyLink.trim())) {
+                setIsLoading(false);
                 showToastMessage({
                     isError: true,
                     message: 'Your Spotify link must be a valid URL',
@@ -463,6 +468,7 @@ function useDataLayer() {
 
         if(soundcloudLink?.trim()) {
             if (!checkValidUrl(soundcloudLink?.trim())) {
+                setIsLoading(false);
                 showToastMessage({
                     isError: true,
                     message: 'Your Soundclound link must be a valid url.',
@@ -473,6 +479,7 @@ function useDataLayer() {
 
         if (youtubeLink?.trim()) {
             if (!checkValidUrl(youtubeLink)) {
+                setIsLoading(false);
                 showToastMessage({
                     isError: true,
                     message: 'Your YouTube link must be a valid URL.',
@@ -482,6 +489,7 @@ function useDataLayer() {
         }
 
         if (newPhoneNumber.length < 11) {
+            setIsLoading(false);
             showToastMessage({
                 isError: true,
                 message: 'You must enter a valid phone number.',
@@ -508,6 +516,43 @@ function useDataLayer() {
         fd.append('soundcloudLink', soundcloudLink as string);
         fd.append('youtubeLink', youtubeLink as string);
         fd.append('_id', _id);
+
+        console.log('The form data is:', data);
+
+        await postData({
+            contentType: 'application/json',
+            data: fd,
+            url: `${process.env.REACT_APP_BASE_URI}api/update-artist`,
+        }).then(response => {
+            const { isSuccess, message, updatedArtist } = response.data;
+
+            if (isSuccess) {
+                setIsLoading(false);
+                showToastMessage({
+                    isError: false,
+                    message,
+                });
+                let artist = updatedArtist;
+                artist.isLoggedIn = true;
+                setArtist(artist);
+                return;
+            }
+
+            setIsLoading(false);
+            showToastMessage({
+                isError: true,
+                message,
+            });
+            return;
+        }).catch((e) => {
+            console.log(e.message);
+            setIsLoading(false);
+            showToastMessage({
+                isError: true,
+                message: 'There was an error updating your settings. Please try again!',
+            });
+            return;
+        });
     }
 
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {
@@ -521,6 +566,7 @@ function useDataLayer() {
         handleGenreSelectionChange,
         handleSave,
         handleSelectedArtistStatechange,
+        isLoading,
         artistName,
         newArtistType,
         bio,

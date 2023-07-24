@@ -13,9 +13,7 @@ const fanSchema = new mongoose.Schema({
     })],
     password: { required: true, type: String },
     phoneNumber: { required: true, type: String },
-    songsHeard: [mongoose.Schema({
-        songId: String,
-    })],
+    songsHeard: [String],
     subscribedArtists: [mongoose.Schema({
         artistId: String,
         subscribedOn: Date,

@@ -12,7 +12,7 @@ export type ArtistType = {
     fans: [{ fanAvatar: string; fanId: string; fanName: string; }];
     gender: any;
     genres: [string];
-    username?: string;
+    username: string;
     password: string;
     phoneNumber: string;
     soundcloudLink?: string;

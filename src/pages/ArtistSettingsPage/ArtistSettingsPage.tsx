@@ -448,7 +448,7 @@ function useDataLayer() {
         setNewGenres(values);
     }
 
-    function handleSave(data: ArtistType) {
+    async function handleSave(data: ArtistType) {
         const { artistName, bio, city, email, firstName, lastName, password, spotifyLink, soundcloudLink, username, youtubeLink } = data;
 
         if(spotifyLink?.trim()) {
@@ -491,6 +491,23 @@ function useDataLayer() {
         }
 
         const fd = new FormData();
+
+        fd.append('firstName', firstName);
+        fd.append('lastName', lastName);
+        fd.append('artistName', artistName);
+        fd.append('username', username);
+        fd.append('password', password);
+        fd.append('bio', bio as string);
+        fd.append('email', email);
+        fd.append('phoneNumber', newPhoneNumber);
+        fd.append('city', city);
+        fd.append('state', newState);
+        fd.append('artistType', newArtistType);
+        fd.append('genres', newGenres);
+        fd.append('spotifyLink', spotifyLink as string);
+        fd.append('soundcloudLink', soundcloudLink as string);
+        fd.append('youtubeLink', youtubeLink as string);
+        fd.append('_id', _id);
     }
 
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {

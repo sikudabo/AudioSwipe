@@ -62,21 +62,21 @@ type ArtistSettingsPageDisplayLayerProps = {
             value: string;
         };
     }) => void;
-    newArtistName: string;
+    artistName: string;
     newArtistType: string;
-    newBio: string;
-    newCity: string;
-    newEmail: string;
-    newFirstName: string;
+    bio: string;
+    city: string;
+    email: string;
+    firstName: string;
     newGenres: Array<string>;
-    newLastName: string;
-    newPassword: string;
+    lastName: string;
+    password: string;
     newPhoneNumber: string;
-    newSoundcloudLink?: string;
-    newSpotifyLink?: string;
+    soundcloudLink?: string;
+    spotifyLink?: string;
     newState: string;
-    newUsername: string;
-    newYoutubeLink?: string;
+    username: string;
+    youtubeLink?: string;
     setNewPhoneNumber: React.Dispatch<any>
     setNewState: React.Dispatch<any>;
 };
@@ -87,38 +87,37 @@ function ArtistSettingsPage_DisplayLayer({
     handleGenreSelectionChange,
     handleSave,
     handleSelectedArtistStatechange,
-    newArtistName,
+    artistName,
     newArtistType,
-    newBio,
-    newCity,
-    newEmail,
-    newFirstName,
+    bio,
+    city,
+    email,
+    firstName,
     newGenres,
-    newLastName,
-    newPassword,
+    lastName,
+    password,
     newPhoneNumber,
-    newSoundcloudLink,
-    newSpotifyLink,
+    soundcloudLink,
+    spotifyLink,
     newState,
-    newUsername,
-    newYoutubeLink,
+    username,
+    youtubeLink,
     setNewPhoneNumber,
     setNewState,
 }: ArtistSettingsPageDisplayLayerProps) {
     const { handleSubmit, register, setValue, watch } = useForm<ArtistType>({
         defaultValues: {
-            firstName: newFirstName,
-            lastName: newLastName,
-            username: newUsername,
-            password: newPassword,
-            artistName: newArtistName,
-            city: newCity,
-            state: newState,
-            email: newEmail,
-            bio: newBio,
-            spotifyLink: newSpotifyLink,
-            soundcloudLink: newSoundcloudLink,
-            youtubeLink: newYoutubeLink,
+            firstName,
+            lastName,
+            username,
+            password,
+            artistName,
+            city,
+            email,
+            bio,
+            spotifyLink,
+            soundcloudLink,
+            youtubeLink,
         },
         mode: 'onChange',
     });
@@ -426,22 +425,10 @@ function useDataLayer() {
         genres,
         _id,
     } = artist;
-
-    const [newFirstName, setNewFirstName] = useState(firstName);
-    const [newLastName, setNewLastName] = useState(lastName);
-    const [newUsername, setNewUsername] = useState(username);
-    const [newPassword, setNewPassword] = useState(password);
-    const [newEmail, setNewEmail] = useState(email);
     const [newPhoneNumber, setNewPhoneNumber] = useState(phoneNumber);
-    const [newCity, setNewCity] = useState(city);
     const [newState, setNewState] = useState(state);
     const [newAvatar, setNewAvatar] = useState(null);
     const [newArtistType, setNewArtistType] = useState(artistType);
-    const [newBio, setNewBio] = useState(bio);
-    const [newArtistName, setNewArtistName] = useState(artistName);
-    const [newSpotifyLink, setNewSpotifyLink] = useState(spotifyLink);
-    const [newSoundcloudLink, setNewSoundcloudLink] = useState(soundcloudLink);
-    const [newYoutubeLink, setNewYoutubeLink] = useState(youtubeLink);
     const [newGenres, setNewGenres] = useState(genres);
     const { showToastMessage } = useHandleToastMessage();
 
@@ -517,21 +504,21 @@ function useDataLayer() {
         handleGenreSelectionChange,
         handleSave,
         handleSelectedArtistStatechange,
-        newArtistName,
+        artistName,
         newArtistType,
-        newBio,
-        newCity,
-        newEmail,
-        newFirstName,
+        bio,
+        city,
+        email,
+        firstName,
         newGenres,
-        newLastName,
-        newPassword,
+        lastName,
+        password,
         newPhoneNumber,
-        newSoundcloudLink,
-        newSpotifyLink,
+        soundcloudLink,
+        spotifyLink,
         newState,
-        newUsername,
-        newYoutubeLink,
+        username,
+        youtubeLink,
         setNewPhoneNumber,
         setNewState,
     };

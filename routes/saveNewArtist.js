@@ -65,7 +65,6 @@ router.route('/api/saveArtist').put(uploads.single('avatar'), async (req, res) =
     } = req.body;
 
     try {
-        console.log('The ArtistModel is:', ArtistModel);
         const isUsernameTaken = await ArtistModel.findOne({ username });
 
         if (isUsernameTaken) {

@@ -424,6 +424,7 @@ function useDataLayer() {
         soundcloudLink,
         youtubeLink,
         genres,
+        _id,
     } = artist;
 
     const [newFirstName, setNewFirstName] = useState(firstName);
@@ -501,6 +502,8 @@ function useDataLayer() {
 
             return;
         }
+
+        const fd = new FormData();
     }
 
     function handleSelectedArtistStatechange(e: { target: { value: string }}) {

@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const fanSchema = new mongoose.Schema({
     avatar: { required: true, type: String },
     birthday: { required: true, type: Date },
+    disLikedSongs: [mongoose.Schema({
+        songId: String,
+        likedOn: Date,
+    })],
     email: { required: true, type: String, unique: true },
     firstName: { required: true, type: String },
     gender: { required: true, type: String },

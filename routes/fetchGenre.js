@@ -7,7 +7,7 @@ router.route('/api/fetch-genre/:genre/:fanId').get(async (req, res) => {
     
     try {
         const songs = await SongModel.find({ genres: genre });
-        const fan = await FanModel.find({ _id: fanId }, { songsHeard: 1, _id: 0 });
+        const fan = await FanModel.find({ _id: fanId }, { songsHeard: 1, _id: 0 }).sort({ createdOn: -1 });
         console.log('The fan is:', fan);
         let filteredSongs = songs;
 

@@ -3,18 +3,12 @@ const mongoose = require('mongoose');
 const fanSchema = new mongoose.Schema({
     avatar: { required: true, type: String },
     birthday: { required: true, type: Date },
-    disLikedSongs: [mongoose.Schema({
-        songId: String,
-        likedOn: Date,
-    })],
+    dislikedSongs: [String],
     email: { required: true, type: String, unique: true },
     firstName: { required: true, type: String },
     gender: { required: true, type: String },
     lastName: { required: true, type: String },
-    likedSongs: [mongoose.Schema({
-        songId: String,
-        likedOn: Date,
-    })],
+    likedSongs: [String],
     password: { required: true, type: String },
     phoneNumber: { required: true, type: String },
     songsHeard: [String],

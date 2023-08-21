@@ -7,13 +7,16 @@ router.route('/api/fetch-genre/:genre/:fanId').get(async (req, res) => {
     
     try {
         const songs = await SongModel.find({ genres: genre });
-        const fan = await FanModel.find({ _id: fanId }, { songsHeard: 1, _id: 0 }).sort({ createdOn: -1 });
-        console.log('The fan is:', fan);
+        const fan = await FanModel.findOne({ _id: fanId }, { dislikedSongs: 1, likedSongs: 1, _id: 0 }).sort({ createdOn: -1 });
+        const { dislikedSongs, likedSongs } = fan;
         let filteredSongs = songs;
 
-        if (typeof songs !== 'undefined' && songs.length > 0 && typeof fan.songsHeader !== 'undefined') {
-            filteredSongs = songs.filter((songId) => !fan.songsHeard.includes(songId));
+        if (typeof songs !== 'undefined' && songs.length > 0) {
+            filteredSongs = songs.filter((song) => !likedSongs.includes(song._id.toString()) && !dislikedSongs.includes(song._id.toString()));
         }
+
+       const testSongs = songs.filter((song) => !likedSongs.includes(song._id.toString()) && !dislikedSongs.includes(song._id.toString()));
+       console.log('The test songs are:', testSongs);
 
         res.status(200).json({ audioClips: filteredSongs, isSuccess: true });
     } catch(e) {

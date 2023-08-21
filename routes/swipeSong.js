@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const { FanModel } = require('../db/models');
 
 router.route('/api/swipe').post(async (req, res) => {
+    console.log('I am being hit!');
     const { direction, fanId, songId } = req.body;
 
     try {
@@ -15,7 +16,7 @@ router.route('/api/swipe').post(async (req, res) => {
             return;
         }
 
-        await FanModel.updateOne({ _id: fanId }, { $push: { disLikedSongs: songId }});
+        await FanModel.updateOne({ _id: fanId }, { $push: { dislikedSongs: songId }});
         res.status(200).json({ isSuccess: true, message: 'Successfully disliked song' });
     } catch(e) {
         console.log('Error swiping on a song!!!!!!!!!!!!!');

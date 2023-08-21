@@ -13,6 +13,7 @@ const SaveAlbumCover = require('./saveAlbumCover')
 const SaveArtistSong = require('./saveArtistSong');
 const SaveNewArtist = require('./saveNewArtist');
 const SaveNewFan = require('./saveNewFan');
+const SwipeSong = require('./swipeSong');
 const TestRoute = require('./testRoute');
 const UpdateArtist = require('./updateArtist');
 
@@ -32,6 +33,7 @@ module.exports = {
     SaveArtistSong,
     SaveNewArtist,
     SaveNewFan,
+    SwipeSong,
     TestRoute,
     UpdateArtist,
 };

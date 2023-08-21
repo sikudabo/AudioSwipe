@@ -32,6 +32,7 @@ const {
     SaveArtistSong,
     SaveNewArtist,
     SaveNewFan,
+    SwipeSong,
     TestRoute,
     UpdateArtist,
 } = require('./routes');
@@ -76,6 +77,7 @@ app.use(SaveAlbumCover);
 app.use(SaveArtistSong);
 app.use(SaveNewArtist);
 app.use(SaveNewFan);
+app.use(SwipeSong);
 app.use(TestRoute);
 app.use(UpdateArtist);
 

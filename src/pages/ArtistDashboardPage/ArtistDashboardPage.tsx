@@ -14,6 +14,7 @@ import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
 import { DashboardSongRankingList, GenderBreakdownChart, LikesAndDislikesChart } from './charts';
 import useFetchArtistSongs from '../ClipsPage/ClipsTable/hooks/useFetchArtistSongs';
 import formatLikesVsDislikesChart from './utils/formatLikesVsDislikesChart';
+import formatGenderBreakdownChart from './utils/formatGenderBreakdownChart';
 
 const theme = createTheme({
     palette: {
@@ -25,15 +26,17 @@ type ArtistDashboardPageDisplayLayerProps = {
     artist?: any;
     dislikes: number;
     dislikesData: any;
+    femaleCount: number;
     likes: number;
     likesData: any;
+    maleCount: number;
 };
 
 export default function ArtistDashboardPage() {
     return <ArtistDashboardPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, likes, likesData }: ArtistDashboardPageDisplayLayerProps) {
+function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, femaleCount, likes, likesData, maleCount }: ArtistDashboardPageDisplayLayerProps) {
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
@@ -96,12 +99,12 @@ function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, like
                             title="Gender Breakdown"
                             subheader="Likes by gender"
                             chartData={[
-                                { label: 'Male', value: 1000 },
-                                { label: 'female', value: 4370 },
+                                { label: 'female', value: femaleCount },
+                                { label: 'Male', value: maleCount },
                             ]}
                             chartColors={[
-                                colors.primary,
                                 colors.salmonPink,
+                                colors.primary,
                             ]}
                         />
                     </Grid>
@@ -132,6 +135,7 @@ function useDataLayer() {
     let dislikes = 0;
 
     const { dislikesData, likesData } = formatLikesVsDislikesChart(artistSongs);
+    const { femaleCount, maleCount } = formatGenderBreakdownChart(artistSongs);
 
     if (artistSongs) {
         artistSongs.map((song: any) => {
@@ -152,7 +156,9 @@ function useDataLayer() {
         artist,
         dislikes,
         dislikesData,
+        femaleCount,
         likes,
         likesData,
+        maleCount,
     };
 }

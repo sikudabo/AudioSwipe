@@ -61,6 +61,22 @@ type DashboardSongRankingListProps = {
 
 export default function DashboardSongRankingList({ title, subheader, list }: DashboardSongRankingListProps) {
 
+  let sortedList = [];
+
+  if (list) {
+    sortedList = list.sort((a, b) => {
+      if (a.likes.length > b.likes.length) {
+        return -1;
+      }
+
+      if (a.likes.length < b.likes.length) {
+        return 1;
+      }
+
+      return 0;
+    })
+  }
+
   return (
     <Card elevation={5} style={{ maxHeight: 375, overflow: 'scroll' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingLeft: 20 }}>
@@ -73,8 +89,8 @@ export default function DashboardSongRankingList({ title, subheader, list }: Das
         </div>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
           {typeof list !== 'undefined' && (
-            <div>
-              {list.map((song: SongDataType) => (
+            <div style={{ paddingBottom: 10 }}>
+              {sortedList.map((song: SongDataType) => (
                 <SongItem key={song._id} song={song} />
               ))}
             </div>
@@ -96,7 +112,7 @@ function SongItem({ song }: SongItemType) {
   const { album, albumCover, likes, name } = song;
 
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
+    <Stack direction="row" alignItems="center" spacing={2} style={{ marginBottom: 20 }}>
       <Box component="img" alt={name} src={`${process.env.REACT_APP_BASE_URI}api/get-photo/${albumCover}`} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
 
       <Box sx={{ minWidth: 240, flexGrow: 1 }}>

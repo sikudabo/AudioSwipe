@@ -5,6 +5,7 @@ import { shortenNumber } from '../../../utils/helpers';
 // components
 import Iconify from '../../../components/artistDashboard/components/Iconify';
 import Scrollbar from '../../../components/scrollbar/Scrollbar';
+import { SongDataType } from '../../ClipsPage/typings/songTableRowType';
 const CeCeCover = require('../../../album-cover-media/cece.jpeg');
 const DonnieCover = require('../../../album-cover-media/Donnie McClurkin.jpeg');
 const ThePoliceAlbumCover = require('../../../album-cover-media/Police-album-zenyattamondatta.jpeg');
@@ -59,6 +60,7 @@ type DashboardSongRankingListProps = {
 };
 
 export default function DashboardSongRankingList({ title, subheader, list }: DashboardSongRankingListProps) {
+
   return (
     <Card elevation={5} style={{ maxHeight: 375, overflow: 'scroll' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 1, paddingLeft: 20 }}>
@@ -70,9 +72,13 @@ export default function DashboardSongRankingList({ title, subheader, list }: Das
             </p>
         </div>
         <Stack spacing={3} sx={{ p: 3, pr: 0 }}>
-          {songs.map((song) => (
-            <SongItem key={song.id} song={song} />
-          ))}
+          {typeof list !== 'undefined' && (
+            <div>
+              {list.map((song: SongDataType) => (
+                <SongItem key={song._id} song={song} />
+              ))}
+            </div>
+          )}
         </Stack>
     </Card>
   );
@@ -82,21 +88,16 @@ export default function DashboardSongRankingList({ title, subheader, list }: Das
 
 
 type SongItemType = {
-    song: {
-        album: string;
-        albumCover: string;
-        name: string;
-        votes: number | string;
-    };
+    song: SongDataType;
 };
 
 function SongItem({ song }: SongItemType) {
 
-  const { album, albumCover, name, votes } = song;
+  const { album, albumCover, likes, name } = song;
 
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <Box component="img" alt={name} src={albumCover} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
+      <Box component="img" alt={name} src={`${process.env.REACT_APP_BASE_URI}api/get-photo/${albumCover}`} sx={{ width: 48, height: 48, borderRadius: 1.5, flexShrink: 0 }} />
 
       <Box sx={{ minWidth: 240, flexGrow: 1 }}>
         <Link color="inherit" variant="subtitle2" underline="hover" noWrap>
@@ -109,7 +110,7 @@ function SongItem({ song }: SongItemType) {
       </Box>
 
       <Typography variant="caption" sx={{ pr: 3, flexShrink: 0, color: 'text.secondary' }}>
-        {votes} likes
+        {typeof song !== 'undefined' && typeof song.likes !== 'undefined' ? song.likes.length : 0} likes
       </Typography>
     </Stack>
   );

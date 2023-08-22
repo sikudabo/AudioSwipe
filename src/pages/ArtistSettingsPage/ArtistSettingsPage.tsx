@@ -452,7 +452,6 @@ function useDataLayer() {
             data: fd,
             url: `api/update-avatar/${_id}/${avatar}`,
         }).then(response => {
-            console.log('The response is:', response);
             const { isSuccess, message, updatedArtist } = response;
 
             if (isSuccess) {
@@ -474,7 +473,6 @@ function useDataLayer() {
             });
             return;
         }).catch(e => {
-            console.log(e.message);
             setIsLoading(false);
             showToastMessage({
                 isError: false,
@@ -556,8 +554,6 @@ function useDataLayer() {
         fd.append('youtubeLink', youtubeLink as string);
         fd.append('_id', _id);
 
-        console.log('The form data is:', data);
-
         await postData({
             contentType: 'application/json',
             data: fd,
@@ -584,7 +580,6 @@ function useDataLayer() {
             });
             return;
         }).catch((e) => {
-            console.log(e.message);
             setIsLoading(false);
             showToastMessage({
                 isError: true,

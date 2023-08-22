@@ -10,6 +10,7 @@ export type SongTableRowType = {
 };
 
 export type SongDataType = {
+    album: string;
     albumCover: string;
     disLikes: string[] | undefined;
     likes: string[] | undefined;

@@ -13,7 +13,7 @@ router.route('/api/get-artist-audio/:artistId').get(async (req, res) => {
     const { artistId } = req.params;
     
     try {
-        const artistSongs = await SongModel.find({ artistId }, { _id: 1, albumCover: 1, disLikes: 1, likes: 1, name: 1, songMediaId: 1 });
+        const artistSongs = await SongModel.find({ artistId }, { _id: 1, album: 1, albumCover: 1, disLikes: 1, likes: 1, name: 1, songMediaId: 1 });
         res.status(200).json({ artistAudio: artistSongs });
     } catch (e) {
         console.log('There was an error retrieving an artists audio list!!!!!!!!!!!!!!!!!!!!!!!!');

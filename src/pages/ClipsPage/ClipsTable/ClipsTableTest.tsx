@@ -40,33 +40,6 @@ type ClipsTableDisplayLayerProps = {
     isLoading: boolean;
 }
 
-const data: SongDataType[] = [
-    {
-        albumCover: '1689809436654-albumCover.jpeg',
-        disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg', 'kdnakgkdkagmk', 'dakdmgakgakgka', 'kdsmgaksdgmagmkla', 'kdgakmkgmkamgkgak'],
-        _id: "1",
-        likes: ['jdnjagnoagdo', 'jkdnoagndagdg', 'dkadokdglng'],
-        name: 'Down on donors',
-        songMediaId: '1689812059779-song.mp3',
-    },
-    {
-        albumCover: '1689812059752-albumCover.jpg',
-        disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg'],
-        _id: "2",
-        likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
-        name: 'The liberal truth',
-        songMediaId: '1689809436712-song.mp3',
-    },
-    {
-        albumCover: '1689854702677-albumCover.jpg',
-        disLikes: ['kdngakgkdakdkmkag', 'kdmkamgkagka', 'dkkdagkadmgks', 'damgkegadkmgdka', 'dkagndkagkgmakldla', 'kdnkagkdadkmkgldgak', 'kdmgkakglalgldaldla', 'kndgakamgkdakgdsmkdgak', 'dmagkdmgkagamdgsdmglamlg', 'dskmklgamalmldgdlamg'],
-        _id: "3",
-        likes: ['kdgkjnakgjdagl', 'jkndagnaglkaa', 'dkamdagoad', 'kdnakgnjkaggawk', 'jdnajknkadskgamko'],
-        name: 'Tucker & Tim',
-        songMediaId: '1689854702706-song.mp3',
-    },
-];
-
 const columns = [
     {
         ...GRID_CHECKBOX_SELECTION_COL_DEF,

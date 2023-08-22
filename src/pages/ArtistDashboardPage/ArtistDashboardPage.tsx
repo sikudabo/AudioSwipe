@@ -15,6 +15,7 @@ import { DashboardSongRankingList, GenderBreakdownChart, LikesAndDislikesChart }
 import useFetchArtistSongs from '../ClipsPage/ClipsTable/hooks/useFetchArtistSongs';
 import formatLikesVsDislikesChart from './utils/formatLikesVsDislikesChart';
 import formatGenderBreakdownChart from './utils/formatGenderBreakdownChart';
+import { SongDataType } from '../ClipsPage/typings/songTableRowType';
 
 const theme = createTheme({
     palette: {
@@ -24,6 +25,7 @@ const theme = createTheme({
 
 type ArtistDashboardPageDisplayLayerProps = {
     artist?: any;
+    artistSongs: SongDataType[];
     dislikes: number;
     dislikesData: any;
     femaleCount: number;
@@ -36,7 +38,7 @@ export default function ArtistDashboardPage() {
     return <ArtistDashboardPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, femaleCount, likes, likesData, maleCount }: ArtistDashboardPageDisplayLayerProps) {
+function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, dislikesData, femaleCount, likes, likesData, maleCount }: ArtistDashboardPageDisplayLayerProps) {
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
@@ -110,13 +112,8 @@ function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, fema
                     </Grid>
                     <Grid item xs={12} md={6} lg={8} style={{ paddingBottom: 50 }}>
                         <DashboardSongRankingList
-                        title="Song Rankings"
-                        list={[...Array(5)].map((_, index) => ({
-                            id: index,
-                            title: `Song ${index}`,
-                            description: `Album ${index}`,
-                            image: `/assets/images/covers/cover_${index + 1}.jpg`,
-                        }))}
+                            title="Song Rankings"
+                            list={artistSongs}
                         />
                     </Grid>
                 </Grid>
@@ -154,6 +151,7 @@ function useDataLayer() {
 
     return {
         artist,
+        artistSongs,
         dislikes,
         dislikesData,
         femaleCount,

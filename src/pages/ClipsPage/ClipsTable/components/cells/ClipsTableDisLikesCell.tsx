@@ -14,7 +14,7 @@ export default function ClipsTableLikesCell({ row }: SongTableRowType) {
     return (
         <ClipsTableDisLikesCellContainer>
             <p className="like-text">
-                {disLikes?.length}
+                {disLikes?.length as number}
             </p>
         </ClipsTableDisLikesCellContainer>
     );

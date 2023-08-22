@@ -13,6 +13,7 @@ import navConfig from '../../components/configs/dashboardNavConfig';
 import SummaryCard from '../../components/cards/summaryCards/SummaryCard';
 import { DashboardSongRankingList, GenderBreakdownChart, LikesAndDislikesChart } from './charts';
 import useFetchArtistSongs from '../ClipsPage/ClipsTable/hooks/useFetchArtistSongs';
+import formatLikesVsDislikesChart from './utils/formatLikesVsDislikesChart';
 
 const theme = createTheme({
     palette: {
@@ -23,14 +24,16 @@ const theme = createTheme({
 type ArtistDashboardPageDisplayLayerProps = {
     artist?: any;
     dislikes: number;
+    dislikesData: any;
     likes: number;
+    likesData: any;
 };
 
 export default function ArtistDashboardPage() {
     return <ArtistDashboardPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistDashboardPage_DisplayLayer({ artist, dislikes, likes }: ArtistDashboardPageDisplayLayerProps) {
+function ArtistDashboardPage_DisplayLayer({ artist, dislikes, dislikesData, likes, likesData }: ArtistDashboardPageDisplayLayerProps) {
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
@@ -77,13 +80,13 @@ function ArtistDashboardPage_DisplayLayer({ artist, dislikes, likes }: ArtistDas
                                 name: 'Likes',
                                 type: 'line',
                                 fill: 'solid',
-                                data: [0, 0, 22, 27, 13, 22, 37, 21, 0, 0, 0, 0],
+                                data: likesData,
                                 },
                                 {
                                 name: 'Dislikes',
                                 type: 'line',
                                 fill: 'solid',
-                                data: [0, 0, 41, 67, 22, 43, 21, 41, 0, 0, 0, 0],
+                                data: dislikesData,
                                 },
                             ]}
                         />
@@ -128,6 +131,8 @@ function useDataLayer() {
     let likes = 0;
     let dislikes = 0;
 
+    const { dislikesData, likesData } = formatLikesVsDislikesChart(artistSongs);
+
     if (artistSongs) {
         artistSongs.map((song: any) => {
             const totalLikes = song.likes.filter((like: any) => like.month === currentMonth);
@@ -136,8 +141,6 @@ function useDataLayer() {
             dislikes += totalDislikes.length;
         });
     }
-
-    console.log('The total dislikes are:', dislikes);
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -148,6 +151,8 @@ function useDataLayer() {
     return {
         artist,
         dislikes,
+        dislikesData,
         likes,
+        likesData,
     };
 }

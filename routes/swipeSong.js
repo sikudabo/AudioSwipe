@@ -21,7 +21,7 @@ router.route('/api/swipe').post(async (req, res) => {
         }
 
         await FanModel.updateOne({ _id: fanId }, { $push: { dislikedSongs: songId }});
-        await SongModel.updateOne({ _id: songId }, { $push: { likes: { createOn: new Date().getTime(), fanId, gender, month, year  }}});
+        await SongModel.updateOne({ _id: songId }, { $push: { disLikes: { createOn: new Date().getTime(), fanId, gender, month, year  }}});
         res.status(200).json({ isSuccess: true, message: 'Successfully disliked song' });
     } catch(e) {
         console.log('Error swiping on a song!!!!!!!!!!!!!');

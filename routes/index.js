@@ -6,6 +6,7 @@ const FetchGenre = require('./fetchGenre');
 const ForgotLogin = require('./forgotLogin');
 const GetAudio = require('./getAudio');
 const GetArtistAudio = require('./getArtistAudio')
+const GetFanAudio = require('./getFanAudio');
 const GetPhoto = require('./getPhoto');
 const LoginArtist = require('./loginArtist');
 const LoginFan = require('./loginFan');
@@ -26,6 +27,7 @@ module.exports = {
     ForgotLogin,
     GetAudio,
     GetArtistAudio,
+    GetFanAudio,
     GetPhoto,
     LoginArtist,
     LoginFan,

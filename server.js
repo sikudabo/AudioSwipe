@@ -25,6 +25,7 @@ const {
     ForgotLogin,
     GetAudio,
     GetArtistAudio,
+    GetFanAudio,
     GetPhoto,
     LoginArtist, 
     LoginFan,
@@ -70,6 +71,7 @@ app.use(FetchGenre);
 app.use(ForgotLogin);
 app.use(GetAudio);
 app.use(GetArtistAudio);
+app.use(GetFanAudio);
 app.use(GetPhoto);
 app.use(LoginArtist);
 app.use(LoginFan);

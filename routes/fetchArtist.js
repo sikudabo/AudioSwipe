@@ -8,7 +8,7 @@ router.route('/api/fetch-artist/:artistId').get(async (req, res) => {
 
     try {
         const artist = await ArtistModel.findOne({ _id: artistId });
-        const artistSongs = await SongModel.find({ artistId }, { _id: 1, album: 1, albumCover: 1, disLikes: 1, likes: 1, name: 1, songMediaId: 1 });
+        const artistSongs = await SongModel.find({ artistId });
         res.status(200).json({ isSuccess: true, artist, artistSongs });
     } catch (e) {
         console.log('There was an error fetching an artist!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');

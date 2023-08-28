@@ -1,3 +1,4 @@
+const AddSubscriber = require('./addSubscriber');
 const ArtistDeleteSong = require('./artistDeleteSong');
 const ArtistUpdateAvatar = require('./artistUpdateAvatar');
 const ArtistUploadSong = require('./artistUploadSong');
@@ -23,6 +24,7 @@ const UpdateArtist = require('./updateArtist');
 const UpdateFan = require('./updateFan');
 
 module.exports = {
+    AddSubscriber,
     ArtistDeleteSong,
     ArtistUpdateAvatar,
     ArtistUploadSong,

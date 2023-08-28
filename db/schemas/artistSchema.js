@@ -35,6 +35,7 @@ const artistSchema = new mongoose.Schema({
     soundcloudLink: String,
     spotifyLink: String,
     state: { required: true, type: String },
+    subscribers: [String],
     username: { required: true, type: String, unique: true },
     userType: { default: 'artist', required: true, type: String },
     youtubeLink: String,

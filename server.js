@@ -21,6 +21,7 @@ const {
     ArtistUpdateAvatar,
     ArtistUploadSong,
     ArtistUploadSongMetadata,
+    FanDeleteAccount,
     FanUpdateAvatar,
     FetchGenre,
     ForgotLogin,
@@ -69,6 +70,7 @@ app.use(ArtistDeleteSong);
 app.use(ArtistUpdateAvatar);
 app.use(ArtistUploadSong);
 app.use(ArtistUploadSongMetadata);
+app.use(FanDeleteAccount);
 app.use(FanUpdateAvatar);
 app.use(FetchGenre);
 app.use(ForgotLogin);

@@ -5,8 +5,6 @@ const { FanModel } = require('../db/models');
 router.route('/api/update-fan').post(async (req, res) => {
     const { email, firstName, _id, lastName, password } = req.body;
 
-    const splitGenres = genres.split(',');
-
     try {
         await FanModel.updateOne({ _id }, { 
             $set: {

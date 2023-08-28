@@ -3,6 +3,7 @@ const router = express.Router();
 const { ArtistModel, SongModel } = require('../db/models');
 
 router.route('/api/fetch-artist/:artistId').get(async (req, res) => {
+    
     const { artistId } = req.params;
 
     try {
@@ -12,7 +13,7 @@ router.route('/api/fetch-artist/:artistId').get(async (req, res) => {
     } catch (e) {
         console.log('There was an error fetching an artist!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         console.log('Error message:', e.message);
-        res.status(500).json({ isSuccess: false, message: 'There was an error finding that artist. Please try again!' })
+        res.status(500).json({ isSuccess: false, message: 'There was an error finding that artist. Please try again!' });
     }
 });
 

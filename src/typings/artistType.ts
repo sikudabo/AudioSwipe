@@ -20,6 +20,7 @@ export type ArtistType = {
     spotifyLink?: string;
     city: string;
     state: string;
+    subscribers: [string];
     userType: string;
     bio?: string;
 };

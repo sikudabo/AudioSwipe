@@ -37,6 +37,7 @@ const {
     SwipeSong,
     TestRoute,
     UpdateArtist,
+    UpdateFan
 } = require('./routes');
 
 startDb();
@@ -84,6 +85,7 @@ app.use(SaveNewFan);
 app.use(SwipeSong);
 app.use(TestRoute);
 app.use(UpdateArtist);
+app.use(UpdateFan);
 
 app.use(serveStatic(path.join(__dirname, 'build')));
 

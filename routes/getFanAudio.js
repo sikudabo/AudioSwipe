@@ -19,7 +19,6 @@ router.route('/api/get-fan-liked-songs/:fanId').get(async (req, res) => {
         if (likedSongs) {
             fanLikedSongs = songs.filter((song) => likedSongs.includes(song._id));
         }
-        console.log('The fan liked songs are:', fanLikedSongs);
         res.status(200).json({ fanLikedSongs, isSuccess: true });
     } catch (e) {
         console.log('There wan an error retrieving a fans liked songs!!!!!!!!!!!!');

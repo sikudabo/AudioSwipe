@@ -15,9 +15,6 @@ router.route('/api/fetch-genre/:genre/:fanId').get(async (req, res) => {
             filteredSongs = songs.filter((song) => !likedSongs.includes(song._id.toString()) && !dislikedSongs.includes(song._id.toString()));
         }
 
-       const testSongs = songs.filter((song) => !likedSongs.includes(song._id.toString()) && !dislikedSongs.includes(song._id.toString()));
-       console.log('The test songs are:', testSongs);
-
         res.status(200).json({ audioClips: filteredSongs, isSuccess: true });
     } catch(e) {
         console.log('There was an retrieving a genre of audio clips');

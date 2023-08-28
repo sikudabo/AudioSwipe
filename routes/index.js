@@ -18,6 +18,7 @@ const SaveNewFan = require('./saveNewFan');
 const SwipeSong = require('./swipeSong');
 const TestRoute = require('./testRoute');
 const UpdateArtist = require('./updateArtist');
+const UpdateFan = require('./updateFan');
 
 module.exports = {
     ArtistDeleteSong,
@@ -40,4 +41,5 @@ module.exports = {
     SwipeSong,
     TestRoute,
     UpdateArtist,
+    UpdateFan,
 };

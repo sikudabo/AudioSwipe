@@ -59,7 +59,7 @@ router.route('/api/update-fan-avatar/:fanId/:avatarId').post(uploads.single('ava
         res.status(200).json({ isSuccess: true, message: 'Avatar successfully updated.', updatedFan: updatedFan });
 
     } catch(e) {
-        console.log('Error updating an artists avatar!!!!!!!!!!!');
+        console.log('Error updating a fans\' avatar!!!!!!!!!!!');
         console.log(e.message);
         res.status(500).json({ error: e.message, isSuccess: false, message: 'Error updating a fans\' avatar' });
     }

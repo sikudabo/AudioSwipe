@@ -14,6 +14,7 @@ const GetFanAudio = require('./getFanAudio');
 const GetPhoto = require('./getPhoto');
 const LoginArtist = require('./loginArtist');
 const LoginFan = require('./loginFan');
+const RemoveSubscriber = require('./removeSubscriber');
 const SaveAlbumCover = require('./saveAlbumCover')
 const SaveArtistSong = require('./saveArtistSong');
 const SaveNewArtist = require('./saveNewArtist');
@@ -40,6 +41,7 @@ module.exports = {
     GetPhoto,
     LoginArtist,
     LoginFan,
+    RemoveSubscriber,
     SaveAlbumCover,
     SaveArtistSong,
     SaveNewArtist,

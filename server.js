@@ -33,6 +33,7 @@ const {
     GetPhoto,
     LoginArtist, 
     LoginFan,
+    RemoveSubscriber,
     SaveAlbumCover,
     SaveArtistSong,
     SaveNewArtist,
@@ -84,6 +85,7 @@ app.use(GetFanAudio);
 app.use(GetPhoto);
 app.use(LoginArtist);
 app.use(LoginFan);
+app.use(RemoveSubscriber);
 app.use(SaveAlbumCover);
 app.use(SaveArtistSong);
 app.use(SaveNewArtist);

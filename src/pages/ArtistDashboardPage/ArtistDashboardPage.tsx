@@ -137,6 +137,7 @@ function useDataLayer() {
 
     const { dislikesData, likesData } = formatLikesVsDislikesChart(artistSongs);
     const { femaleCount, maleCount } = formatGenderBreakdownChart(artistSongs);
+    console.log('The male count is:', maleCount);
 
     if (artistSongs) {
         artistSongs.map((song: any) => {

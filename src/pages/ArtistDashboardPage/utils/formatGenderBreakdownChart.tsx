@@ -6,8 +6,8 @@ export default function formatGenderBreakdownChart(songs: SongDataType[]) {
 
     if (songs) {
         songs.map((song: SongDataType) => {
-            song?.disLikes?.map((dislike: any) => {
-                if (dislike.gender === 'male') {
+            song?.likes?.map((like: any) => {
+                if (like.gender === 'male') {
                     maleCount += 1;
                     return;
                 }

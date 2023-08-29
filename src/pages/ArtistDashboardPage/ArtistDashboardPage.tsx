@@ -32,13 +32,15 @@ type ArtistDashboardPageDisplayLayerProps = {
     likes: number;
     likesData: any;
     maleCount: number;
+    subscribersCount: number;
+    totalArtistLikes: number;
 };
 
 export default function ArtistDashboardPage() {
     return <ArtistDashboardPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, dislikesData, femaleCount, likes, likesData, maleCount }: ArtistDashboardPageDisplayLayerProps) {
+function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, dislikesData, femaleCount, likes, likesData, maleCount, subscribersCount, totalArtistLikes }: ArtistDashboardPageDisplayLayerProps) {
     const navigate = useNavigate();
     return (
         <ThemeProvider theme={theme}>
@@ -56,10 +58,10 @@ function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, disli
                         <SummaryCard bgColor={colors.primary} color="primary" icon={'ant-design:dislike-filled'} title="Dislikes this month" total={dislikes} />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3} item>
-                        <SummaryCard bgColor={colors.hotPink} color="primary" icon={'ant-design:plus-square-filled'} title="Subscribers added" total={44} />
+                        <SummaryCard bgColor={colors.hotPink} color="primary" icon={'ant-design:plus-square-filled'} title="Total Likes" total={totalArtistLikes} />
                     </Grid>
                     <Grid xs={12} sm={6} lg={3} item>
-                        <SummaryCard bgColor={colors.black} color="primary" icon={'ant-design:minus-square-filled'} title="Subscribers lost" total={92} />
+                        <SummaryCard bgColor={colors.black} color="primary" icon={'ant-design:minus-square-filled'} title="Subscribers" total={subscribersCount}/>
                     </Grid>
                     <Grid item xs={12} md={6} lg={8}>
                         <LikesAndDislikesChart
@@ -78,7 +80,6 @@ function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, disli
                                 '10/01/2023',
                                 '11/01/2023',
                                 '12/01/2023',
-                                '01/01/2023',
                             ]}
                             chartData={[
                                 {
@@ -128,8 +129,11 @@ function useDataLayer() {
     const { isLoggedIn } = typeof artist !== 'undefined' ? artist as any : { isLoggedIn: false };
     const { data: artistSongs } = useFetchArtistSongs();
     const currentMonth = new Date().getMonth();
+    const { subscribers = []} = artist;
+    const subscribersCount = subscribers.length;
     let likes = 0;
     let dislikes = 0;
+    let totalArtistLikes = 0;
 
     const { dislikesData, likesData } = formatLikesVsDislikesChart(artistSongs);
     const { femaleCount, maleCount } = formatGenderBreakdownChart(artistSongs);
@@ -138,6 +142,7 @@ function useDataLayer() {
         artistSongs.map((song: any) => {
             const totalLikes = song.likes.filter((like: any) => like.month === currentMonth);
             likes += totalLikes.length;
+            totalArtistLikes += song.likes.length;
             const totalDislikes = song.disLikes.filter((dislike: any) => dislike.month === currentMonth);
             dislikes += totalDislikes.length;
         });
@@ -158,5 +163,7 @@ function useDataLayer() {
         likes,
         likesData,
         maleCount,
+        subscribersCount,
+        totalArtistLikes,
     };
 }

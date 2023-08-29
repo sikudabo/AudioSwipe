@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { ArtistModel, FanModel } = require('../db/models');
 
-router.route('/api/add-subscriber').post(async (req, res) => {
+router.route('/api/remove-subscriber').post(async (req, res) => {
     const { artistId, fanId } = req.body
 
     try {

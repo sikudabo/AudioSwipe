@@ -5,8 +5,8 @@ import { colors } from '../../../components';
 export const ClipsPageContainer = styled(Grid)`
     background-color: ${colors.primary};
     height: 100vh;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 0;
+    padding-right: 0;
     width: 100%;
 
     .top-clips-page-header {

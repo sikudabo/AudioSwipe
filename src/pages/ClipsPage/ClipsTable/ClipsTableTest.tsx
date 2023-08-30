@@ -14,7 +14,8 @@ import useFetchArtistSongs from './hooks/useFetchArtistSongs';
 
 const ClipsTableContainer = styled.div`
     background-color: ${colors.white};
-    height: 300px;
+    height: 100vh;
+    
     text-overflow: clipped;
     width: 100%;
 

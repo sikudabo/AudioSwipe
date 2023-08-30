@@ -4,7 +4,7 @@ const nodeMailer = require('nodemailer');
 const { mailOptions } = require('./constants');
 const { emailSender } = require('../utils/emailSender');
 
-router.route('/api/forgotLogin').post((req, res) => {
+router.route('/api/forgot-login').post((req, res) => {
     const { email } = req.body;
     let options = mailOptions;
     options.text = email;

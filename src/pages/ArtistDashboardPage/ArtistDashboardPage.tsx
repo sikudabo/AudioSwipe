@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { ArtistDashboardPageContainer } from './styles';
-import { useUserData } from '../../hooks';
+import { useFetchArtistData, useUserData } from '../../hooks';
 import { ArtistType } from '../../typings';
 import { colors } from '../../components';
 import { createTheme, ThemeProvider } from '@mui/material';
@@ -125,13 +125,15 @@ function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, disli
 
 function useDataLayer() {
     const navigate = useNavigate();
-    const { artist, setArtist } = useUserData();
-
+    const { setArtist } = useUserData();
+    const { data: fetchedArtist, isLoading: artistIsLoading } = useFetchArtistData();
+    const { artist } = useUserData();
+    
     const { isLoggedIn } = typeof artist !== 'undefined' ? artist as any : { isLoggedIn: false };
     const { data: artistSongs } = useFetchArtistSongs();
     const currentMonth = new Date().getMonth();
     const { subscribers = [] } = artist;
-    const subscribersCount = subscribers.length;
+    const subscribersCount = fetchedArtist.subscribers.length;
     let likes = 0;
     let dislikes = 0;
     let totalArtistLikes = 0;

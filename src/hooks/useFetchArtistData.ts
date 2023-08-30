@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useUserData } from "./useUserData";
 
 export function useFetchArtistData() {
-    const { artist } = useUserData();
+    const { artist, setArtist } = useUserData();
     const { _id } = artist;
     
     return useQuery(['fetchArtistData', _id], async () => {
@@ -12,6 +12,9 @@ export function useFetchArtistData() {
             url: `${process.env.REACT_APP_BASE_URI}api/fetch-artist/${_id}`,
         }).then(response => {
             const { artist } = response.data;
+            let newArtist = artist;
+            newArtist.isLoggedIn = true;
+            setArtist(newArtist);
             return artist;
         }).catch(() => {
             
@@ -20,6 +23,7 @@ export function useFetchArtistData() {
         return artistData;
     }, {
         initialData: artist,
+        refetchInterval: 200,
         staleTime: 2000,
     });
 }

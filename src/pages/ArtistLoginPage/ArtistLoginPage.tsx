@@ -19,17 +19,19 @@ import { useUserData } from '../../hooks';
 
 type ArtistLoginDisplayLayerProps = {
     handleForgot: (email: string) => void;
+    handleForgotCredentials: (e: { target: { value: string }}) => void;
     handleLogin: ({ password, username }: ArtistType) => void;
     isForgotOpen: boolean;
     isLoading: boolean;
     setIsForgotOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    submitForgotCredentials: () => void;
 }
 
 export default function ArtistLoginPage() {
     return <ArtistLoginPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistLoginPage_DisplayLayer({ handleForgot, handleLogin, isForgotOpen, isLoading, setIsForgotOpen }: ArtistLoginDisplayLayerProps) {
+function ArtistLoginPage_DisplayLayer({ handleForgot, handleForgotCredentials, handleLogin, isForgotOpen, isLoading, setIsForgotOpen, submitForgotCredentials }: ArtistLoginDisplayLayerProps) {
     const [userEmail, setUserEmail] = useState('');
     const { handleSubmit, register } = useForm<ArtistType>({
         defaultValues: {
@@ -105,7 +107,7 @@ function ArtistLoginPage_DisplayLayer({ handleForgot, handleLogin, isForgotOpen,
                             margin="dense"
                             id="email"
                             label="Email"
-                            onChange={onEmailChange}
+                            onChange={handleForgotCredentials}
                             type="email"
                             fullWidth
                             variant="standard"
@@ -114,7 +116,7 @@ function ArtistLoginPage_DisplayLayer({ handleForgot, handleLogin, isForgotOpen,
                     </DialogContent>
                     <DialogActions>
                         <AudioSwipeButton color="secondary" onClick={() => setIsForgotOpen(false)} text="Cancel" />
-                        <AudioSwipeButton color="secondary" onClick={() => handleForgot(userEmail)} text="Send" />
+                        <AudioSwipeButton color="secondary" onClick={submitForgotCredentials} text="Send" />
                     </DialogActions>
                 </Dialog>
             </Paper>
@@ -127,7 +129,46 @@ function useDataLayer() {
     const { showToastMessage } = useHandleToastMessage();
     const { isLoading, setIsLoading } = useIsFormLoading();
     const [isForgotOpen, setIsForgotOpen] = useState(false);
+    const [forgotEmail, setForgotEmail] = useState('');
     const navigate = useNavigate();
+
+    function handleForgotCredentials(e: { target: { value: string }}) {
+        const { value } = e.target;
+        setForgotEmail(value);
+    }
+
+    async function submitForgotCredentials() {
+        if (!checkValidEmail(forgotEmail)) {
+            showToastMessage({
+                isError: true,
+                message: 'Must enter a valid email address',
+            });
+            return;
+        }
+
+        await postData({
+            data: {
+                email: forgotEmail,
+            },
+            url: `${process.env.REACT_APP_BASE_URI}api/forgot-login`,
+        }).then(response => {
+            const { isSuccess, message } = response.data;
+
+            showToastMessage({
+                isError: isSuccess === false,
+                message,
+            });
+
+            setIsForgotOpen(false);
+
+        }).catch(() => {
+            showToastMessage({
+                isError: true,
+                message: 'There was an error sending your email. Please try again!',
+            });
+            setIsForgotOpen(false);
+        });
+    }
 
     async function handleForgot(email: string) {
         setIsLoading(true);
@@ -217,9 +258,11 @@ function useDataLayer() {
     }
     return {
         handleForgot,
+        handleForgotCredentials,
         handleLogin,
         isForgotOpen,
         isLoading,
         setIsForgotOpen,
+        submitForgotCredentials,
     }
 }

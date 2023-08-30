@@ -3,10 +3,10 @@ import axios from 'axios';
 type PostDataProps = {
     url: string,
     data: any,
-    contentType: string;
+    contentType?: string;
 };
 
-export default function postData({ url, data, contentType }: PostDataProps) {
+export default function postData({ url, data, contentType = "application/json" }: PostDataProps) {
     return axios({
         data,
         method: 'POST',

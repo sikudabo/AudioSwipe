@@ -27,6 +27,7 @@ const {
     FetchArtist,
     FetchGenre,
     ForgotLogin,
+    GeneralContact,
     GetAudio,
     GetArtistAudio,
     GetFanAudio,
@@ -79,6 +80,7 @@ app.use(FanUpdateAvatar);
 app.use(FetchArtist);
 app.use(FetchGenre);
 app.use(ForgotLogin);
+app.use(GeneralContact);
 app.use(GetAudio);
 app.use(GetArtistAudio);
 app.use(GetFanAudio);

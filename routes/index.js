@@ -8,6 +8,7 @@ const FanUpdateAvatar = require('./fanUpdateAvatar');
 const FetchArtist = require('./fetchArtist')
 const FetchGenre = require('./fetchGenre');
 const ForgotLogin = require('./forgotLogin');
+const GeneralContact = require('./generalContact');
 const GetAudio = require('./getAudio');
 const GetArtistAudio = require('./getArtistAudio')
 const GetFanAudio = require('./getFanAudio');
@@ -35,6 +36,7 @@ module.exports = {
     FetchArtist,
     FetchGenre,
     ForgotLogin,
+    GeneralContact,
     GetAudio,
     GetArtistAudio,
     GetFanAudio,

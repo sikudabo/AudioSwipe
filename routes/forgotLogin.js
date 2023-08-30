@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const nodeMailer = require('nodemailer');
 const { mailOptions } = require('./constants');
 const { emailSender } = require('../utils');
 
@@ -11,7 +10,7 @@ router.route('/api/forgot-login').post((req, res) => {
         emailSender.sendMail(options, (err) => {
             if (err) {
                 console.log('There was an error when a user tried to send their email to us for a lost username or password');
-                res.status(500).json({ isSuccess: false, message: err.message });
+                res.status(500).json({ isSuccess: false, message: "There was an error sending your email to us! Please try again." });
                 return;
             } 
 

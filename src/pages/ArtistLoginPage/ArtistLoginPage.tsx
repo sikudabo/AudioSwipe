@@ -18,7 +18,6 @@ import { checkValidEmail, postData } from '../../utils/helpers';
 import { useUserData } from '../../hooks';
 
 type ArtistLoginDisplayLayerProps = {
-    handleForgot: (email: string) => void;
     handleForgotCredentials: (e: { target: { value: string }}) => void;
     handleLogin: ({ password, username }: ArtistType) => void;
     isForgotOpen: boolean;
@@ -31,7 +30,7 @@ export default function ArtistLoginPage() {
     return <ArtistLoginPage_DisplayLayer {...useDataLayer()} />;
 }
 
-function ArtistLoginPage_DisplayLayer({ handleForgot, handleForgotCredentials, handleLogin, isForgotOpen, isLoading, setIsForgotOpen, submitForgotCredentials }: ArtistLoginDisplayLayerProps) {
+function ArtistLoginPage_DisplayLayer({ handleForgotCredentials, handleLogin, isForgotOpen, isLoading, setIsForgotOpen, submitForgotCredentials }: ArtistLoginDisplayLayerProps) {
     const [userEmail, setUserEmail] = useState('');
     const { handleSubmit, register } = useForm<ArtistType>({
         defaultValues: {
@@ -170,53 +169,6 @@ function useDataLayer() {
         });
     }
 
-    async function handleForgot(email: string) {
-        setIsLoading(true);
-        if (!checkValidEmail(email)) {
-            showToastMessage({
-                isError: true,
-                message: 'Must enter a valid email address.',
-            });
-            setIsLoading(false);
-            return;
-        }
-
-        await postData({
-            contentType: 'appllication/json',
-            data: {
-                email: email.trim(),
-            },
-            url: `${process.env.REACT_APP_BASE_URI}api/forgotLogin`,
-        }).then((res: { data: any }) => {
-            const { isSuccess, message } = res.data;
-
-            if (!isSuccess) {
-                showToastMessage({
-                    isError: true,
-                    message: 'Error. Please try again!',
-                });
-                setIsLoading(false);
-                return;
-            }
-
-            setIsLoading(false);
-
-            showToastMessage({
-                isError: false,
-                message: message,
-            });
-            setIsForgotOpen(false);
-            navigate('/');
-            return;
-        }).catch(err => {
-            setIsLoading(false);
-            showToastMessage({
-                isError: true,
-                message: 'Error. Please try again!',
-            });
-        });
-    }
-
     async function handleLogin({ password, username }: ArtistType) {
         setIsLoading(true);
         await postData({ 
@@ -257,7 +209,6 @@ function useDataLayer() {
         });
     }
     return {
-        handleForgot,
         handleForgotCredentials,
         handleLogin,
         isForgotOpen,

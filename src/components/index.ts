@@ -1,5 +1,6 @@
 import ArtistDashboardLayout from './artistDashboard/ArtistDashboardLayout';
 import AudioSwipeAppBar from './AudioSwipeAppBar';
+import AudioSwipeBottomNavigation from './AudioSwipeBottomNavigation';
 import AudioSwipeButton from './AudioSwipeButton';
 import BoxExample from './BoxExample';
 import FormSelect from './FormSelect';
@@ -23,6 +24,7 @@ import { colors } from './colors';
 export {
     ArtistDashboardLayout,
     AudioSwipeAppBar,
+    AudioSwipeBottomNavigation,
     AudioSwipeButton,
     BoxExample,
     ButtonGroup,

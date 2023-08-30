@@ -22,6 +22,7 @@ import {
   colors,
   RouteWatch,
   ToastMessage,
+  AudioSwipeBottomNavigation,
 } from './components';
 import './BodyStyles.css';
 import { 
@@ -151,6 +152,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
                 </Routes>
               </GlobalContextProviders>
             </QueryClientProvider>
+            <AudioSwipeBottomNavigation />
           </Router>
         </CustomStyledContainer >
       </ThemeProvider>

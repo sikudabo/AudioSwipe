@@ -2,21 +2,13 @@ const express = require('express');
 const router = express.Router();
 const nodeMailer = require('nodemailer');
 const { mailOptions } = require('./constants');
-const { emailSender } = require('../utils/emailSender');
-
-const transporter = nodeMailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.COMPANY_EMAIL,
-        pass: process.env.COMPANY_EMAIL_SECRET,
-    }
-});
+const { emailSender } = require('../utils');
 
 router.route('/api/forgot-login').post((req, res) => {
     const { email } = req.body;
     let options = mailOptions;
     options.text = email;
-        transporter.sendMail(options, (err) => {
+        emailSender.sendMail(options, (err) => {
             if (err) {
                 console.log('There was an error when a user tried to send their email to us for a lost username or password');
                 res.status(500).json({ isSuccess: false, message: err.message });

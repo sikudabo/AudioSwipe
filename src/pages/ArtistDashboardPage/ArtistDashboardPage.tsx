@@ -125,11 +125,12 @@ function ArtistDashboardPage_DisplayLayer({ artist, artistSongs, dislikes, disli
 
 function useDataLayer() {
     const navigate = useNavigate();
-    const { artist } = useUserData();
+    const { artist, setArtist } = useUserData();
+
     const { isLoggedIn } = typeof artist !== 'undefined' ? artist as any : { isLoggedIn: false };
     const { data: artistSongs } = useFetchArtistSongs();
     const currentMonth = new Date().getMonth();
-    const { subscribers = []} = artist;
+    const { subscribers = [] } = artist;
     const subscribersCount = subscribers.length;
     let likes = 0;
     let dislikes = 0;
@@ -137,7 +138,6 @@ function useDataLayer() {
 
     const { dislikesData, likesData } = formatLikesVsDislikesChart(artistSongs);
     const { femaleCount, maleCount } = formatGenderBreakdownChart(artistSongs);
-    console.log('The male count is:', maleCount);
 
     if (artistSongs) {
         artistSongs.map((song: any) => {

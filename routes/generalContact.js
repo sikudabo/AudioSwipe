@@ -12,7 +12,7 @@ router.route('/api/general-contact').post((req, res) => {
         emailSender.sendMail(options, (err) => {
             if (err) {
                 console.log('Message successfully sent!');
-                res.status(500).json({ isSuccess: false, message: "There was an error sending that message! Please try again." });
+                res.status(500).json({ isSuccess: false, message: "Thanks for your message! We will be in touch with you soon!" });
                 return;
             } 
 

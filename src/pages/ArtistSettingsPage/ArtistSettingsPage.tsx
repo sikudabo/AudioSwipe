@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import PhoneInput from 'react-phone-input-material-ui';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+
 import {
     Checkbox,
     FormControl,

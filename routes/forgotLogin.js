@@ -6,6 +6,7 @@ const { emailSender } = require('../utils');
 router.route('/api/forgot-login').post((req, res) => {
     const { email } = req.body;
     let options = mailOptions;
+    options.subject = "Forgot username or password";
     options.text = email;
         emailSender.sendMail(options, (err) => {
             if (err) {

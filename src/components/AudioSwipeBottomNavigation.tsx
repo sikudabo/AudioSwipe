@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { colors } from './colors';
 
 const AudioSwipeBottomNavigationContainer = styled.div`
@@ -31,6 +31,7 @@ const AudioSwipeBottomNavigationContainer = styled.div`
         align-items: center;
         display: flex;
         flex-direction: row;
+        justify-content: center;
         padding-left: 30px;
         padding-right: 30px;
         width: 100vw;
@@ -65,6 +66,8 @@ const AudioSwipeBottomNavigationContainer = styled.div`
 
 export default function AudioSwipeBottomNavigation() {
     const { pathname } = useLocation();
+    const navigate = useNavigate();
+    
     const paths = [
         "/login/artist",
         "/signup/artist",
@@ -91,10 +94,10 @@ export default function AudioSwipeBottomNavigation() {
                                 </p>
                             </div>
                             <div className="links-container">
-                                <p className="site-link">
+                                <p className="site-link" onClick={() => navigate('signup/artist')}>
                                     Artist Sign Up 
                                 </p>
-                                <p className="site-link">
+                                <p className="site-link" onClick={() => navigate('login/artist')}>
                                     Artist Login 
                                 </p>
                                 <p className="site-link">

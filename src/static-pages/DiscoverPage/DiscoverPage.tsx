@@ -1,12 +1,13 @@
 import React from 'react';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import { AudioSwipeButton, colors } from '../../components';
+import DashboardPhoto from '../../audio-media/dashboard-photo.jpeg';
 import DataPhoto from '../../audio-media/data-img-2.jpeg';
 import MagnifyPhoto from '../../audio-media/magnify.jpeg';
 import SwipePhoto from '../../audio-media/swipe-photo.jpeg';
 import { deviceBreakPointsMaxWidth } from '../../utils/helpers';
-import GlobalContextProviders from '../../GlobalContextProviders';
 
 const DiscoverPageContainer = styled(Grid)`
     background-color: ${colors.white};
@@ -122,9 +123,52 @@ const DiscoverPageContainer = styled(Grid)`
             }
         }
     }
+
+    .dashboard-section {
+
+        .dashboard-section-img-container {
+            width: 50%;
+
+            @media ${deviceBreakPointsMaxWidth.tablet} {
+                width: 100%;
+            }
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .dashboard-section-text-container {
+            background-color: ${colors.white};
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 50%; 
+
+            @media ${deviceBreakPointsMaxWidth.laptop} {
+                width: 100%;
+            }
+
+            p {
+                color: ${colors.black};
+            }
+
+            .dashboard-section-header-text {
+                font-size: 32px;
+                font-weight: 700;
+            }
+
+            .dashboard-section-body-text {
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+    }
 `;
 
 export default function DiscoverPage() {
+    const navigate = useNavigate();
+
     return (
         <DiscoverPageContainer container>
             <Grid className="get-noticed-section" columnSpacing={0} container>
@@ -182,6 +226,27 @@ export default function DiscoverPage() {
                 </Grid>
                 <Grid className="swipe-section-img-container">
                     <img alt="Swiping song photo" aria-label="Swiping song photo" src={SwipePhoto} />
+                </Grid>
+            </Grid>
+            <Grid className="dashboard-section" columnSpacing={0} container>
+                <Grid className="dashboard-section-img-container">
+                    <img alt="Swiping song photo" aria-label="Swiping song photo" src={DashboardPhoto} />
+                </Grid>
+                <Grid className="dashboard-section-text-container" md={6} lg={12}>
+                    <p className="dashboard-section-header-text">Modern Dashboard</p>
+                    <p className="dashboard-section-body-text">
+                        The AudioSwipe artist dashboard allows you to take control of your audio. 
+                        You can upload 30-second snippets of your audio, delete the audio, filter 
+                        different song based on a set of criteria you set to gain insights, and 
+                        get data driven feedback as to how fans are engaging with your audio. The 
+                        AudioSwipe dashboard enables you to take control of your career and be seen. 
+                        You can find out how many subscribers you have, how many likes you have in a 
+                        given month when a fan swipes right, how many dislikes you have when a fan swipes 
+                        left for the month and visualizes the insights for you.
+                    </p>
+                    <div className="btns-section">
+                        <AudioSwipeButton color="primary" onClick={() => navigate('/signup/artist')} text="Sign Up Today" type="button" variant="contained" />
+                    </div>
                 </Grid>
             </Grid>
         </DiscoverPageContainer>

@@ -244,7 +244,7 @@ export default function DiscoverPage() {
                         given month when a fan swipes right, how many dislikes you have when a fan swipes 
                         left for the month and visualizes the insights for you.
                     </p>
-                    <div className="btns-section">
+                    <div>
                         <AudioSwipeButton color="primary" onClick={() => navigate('/signup/artist')} text="Sign Up Today" type="button" variant="contained" />
                     </div>
                 </Grid>

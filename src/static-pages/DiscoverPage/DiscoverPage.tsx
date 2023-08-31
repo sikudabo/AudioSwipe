@@ -2,8 +2,11 @@ import React from 'react';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import styled from '@emotion/styled';
 import { AudioSwipeButton, colors } from '../../components';
+import DataPhoto from '../../audio-media/data-img-2.jpeg';
 import MagnifyPhoto from '../../audio-media/magnify.jpeg';
+import SwipePhoto from '../../audio-media/swipe-photo.jpeg';
 import { deviceBreakPointsMaxWidth } from '../../utils/helpers';
+import GlobalContextProviders from '../../GlobalContextProviders';
 
 const DiscoverPageContainer = styled(Grid)`
     background-color: ${colors.white};
@@ -21,19 +24,101 @@ const DiscoverPageContainer = styled(Grid)`
             padding-right: 20px;
             width: 50%;
 
-            @media ${deviceBreakPointsMaxWidth.tablet} {
+            @media ${deviceBreakPointsMaxWidth.laptop} {
                 width: 100%;
             }
 
             .get-noticed-header-text {
                 padding-top: 50px;
                 font-size: 32px;
-                font-weight: normal;
+                font-weight: 700;
             }
 
             .get-noticed-body-text {
                 font-size: 20px;
+                font-weight: 500;
+            }
+        }
+
+        .get-noticed-image-section {
+            padding-top: 10px;
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .data-an-section {
+
+        .data-an-text-container {
+            background-color: ${colors.darkBlue};
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 50%;
+
+            @media ${deviceBreakPointsMaxWidth.laptop} {
+                width: 100%;
+            }
+
+            .data-an-header-text {
+                font-size: 32px;
                 font-weight: 700;
+            }
+
+            .data-an-body-text {
+                font-size: 20px;
+                font-weight: 500;
+            }
+        }
+
+        .data-an-img-container {
+            width: 50%;
+
+            @media ${deviceBreakPointsMaxWidth.laptop} {
+                width: 100%;
+            }
+            
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .swipe-section {
+
+        .swipe-section-img-container {
+            width: 50%;
+
+            @media ${deviceBreakPointsMaxWidth.tablet} {
+                width: 100%;
+            }
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .swipe-section-text-container {
+            background-color: ${colors.primary};
+            padding-left: 20px;
+            padding-right: 20px;
+            width: 50%; 
+
+            @media ${deviceBreakPointsMaxWidth.laptop} {
+                width: 100%;
+            }
+
+            .swipe-section-header-text {
+                font-size: 32px;
+                font-weight: 700;
+            }
+
+            .swipe-section-body-text {
+                font-size: 20px;
+                font-weight: 500;
             }
         }
     }
@@ -42,7 +127,7 @@ const DiscoverPageContainer = styled(Grid)`
 export default function DiscoverPage() {
     return (
         <DiscoverPageContainer container>
-            <Grid className="get-noticed-section" container columnSpacing={0}>
+            <Grid className="get-noticed-section" columnSpacing={0} container>
                 <Grid className="get-noticed-text-section" md={6} sm={12} container>
                     <p className="get-noticed-header-text">
                         In Focus: Get Noticed
@@ -57,6 +142,46 @@ export default function DiscoverPage() {
                         offer the spotlight and tools needed to support the little guy and give them a stage 
                         to share their gifts, knowledge and skills from God with the world. 
                     </p>
+                </Grid>
+                <Grid className="get-noticed-image-section" md={6} sm={12}>
+                    <img alt="Magnifying Glass" aria-label="Magnifying Glass" src={MagnifyPhoto} />
+                </Grid>
+            </Grid>
+            <Grid className="data-an-section" columnSpacing={0} container>
+                <Grid className="data-an-img-container" md={6} lg={12}>
+                    <img src={DataPhoto} />
+                </Grid>
+                <Grid className="data-an-text-container" md={6} lg={12}> 
+                    <p className="data-an-header-text">
+                        Vision: Insights
+                    </p>
+                    <p className="data-an-body-text">
+                        See clearly with our data driven visual insights. 
+                        Our graphs and charts give you the data that you need
+                        in order to know which of your audio clips is gaining 
+                        traction, and which ones fans are losing interest in.
+                        Our data driven insights will enable you to optimize your 
+                        decisions in order to share your talent with as many fans 
+                        as possible. Our charts, graphs, table and cards will allow you
+                        to quickly identify how well your audio is engaging with fans.
+                    </p>
+                </Grid>
+            </Grid>
+            <Grid className="swipe-section" columnSpacing={0} container>
+                <Grid className="swipe-section-text-container" md={6} lg={12}>
+                    <p className="swipe-section-header-text">Tinder for Audio</p>
+                    <p className="swipe-section-body-text">
+                        AudioSwipe is like Tinder for artists that rely on audio to get 
+                        their message to the world. The AudioSwipe mobile app allows fans 
+                        to discover new audio with 30-second snippets that they can swipe left 
+                        or right on in order to either like or dislike the clip. This allows 
+                        artists to get real time feedback as to how fans are recieving their 
+                        music. Like a modern dating app, you can objectively see what 
+                        people think when you upload your audio to AudioSwipe.
+                    </p>
+                </Grid>
+                <Grid className="swipe-section-img-container">
+                    <img alt="Swiping song photo" aria-label="Swiping song photo" src={SwipePhoto} />
                 </Grid>
             </Grid>
         </DiscoverPageContainer>

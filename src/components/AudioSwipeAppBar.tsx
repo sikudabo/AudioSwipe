@@ -198,7 +198,7 @@ export default function AudioSwipeAppBar() {
                                     </ListItem>
                                     <Collapse in={artistListItemIsOpen} timeout="auto" unmountOnExit>
                                             <List component="div">
-                                                <ListItem>
+                                                <ListItem onClick={() => navigate('discovered')}>
                                                     <ListItemButton>
                                                         <ListItemIcon>
                                                             <SearchIcon />
@@ -319,7 +319,7 @@ export default function AudioSwipeAppBar() {
                             }}
                             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                         >
-                            <MenuItem>
+                            <MenuItem onClick={() => navigate('discovered')}>
                               <SearchIcon sx={{ mr: 2 }} />  <p>Get Discovered</p>
                             </MenuItem>
                             <MenuItem onClick={() => navigate('login/artist')}>

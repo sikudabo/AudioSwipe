@@ -38,6 +38,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import {
   AboutUsPage,
   DiscoverPage,
+  InvestorsPage,
   ListenerDiscoverPage,
   ListenerSignUpPage,
 } from './static-pages';
@@ -151,6 +152,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
                   <Route element={<SignupArtistPage />} path="signup/artist" />
                   <Route element={<ArtistLoginPage />} path="login/artist" />
                   <Route element={<DiscoverPage />} path="discovered" />
+                  <Route element={<InvestorsPage />} path="investors" />
                   <Route element={<ListenerDiscoverPage />} path="discover" />
                   <Route element={<ListenerSignUpPage />} path="listeners" />
                   <Route element={<ArtistDashboardLayout />} path="artist/dashboard">

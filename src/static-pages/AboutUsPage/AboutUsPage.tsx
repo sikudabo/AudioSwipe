@@ -14,76 +14,6 @@ const AboutUsPageContainer = styled(Grid)`
         color: ${colors.white};
     }
 
-    .get-noticed-section {
-        background-color: ${colors.hotPink};
-
-        .get-noticed-text-section {
-            padding-left: 20px;
-            padding-right: 20px;
-            width: 50%;
-
-            @media ${deviceBreakPointsMaxWidth.laptop} {
-                width: 100%;
-            }
-
-            .get-noticed-header-text {
-                padding-top: 50px;
-                font-size: 32px;
-                font-weight: 700;
-            }
-
-            .get-noticed-body-text {
-                font-size: 20px;
-                font-weight: 500;
-            }
-        }
-
-        .get-noticed-image-section {
-            padding-top: 10px;
-            img {
-                height: 100%;
-                width: 100%;
-            }
-        }
-    }
-
-    .data-an-section {
-
-        .data-an-text-container {
-            background-color: ${colors.darkBlue};
-            padding-left: 20px;
-            padding-right: 20px;
-            width: 50%;
-
-            @media ${deviceBreakPointsMaxWidth.laptop} {
-                width: 100%;
-            }
-
-            .data-an-header-text {
-                font-size: 32px;
-                font-weight: 700;
-            }
-
-            .data-an-body-text {
-                font-size: 20px;
-                font-weight: 500;
-            }
-        }
-
-        .data-an-img-container {
-            width: 50%;
-
-            @media ${deviceBreakPointsMaxWidth.laptop} {
-                width: 100%;
-            }
-            
-            img {
-                height: 100%;
-                width: 100%;
-            }
-        }
-    }
-
     .mission-section {
         padding-top: 50px;
 
@@ -116,47 +46,6 @@ const AboutUsPageContainer = styled(Grid)`
             }
 
             .mission-section-body-text {
-                font-size: 20px;
-                font-weight: 500;
-            }
-        }
-    }
-
-    .dashboard-section {
-
-        .dashboard-section-img-container {
-            width: 50%;
-
-            @media ${deviceBreakPointsMaxWidth.laptopL} {
-                width: 100%;
-            }
-
-            img {
-                height: 100%;
-                width: 100%;
-            }
-        }
-
-        .dashboard-section-text-container {
-            background-color: ${colors.white};
-            padding-left: 20px;
-            padding-right: 20px;
-            width: 50%; 
-
-            @media ${deviceBreakPointsMaxWidth.laptopL} {
-                width: 100%;
-            }
-
-            p {
-                color: ${colors.black};
-            }
-
-            .dashboard-section-header-text {
-                font-size: 32px;
-                font-weight: 700;
-            }
-
-            .dashboard-section-body-text {
                 font-size: 20px;
                 font-weight: 500;
             }

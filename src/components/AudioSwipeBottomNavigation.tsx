@@ -124,7 +124,7 @@ export default function AudioSwipeBottomNavigation() {
                                 <p className="site-link" onClick={() => navigate('about')}>
                                     About Us 
                                 </p>
-                                <p className="site-link">
+                                <p className="site-link" onClick={() => navigate('investors')}>
                                     Investors
                                 </p>
                                 <p className="site-link">

@@ -79,7 +79,7 @@ export default function PartnershipsPage() {
                     <div className="btn-container">
                         <AudioSwipeButton 
                             color="secondary"
-                            onClick={() => navigate('contact')}
+                            onClick={() => navigate('/contact')}
                             text="Contact"
                             variant="contained"
                         />

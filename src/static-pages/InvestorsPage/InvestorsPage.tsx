@@ -81,7 +81,7 @@ export default function InvestorsPage() {
                     <div className="btn-container">
                         <AudioSwipeButton 
                             color="primary"
-                            onClick={() => navigate('contact')}
+                            onClick={() => navigate('/contact')}
                             text="Contact"
                             variant="contained"
                         />

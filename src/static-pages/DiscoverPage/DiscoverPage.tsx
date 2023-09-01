@@ -129,7 +129,7 @@ const DiscoverPageContainer = styled(Grid)`
         .dashboard-section-img-container {
             width: 50%;
 
-            @media ${deviceBreakPointsMaxWidth.laptop} {
+            @media ${deviceBreakPointsMaxWidth.laptopL} {
                 width: 100%;
             }
 
@@ -145,7 +145,7 @@ const DiscoverPageContainer = styled(Grid)`
             padding-right: 20px;
             width: 50%; 
 
-            @media ${deviceBreakPointsMaxWidth.laptop} {
+            @media ${deviceBreakPointsMaxWidth.laptopL} {
                 width: 100%;
             }
 

@@ -258,7 +258,7 @@ export default function AudioSwipeAppBar() {
                                                 </ListItem>
                                             </List>
                                     </Collapse>
-                                    <ListItem>
+                                    <ListItem onClick={() => navigate('about')}>
                                         <ListItemButton>
                                             <ListItemText primary="About Us" />
                                         </ListItemButton>
@@ -376,6 +376,7 @@ export default function AudioSwipeAppBar() {
                             aria-label="Audio Swipe About Us Button"
                             color="inherit"
                             edge="start"
+                            onClick={() => navigate('about')}
                             size="large"
                             disableRipple
                         >

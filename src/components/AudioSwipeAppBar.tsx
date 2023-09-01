@@ -268,7 +268,7 @@ export default function AudioSwipeAppBar() {
                                             <ListItemText primary="Investors" />
                                         </ListItemButton>
                                     </ListItem>
-                                    <ListItem>
+                                    <ListItem onClick={() => navigate('partnerships')}>
                                         <ListItemButton>
                                             <ListItemText primary="Partnerships" />
                                         </ListItemButton>
@@ -400,6 +400,7 @@ export default function AudioSwipeAppBar() {
                             aria-label="Audio Swipe Partnerships Button"
                             color="inherit"
                             edge="start"
+                            onClick={() => navigate('partnerships')}
                             size="large"
                             disableRipple
                         >

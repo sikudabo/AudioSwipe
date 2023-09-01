@@ -22,6 +22,7 @@ const {
     ArtistUpdateAvatar,
     ArtistUploadSong,
     ArtistUploadSongMetadata,
+    Contact,
     FanDeleteAccount,
     FanUpdateAvatar,
     FetchArtist,
@@ -75,6 +76,7 @@ app.use(ArtistDeleteSong);
 app.use(ArtistUpdateAvatar);
 app.use(ArtistUploadSong);
 app.use(ArtistUploadSongMetadata);
+app.use(Contact);
 app.use(FanDeleteAccount);
 app.use(FanUpdateAvatar);
 app.use(FetchArtist);

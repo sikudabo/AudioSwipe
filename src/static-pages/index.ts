@@ -1,4 +1,5 @@
 import AboutUsPage from "./AboutUsPage/AboutUsPage";
+import ContactPage from "./ContactPage/ContactPage";
 import DiscoverPage from "./DiscoverPage/DiscoverPage";
 import InvestorsPage from "./InvestorsPage/InvestorsPage";
 import ListenerDiscoverPage from "./ListenerDiscoverPage/ListenerDiscoverPage";
@@ -7,6 +8,7 @@ import PartnershipsPage from "./PartnershipsPage/PartnershipsPage";
 
 export {
     AboutUsPage,
+    ContactPage,
     DiscoverPage,
     InvestorsPage,
     ListenerDiscoverPage,

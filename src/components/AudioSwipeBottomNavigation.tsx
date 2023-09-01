@@ -136,7 +136,7 @@ export default function AudioSwipeBottomNavigation() {
                                 <p className="site-link">
                                     Press Releases 
                                 </p>
-                                <p className="site-link">
+                                <p className="site-link" onClick={() => navigate('contact')}>
                                     Contact 
                                 </p>
                             </div>

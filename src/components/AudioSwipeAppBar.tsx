@@ -240,7 +240,7 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Discover</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <ListItem>
+                                                <ListItem onClick={() => navigate('listeners')}>
                                                     <ListItemButton>
                                                         <ListItemIcon>
                                                             <LoginIcon />
@@ -248,7 +248,7 @@ export default function AudioSwipeAppBar() {
                                                         <p style={{ fontSize: 12, fontWeight: 700, marginLeft: "-2px" }}>Login</p>
                                                     </ListItemButton>
                                                 </ListItem>
-                                                <ListItem>
+                                                <ListItem onClick={() => navigate('listeners')}>
                                                     <ListItemButton>
                                                         <ListItemIcon>
                                                             <HeadsetIcon />
@@ -365,10 +365,10 @@ export default function AudioSwipeAppBar() {
                             <MenuItem>
                               <SearchIcon sx={{ mr: 2 }} />  <p>Discover New Music</p>
                             </MenuItem>
-                            <MenuItem onClick={() => navigate('login/artist')}>
+                            <MenuItem onClick={() => navigate('listeners')}>
                                 <LoginIcon sx={{ mr: 2 }} />  <p> Login </p>
                             </MenuItem>
-                            <MenuItem onClick={() => navigate('signup/artist')}>
+                            <MenuItem onClick={() => navigate('listeners')}>
                                 <HeadsetIcon sx={{ mr: 2 }} />  <p> Sign Up </p>
                             </MenuItem>
                         </Menu>

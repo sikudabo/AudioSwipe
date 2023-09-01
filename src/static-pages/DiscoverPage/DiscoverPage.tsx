@@ -219,7 +219,7 @@ export default function DiscoverPage() {
                         their message to the world. The AudioSwipe mobile app allows fans 
                         to discover new audio with 30-second snippets that they can swipe left 
                         or right on in order to either like or dislike the clip. This allows 
-                        artists to get real time feedback as to how fans are recieving their 
+                        artists to get real time feedback as to how fans are receiving their 
                         music. Like a modern dating app, you can objectively see what 
                         people think when you upload your audio to AudioSwipe.
                     </p>

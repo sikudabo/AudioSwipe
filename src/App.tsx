@@ -35,7 +35,10 @@ import {
   SignupArtistPage 
 } from './pages';
 import CircularProgress from '@mui/material/CircularProgress';
-import { DiscoverPage } from './static-pages';
+import {
+  DiscoverPage,
+  ListenerSignUpPage,
+} from './static-pages';
 import { ArtistType } from './typings';
 
 const CustomStyledContainer = styled.div`
@@ -145,6 +148,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
                   <Route element={<SignupArtistPage />} path="signup/artist" />
                   <Route element={<ArtistLoginPage />} path="login/artist" />
                   <Route element={<DiscoverPage />} path="discovered" />
+                  <Route element={<ListenerSignUpPage />} path="listeners" />
                   <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
                     <Route element={<ArtistDashboardPage />} path="main" />
                     <Route element={<ArtistSongUploadPage />} path="upload" />

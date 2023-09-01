@@ -8,19 +8,19 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/favicons/ios/16.png",
+      "src": "/favicons/favicon-16x16.png",
       "type": "image/png",
       "sizes": "16x16"
      },
      {
-      "src": "/favicons/ios/32.png",
+      "src": "/favicons/favicon-32x32.png",
       "type": "image/png",
       "sizes": "32x32"
      },
     {
-      "src": "/favicons/android/android-launchericon-96-96.png",
+      "src": "/favicons/android-chrome-192x192.png",
       "type": "image/png",
-      "sizes": "96x96"
+      "sizes": "192x192"
      },
     {
       "src": "/favicons/ios/114.png",
@@ -28,32 +28,32 @@
       "sizes": "114x114"
      },
     {
-      "src": "/favicons/ios/144.png",
+      "src": "/favicons/apple-touch-icon-144x144.png",
       "type": "image/png",
       "sizes": "144x144"
      },
      {
-      "src": "/favicons/ios/152.png",
+      "src": "/favicons/apple-touch-icon-152x152.png",
       "type": "image/png",
       "sizes": "152x152"
      },
     {
-      "src": "/favicons/ios/180.png",
+      "src": "/favicons/apple-touch-icon-180x180.png",
       "type": "image/png",
       "sizes": "180x180"
      },
     {
-      "src": "/favicons/ios/192.png",
+      "src": "/favicons/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/favicons/ios/512.png",
+      "src": "/favicons/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     },
     {
-      "src": "/favicons/ios/512.png",
+      "src": "/favicons/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

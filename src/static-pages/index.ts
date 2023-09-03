@@ -5,6 +5,7 @@ import InvestorsPage from "./InvestorsPage/InvestorsPage";
 import ListenerDiscoverPage from "./ListenerDiscoverPage/ListenerDiscoverPage";
 import ListenerSignUpPage from "./ListenerSignUpPage/ListenerSignUpPage";
 import PartnershipsPage from "./PartnershipsPage/PartnershipsPage";
+import PrivacyPolicyPage from "./PrivacyPolicyPage/PrivacyPolicyPage";
 
 export {
     AboutUsPage,
@@ -14,4 +15,5 @@ export {
     ListenerDiscoverPage,
     ListenerSignUpPage,
     PartnershipsPage,
+    PrivacyPolicyPage,
 };

@@ -166,7 +166,7 @@ export default function LandingPage() {
                             they also love to find new artists and podcasters that they've never
                             heard of before that they can add to their favorites collection! Our platform allows fans to 
                             hear snippets of your songs and podcasts and they can swipe 
-                            left or right to; just like on a dating app! You can get data driven 
+                            left or right on the audio; just like on a dating app! You can get data driven 
                             feedback as to how well people are enjoying your music or podcast snippets and direct 
                             feedback from your new fans. AudioSwipe will give you the spotlight 
                             and data you need to show your talents to the world and gain the following you need!

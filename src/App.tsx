@@ -43,7 +43,8 @@ import {
   ListenerDiscoverPage,
   ListenerSignUpPage,
   PartnershipsPage,
-  PrivacyPolicyPage
+  PrivacyPolicyPage,
+  SupportPage
 } from './static-pages';
 import { ArtistType } from './typings';
 
@@ -161,6 +162,7 @@ function App_DisplayLayer({ handleBackdropClose, isDarkMode, isLoading }: AppDis
                   <Route element={<ListenerSignUpPage />} path="listeners" />
                   <Route element={<PartnershipsPage />} path="partnerships" />
                   <Route element={<PrivacyPolicyPage />} path="privacy" />
+                  <Route element={<SupportPage />} path="support" />
                   <Route element={<ArtistDashboardLayout />} path="artist/dashboard">
                     <Route element={<ArtistDashboardPage />} path="main" />
                     <Route element={<ArtistSongUploadPage />} path="upload" />

@@ -6,6 +6,7 @@ import ListenerDiscoverPage from "./ListenerDiscoverPage/ListenerDiscoverPage";
 import ListenerSignUpPage from "./ListenerSignUpPage/ListenerSignUpPage";
 import PartnershipsPage from "./PartnershipsPage/PartnershipsPage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage/PrivacyPolicyPage";
+import SupportPage from "./SupportPage/SupportPage";
 
 export {
     AboutUsPage,
@@ -16,4 +17,5 @@ export {
     ListenerSignUpPage,
     PartnershipsPage,
     PrivacyPolicyPage,
+    SupportPage,
 };

@@ -114,7 +114,7 @@ server.listen(app.get('port'), () => {
 });
 
 // Catch uncaught exceptions
-/* process.on('uncaughtException', err => {
+process.on('uncaughtException', err => {
     // console.log(`Error: ${err.message}`);
     console.log(err);
-}); */
+});

@@ -24,7 +24,7 @@ https://github.com/sikudabo/AudioSwipe/assets/32518831/3baa7227-8844-429e-b4ef-8
 <img width="1440" alt="Screenshot 2023-09-19 at 10 20 40 PM" src="https://github.com/sikudabo/AudioSwipe/assets/32518831/427efbbe-d363-47e0-8796-838e3a49513e">
 
 ## Fans
-Fans can swipe through a collection of audio content from 74 different genres and find new up-and-coming artists who get lost in the shuff on platforms like Spotify, SoundCloud, and YouTube.
+Fans can swipe through a collection of audio content from 74 different genres and find new up-and-coming artists who get lost in the shuffle on platforms like Spotify, SoundCloud, and YouTube.
 
 ### Swipe left or right just like on a dating app
 

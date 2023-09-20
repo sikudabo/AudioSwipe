@@ -1,41 +1,36 @@
-# React Truffle Box
+# Welcome 
+AudioSwipe is the Tinder of audio discovery. AudioSwipe is built to enable musicians, podcasters, and authors match with fans who are looking to discover underserved talent. AudioSwipe is built for Christian artists and non-religious artists with clean and engaging content for fans to worship, learn, grow, and be entertained. From sermons, to sports, to business, to learning how to craft; AudioSwipe offers something for everyone. 
+![swipe_new_2](https://github.com/sikudabo/AudioSwipe/assets/32518831/ca0b77c9-b2da-4cb6-b033-c5889ef7be5d)
 
-This box comes with everything you need to start using Truffle to write, compile, test, and deploy smart contracts, and interact with them from a React app.
 
-## Installation
+## Aritsts 
+Artists can get data metrics about how their audio content is being received by fans with the AudioSwipe dashboard. The AudioSwipe dashboard visualizes your progress for you and gives you the feedback you need to cater your audio content towards your audience and gain a following. 
 
-First ensure you are in an empty directory.
+### AudioSwipe Dashboard 
+https://github.com/sikudabo/AudioSwipe/assets/32518831/3baa7227-8844-429e-b4ef-86a4dedf941b
 
-Run the `unbox` command using 1 of 2 ways.
+### AudioSwipe Song Table
+<img width="1440" alt="Screenshot 2023-09-19 at 10 19 00 PM" src="https://github.com/sikudabo/AudioSwipe/assets/32518831/847ad6cf-dc1d-494c-82c5-dd65211aad78">
 
-```sh
-# Install Truffle globally and run `truffle unbox`
-$ npm install -g truffle
-$ truffle unbox react
-```
+### Upload new content
+<img width="1440" alt="Screenshot 2023-09-19 at 10 20 40 PM" src="https://github.com/sikudabo/AudioSwipe/assets/32518831/427efbbe-d363-47e0-8796-838e3a49513e">
 
-```sh
-# Alternatively, run `truffle unbox` via npx
-$ npx truffle unbox react
-```
+## Fans
+Fans can swipe through a collection of audio content from 74 different genres and find new up-and-coming artists who get lost in the shuff on platforms like Spotify, SoundCloud, and YouTube.
 
-Start the react dev server.
+### Swipe left or right just like on a dating app
+![swipe_new_2](https://github.com/sikudabo/AudioSwipe/assets/32518831/00a37283-5978-4752-b06e-163b361f66c2)
 
-```sh
-$ cd client
-$ npm start
-```
+### 74 different genres to choose from between music, podcasts and audiobooks
+![audioswipe_discover](https://github.com/sikudabo/AudioSwipe/assets/32518831/731db897-aa48-4d89-be70-a9f35514fedf)
 
-From there, follow the instructions on the hosted React app. It will walk you through using Truffle and Ganache to deploy the `SimpleStorage` contract, making calls to it, and sending transactions to change the contract's state.
+### Get a playlist of all of your favorite audio content
+![audioswipe_playlist](https://github.com/sikudabo/AudioSwipe/assets/32518831/2899c8a7-e7cf-44d3-b2b2-06edfb03f37b)
 
-## FAQ
+### Checkout artist profiles and follow them on Spotify, SoundCloud and YouTube. Subscribe to gain access to all of their content.
+![audioswipe_artist_playlist](https://github.com/sikudabo/AudioSwipe/assets/32518831/4b3e574d-7139-4159-b427-cc364eb79f87)
 
-- __How do I use this with Ganache (or any other network)?__
 
-  The Truffle project is set to deploy to Ganache by default. If you'd like to change this, it's as easy as modifying the Truffle config file! Check out [our documentation on adding network configurations](https://trufflesuite.com/docs/truffle/reference/configuration/#networks). From there, you can run `truffle migrate` pointed to another network, restart the React dev server, and see the change take place.
+# Sign Up
+Sign up today at [AudioSwipe.io](https://www.audioswipe.io)
 
-- __Where can I find more resources?__
-
-  This Box is a sweet combo of [Truffle](https://trufflesuite.com) and [Webpack](https://webpack.js.org). Either one would be a great place to start!
-# AudiSwipe
-# AudioSwipe

@@ -228,7 +228,7 @@ export default function LandingPage() {
                             </p>
                             <div className="prompt-buttons-container">
                                 <StyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate("signup/artist")} text="Artist Sign Up" />
-                                <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" size="small" text="Fan Sign Up" variant="contained" disableRipple />
+                                <SecondStyledButton aria-label="Artist Sign Up Button" color="primary" onClick={() => navigate('listeners')} size="small" text="Fan Sign Up" variant="contained" disableRipple />
                          </div>
                         </Grid>
                         <Grid className="bottom-img-container" md={6} sm={12}>

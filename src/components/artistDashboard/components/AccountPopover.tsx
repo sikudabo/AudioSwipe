@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
@@ -14,16 +15,19 @@ const account = {
 
 const MENU_OPTIONS = [
   {
-    label: 'Home',
+    label: 'Dashboard',
     icon: 'eva:home-fill',
+    link: '/artist/dashboard/main',
   },
   {
-    label: 'Profile',
+    label: 'Upload',
     icon: 'eva:person-fill',
+    link: '/artist/dashboard/upload',
   },
   {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
+    link: '/artist/dashboard/settings',
   },
 ];
 
@@ -31,7 +35,8 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
-  const { artist } = useUserData();
+  const { artist, setArtist } = useUserData();
+  const navigate = useNavigate();
 
   const handleOpen = (event: any) => {
     setOpen(event.currentTarget);
@@ -40,6 +45,12 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(null);
   };
+
+  const handleLogout = () => {
+    setOpen(null);
+    setArtist({} as any);
+    navigate('/');
+  }
 
   return (
     <>
@@ -93,7 +104,7 @@ export default function AccountPopover() {
 
         <Stack sx={{ p: 1 }}>
           {MENU_OPTIONS.map((option) => (
-            <MenuItem key={option.label} onClick={handleClose}>
+            <MenuItem key={option.label} onClick={() => navigate(option.link)}>
               {option.label}
             </MenuItem>
           ))}
@@ -101,7 +112,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

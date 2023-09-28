@@ -25,6 +25,11 @@ const MENU_OPTIONS = [
     link: '/artist/dashboard/upload',
   },
   {
+    label: 'Clips',
+    icon: 'eva:settings-2-fill',
+    link: '/artist/dashboard/clips',
+  },
+  {
     label: 'Settings',
     icon: 'eva:settings-2-fill',
     link: '/artist/dashboard/settings',
